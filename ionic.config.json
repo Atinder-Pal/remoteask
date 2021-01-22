@@ -1,0 +1,7 @@
+{
+  "name": "remoteAsk",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
