@@ -14,17 +14,9 @@
       </ion-header>
     
       <div id="container">
-        <strong>Home Screen</strong>
-        <router-link to="/login">
-        <ion-button>LOGIN</ion-button>
-        </router-link>
-
-        <router-link to="/upload">
-        <ion-button>UPLOAD</ion-button>
-        </router-link>
-       
-       <router-link to="/listVideos">
-        <ion-button>LIST VIDEOS</ion-button>
+        <strong>Login Screen</strong>
+        <router-link to="/home">
+        <ion-button>HOME</ion-button>
         </router-link>
       </div>
     </ion-content>
@@ -36,7 +28,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Login',
   components: {
     IonContent,
     IonHeader,
