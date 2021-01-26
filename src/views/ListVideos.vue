@@ -18,6 +18,12 @@
         <router-link to="/home">
           <ion-button>HOME</ion-button>
         </router-link>
+        <button @click="list">List videos</button>
+        <ul>
+          <li v-for="item in itemsArray" :key="item">
+            {{ item }}
+          </li>
+        </ul>
       </div>
     </ion-content>
   </ion-page>
@@ -31,8 +37,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/vue";
-import { defineComponent, ref } from "vue";
-import firebase from "firebase";
+import { defineComponent } from "vue";
 import db from "../db.js";
 
 export default defineComponent({
@@ -44,11 +49,26 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
   },
+  data() {
+    return {
+      itemsArray: [],
+    };
+  },
+  methods: {
+    list() {
+      db.collection("videos").onSnapshot((querySnapshot) => {
+        const items = querySnapshot.docs.map((doc) => {
+          return doc.data();
+        });
+        this.itemsArray.push(...items);
+      });
+    },
+  },
 });
 </script>
 
 <style scoped>
-#container {
+/* #container {
   text-align: center;
 
   position: absolute;
@@ -74,5 +94,5 @@ export default defineComponent({
 
 #container a {
   text-decoration: none;
-}
+} */
 </style>
