@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Welcome to Sign Up Page</ion-title>
+        <ion-title>Welcome to Login Page</ion-title>
           <router-link to="/home">
         <ion-button>HOME</ion-button>
         </router-link>
@@ -20,11 +20,14 @@
 
 
       <div>
-        <p>SignUp</p>
+      <p>Dont have an account yet click here to
+                   <router-link to="/signup"
+              >Sign up</router-link ></p>
         </div>
 
    <form @submit.prevent="userRegistration">
 
+  <h1>SignIn to Your RemoteAsk account</h1>
 
       <div>
         <label>Name</label>
@@ -32,6 +35,9 @@
           type="text"
         />
       </div>
+
+
+
 
      </form>
 
