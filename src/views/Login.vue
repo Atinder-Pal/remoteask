@@ -2,23 +2,42 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>Welcome to Sign Up Page</ion-title>
+          <router-link to="/home">
+        <ion-button>HOME</ion-button>
+        </router-link>
+   
       </ion-toolbar>
     </ion-header>
     
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">Login Page</ion-title>
         </ion-toolbar>
       </ion-header>
     
-      <div id="container">
-        <strong>Login Screen</strong>
-        <router-link to="/home">
-        <ion-button>HOME</ion-button>
-        </router-link>
+
+
+      <div>
+        <p>SignUp</p>
+        </div>
+
+   <form @submit.prevent="userRegistration">
+
+
+      <div>
+        <label>Name</label>
+        <input
+          type="text"
+        />
       </div>
+
+     </form>
+
+
+        
+
     </ion-content>
   </ion-page>
 </template>
@@ -46,7 +65,7 @@ export default defineComponent({
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 15%;
   transform: translateY(-50%);
 }
 
