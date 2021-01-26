@@ -14,17 +14,10 @@
       </ion-header>
     
       <div id="container">
-        <strong>Home Screen</strong>
-        <router-link to="/login">
-        <ion-button>LOGIN</ion-button>
-        </router-link>
-
-        <router-link to="/upload">
-        <ion-button>UPLOAD</ion-button>
-        </router-link>
-       
-       <router-link to="/listVideos">
-        <ion-button>LIST VIDEOS</ion-button>
+        <strong>Ready to create an app?</strong>
+        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <router-link to="/home">
+        <ion-button>HOME</ion-button>
         </router-link>
       </div>
     </ion-content>
@@ -36,14 +29,15 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Upload',
   components: {
     IonContent,
     IonHeader,
     IonPage,
     IonTitle,
     IonToolbar
-  }
+  },
+
 });
 </script>
 
