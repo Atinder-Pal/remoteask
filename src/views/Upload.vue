@@ -13,12 +13,11 @@
         </ion-toolbar>
       </ion-header>
     
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div id="container">               
         <router-link to="/home">
         <ion-button>HOME</ion-button>
         </router-link>
+        <VideoRecordUpload />
       </div>
     </ion-content>
   </ion-page>
@@ -27,6 +26,7 @@
 <script>
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import VideoRecordUpload from '../components/VideoRecordUpload';
 
 export default defineComponent({
   name: 'Upload',
@@ -35,7 +35,8 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    VideoRecordUpload
   },
 
 });
