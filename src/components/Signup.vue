@@ -60,7 +60,7 @@ import { defineComponent } from "vue";
 
 import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
-//import { db } from '../db'
+import { db } from '../db'
 
 export default defineComponent({
   name: "Login",

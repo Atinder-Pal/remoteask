@@ -25,18 +25,29 @@
               >Sign up</router-link ></p>
         </div>
 
-   <form @submit.prevent="userRegistration">
+   <form @submit.prevent="userLogin">
 
   <h1>SignIn to Your RemoteAsk account</h1>
 
       <div>
-        <label>Name</label>
+        <label>Email</label>
         <input
-          type="text"
+          type="email"
+          v-model="user.email"
         />
       </div>
 
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          v-model="user.password"
+        />
+      </div>
 
+      <ion-button type="submit">
+        Sign In
+      </ion-button>
 
 
      </form>
@@ -49,8 +60,11 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import firebase from "firebase/app";
+// eslint-disable-next-line no-unused-vars
+import { db } from '../db'
 
 export default defineComponent({
   name: 'Login',
@@ -59,8 +73,35 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonButton,
+  },
+ data() {
+    return {
+      user: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    userLogin() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.user.email, this.user.password)
+        .then(() => {
+          this.$router.push("/home");
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
   }
+
+
+
+
+
 });
 </script>
 
