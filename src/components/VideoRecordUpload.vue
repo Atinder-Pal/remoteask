@@ -85,7 +85,7 @@ export default {
         topic: null,
         url: null,
       },
-      i: 0,
+      //i: 0,
       uploaded: false,
       blobURL: null,
       videoData: null,
@@ -162,11 +162,20 @@ export default {
     onUpload(video) {
       this.videoData = null;
       this.video.url = null;
-      this.i++;
+      //this.i++;
+
+      const date = new Date();
+      const fileName =
+        date.toDateString() +
+        "-" +
+        date.getHours() +
+        "-" +
+        date.getMinutes() +
+        ".webm";
 
       const storageRef = firebase
         .storage()
-        .ref(`${video.name}`)
+        .ref(`${fileName}`)
         .put(video);
       storageRef.on(
         `state_changed`,
