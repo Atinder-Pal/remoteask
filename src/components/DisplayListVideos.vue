@@ -7,7 +7,12 @@
   </section>
   <ul>
     <li v-for="item in itemsArray" :key="item">
-      {{ item }}
+      <span>{{ item.title }}</span>
+      <br />
+      <span>{{ item.topic }}</span>
+      <br />
+      <span>{{ item.createdAt }}</span>
+      <br /><br /><br />
     </li>
   </ul>
 </template>
