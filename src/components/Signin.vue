@@ -2,26 +2,19 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <!-- <ion-title>Welcome to Pafe after user login</ion-title>
-          <router-link to="/home">
-        <ion-button>HOME</ion-button>
-        </router-link> -->
+
         <LogoutTemplate />
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <!-- <div>
-      <p>Dont have an account yet click here to
-                   <router-link to="/signup"
-              >Sign up</router-link ></p>
-        </div> -->
+
 
       <h3>Welcome</h3>    <p v-if="user">You are logged in!</p>
-      <!-- <p>{{ user.displayName }}</p> -->
+      <p>{{ user ? user.email : null }}</p>
       <!-- <p>{{ user.providerData.email }}</p> -->
       <pre>{{ user }}</pre>
-      <!-- <button type="submit" @click="logOut()">Log out</button> -->
+ 
   
     </ion-content>
   </ion-page>
@@ -71,16 +64,8 @@ export default defineComponent({
     });
   },
   methods: {
-    logOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          firebase.auth().onAuthStateChanged(() => {
-            this.$router.push("/home");
-          });
-        });
-    },
+
+
   },
 });
 </script>

@@ -29,7 +29,7 @@
           <!-- <router-link to="/signup"><ion-button>Sign Up</ion-button></router-link> -->
           <ion-button type="submit" @click="logOut()">Log out</ion-button>
           <p v-if="user">You are logged in!</p>
-      
+    <!-- <p>{{ user.displayName }}</p> -->   
 
   </div>
 </template>
