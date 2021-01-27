@@ -1,39 +1,45 @@
 <template>
-  <ion-page>
+  <!-- <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <!-- <ion-title>Welcome to Pafe after user login</ion-title>
-          <router-link to="/home">
-        <ion-button>HOME</ion-button>
-        </router-link> -->
-        <LogoutTemplate />
+        <ion-title>Welcome to Page after user login</ion-title>
+        <router-link to="/home">
+          <ion-button>HOME</ion-button>
+        </router-link>
+
+        <div>
+          <router-link to="/signup">Sign up</router-link>
+          <button type="submit" @click="logOut()">Log out</button>
+          <p v-if="user">You are logged in!</p>
+        </div>
       </ion-toolbar>
     </ion-header>
+ -->
+    <!-- <p>{{ user.displayName }}</p> -->
+    <!-- <p>{{ user.providerData.email }}</p> -->
+    <!-- <pre>{{ user }}</pre> -->
+  <!-- </ion-page> --> 
+  <div>
 
-    <ion-content :fullscreen="true">
-      <!-- <div>
-      <p>Dont have an account yet click here to
-                   <router-link to="/signup"
-              >Sign up</router-link ></p>
-        </div> -->
+  <router-link to="/home">
+          <ion-button>Home</ion-button>
+        </router-link>
 
-      <h3>Welcome</h3>    <p v-if="user">You are logged in!</p>
-      <!-- <p>{{ user.displayName }}</p> -->
-      <!-- <p>{{ user.providerData.email }}</p> -->
-      <pre>{{ user }}</pre>
-      <!-- <button type="submit" @click="logOut()">Log out</button> -->
-  
-    </ion-content>
-  </ion-page>
+        
+          <!-- <router-link to="/signup"><ion-button>Sign Up</ion-button></router-link> -->
+          <ion-button type="submit" @click="logOut()">Log out</ion-button>
+          <p v-if="user">You are logged in!</p>
+      
+
+  </div>
 </template>
 
 <script>
 import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
+//   IonHeader,
+//   IonPage,
+//   IonTitle,
+//   IonToolbar,
   IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
@@ -41,20 +47,14 @@ import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from "../db";
 
-import LogoutTemplate from "../components/LogoutTemplate";
-
 export default defineComponent({
-  name: "Login",
+  name: "LogoutTemplate",
   components: {
-    IonContent,
-    IonHeader,
-    IonPage,
-    // eslint-disable-next-line vue/no-unused-components
-    IonTitle,
-    IonToolbar,
-    // eslint-disable-next-line vue/no-unused-components
+    // IonHeader,
+    // IonPage,
+    // IonTitle,
+    // IonToolbar,
     IonButton,
-    LogoutTemplate,
   },
   // data() {
   //   return {
