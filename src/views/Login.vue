@@ -2,30 +2,69 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>Welcome to Login Page</ion-title>
+          <router-link to="/home">
+        <ion-button>HOME</ion-button>
+        </router-link>
+   
       </ion-toolbar>
     </ion-header>
     
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">Login Page</ion-title>
         </ion-toolbar>
       </ion-header>
     
-      <div id="container">
-        <strong>Login Screen</strong>
-        <router-link to="/home">
-        <ion-button>HOME</ion-button>
-        </router-link>
+
+
+      <div>
+      <p>Dont have an account yet click here to
+                   <router-link to="/signup"
+              >Sign up</router-link ></p>
+        </div>
+
+   <form @submit.prevent="userLogin">
+
+  <h1>SignIn to Your RemoteAsk account</h1>
+
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          v-model="user.email"
+        />
       </div>
+
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          v-model="user.password"
+        />
+      </div>
+
+      <ion-button type="submit">
+        Sign In
+      </ion-button>
+
+
+     </form>
+
+
+        
+
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import firebase from "firebase/app";
+// eslint-disable-next-line no-unused-vars
+import { db } from '../db'
 
 export default defineComponent({
   name: 'Login',
@@ -34,8 +73,35 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonButton,
+  },
+ data() {
+    return {
+      user: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    userLogin() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.user.email, this.user.password)
+        .then(() => {
+          this.$router.push("/signedin");
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
   }
+
+
+
+
+
 });
 </script>
 
@@ -46,7 +112,7 @@ export default defineComponent({
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 15%;
   transform: translateY(-50%);
 }
 
