@@ -1,12 +1,18 @@
 <template>
   <section class="display">
-    <iframe src="" frameborder="0"></iframe>
-    <h3>Title</h3>
-    <p>Topic</p>
-    <p>Time Stamp</p>
+    <iframe :src="selectedItem.link" frameborder="0"></iframe>
+    <h3>{{ selectedItem.title }}</h3>
+    <p>{{ selectedItem.topic }}</p>
+    <p>{{ selectedItem.createdAt }}</p>
   </section>
-  <ul>
-    <li v-for="item in itemsArray" :key="item">
+  <ul class="videosList">
+    <li
+      v-for="item in itemsArray"
+      :key="item"
+      :id="item"
+      class="listItem"
+      @click="selectVideo"
+    >
       <span>{{ item.title }}</span>
       <br />
       <span>{{ item.topic }}</span>
@@ -23,19 +29,34 @@ import db from "../db.js";
 export default {
   data() {
     return {
-      selectedItem: null,
+      selectedItem: {},
       itemsArray: [],
     };
   },
-  methods: {},
+  methods: {
+    selectVideo(e) {
+      this.selectedItem = e.target.id;
+      console.log(e.target.id);
+    },
+  },
   mounted() {
     db.collection("videos").onSnapshot((querySnapshot) => {
       const items = querySnapshot.docs.map((doc) => {
         return doc.data();
       });
       this.itemsArray.push(...items);
+      this.selectedItem = items[0];
     });
   },
 };
 </script>
-<style scoped=""></style>
+<style scoped="">
+.videosList {
+  padding: 0px;
+}
+
+.listItem {
+  border: solid;
+  display: block;
+}
+</style>
