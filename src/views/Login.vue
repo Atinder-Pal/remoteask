@@ -53,8 +53,7 @@
      </form>
 
 
-        
-
+   <ion-button @click="googleLogin">SignIn With Google</ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -98,7 +97,19 @@ export default defineComponent({
         .catch(error => {
           alert(error.message);
         });
-    }
+    },
+    googleLogin(){
+       // Firebase Google Sign-in
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+        // eslint-disable-next-line no-unused-vars
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          this.$router.replace('Signedin');
+        }).catch((err) => {
+          alert('Oops. ' + err.message)
+        });
+    
+    },
   }
 
 
