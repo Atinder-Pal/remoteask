@@ -17,7 +17,7 @@
       <br />
       <span>{{ item.topic }}</span>
       <br />
-      <span>{{ item.createdAt }}</span>
+      <span>{{ item.createdAt.toDate().toDateString() }}</span>
       <br /><br /><br />
     </li>
   </ul>
@@ -34,18 +34,21 @@ export default {
     };
   },
   methods: {
+    defaultVideo(video) {
+      this.selectedItem = video[0];
+    },
     selectVideo(e) {
       this.selectedItem = e.target.id;
       console.log(e.target.id);
     },
   },
-  mounted() {
+  beforeMount() {
     db.collection("videos").onSnapshot((querySnapshot) => {
       const items = querySnapshot.docs.map((doc) => {
         return doc.data();
       });
       this.itemsArray.push(...items);
-      this.selectedItem = items[0];
+      this.defaultVideo(items);
     });
   },
 };
