@@ -35,7 +35,12 @@ export default {
   },
   methods: {
     defaultVideo(video) {
-      this.selectedItem = video[0];
+      this.selectedItem = {
+        link: video[0].link,
+        title: video[0].title,
+        topic: video[0].topic,
+        createdAt: video[0].createdAt.toDate().toDateString(),
+      };
     },
     selectVideo(e) {
       this.selectedItem = e.target.id;
