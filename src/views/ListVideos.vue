@@ -18,11 +18,6 @@
         <router-link to="/home">
           <ion-button>HOME</ion-button>
         </router-link>
-        <ul>
-          <li v-for="item in itemsArray" :key="item">
-            {{ item }}
-          </li>
-        </ul>
       </div>
     </ion-content>
   </ion-page>
@@ -37,7 +32,6 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import db from "../db.js";
 
 export default defineComponent({
   name: "ListVideos",
@@ -48,25 +42,11 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
   },
-  data() {
-    return {
-      itemsArray: [],
-    };
-  },
-  methods: {},
-  mounted() {
-    db.collection("videos").onSnapshot((querySnapshot) => {
-      const items = querySnapshot.docs.map((doc) => {
-        return doc.data();
-      });
-      this.itemsArray.push(...items);
-    });
-  },
 });
 </script>
 
 <style scoped>
-/* #container {
+#container {
   text-align: center;
 
   position: absolute;
@@ -92,5 +72,5 @@ export default defineComponent({
 
 #container a {
   text-decoration: none;
-} */
+}
 </style>
