@@ -52,7 +52,7 @@
     </div>
 
   </div>
-  
+
   <div v-if="uploaded">
     <h4>Video submitted successfully!</h4>
     <!-- <button @click="newVideo">Add more videos</button> -->
@@ -101,7 +101,7 @@ export default {
         height: 240,
         bigPlayButton: true,
         controlBar: {
-          volumePanel: true,
+          volumePanel: true          
         },
         plugins: {
           // configure videojs-record plugin
@@ -136,6 +136,7 @@ export default {
         .then(() => {
           console.log("Video uploaded successfully!");
           this.uploaded = true;
+          this.player.reset();
           setTimeout(this.newVideo, 3000);
         })
         .catch((e) => {
@@ -146,14 +147,15 @@ export default {
       this.uploaded = false;
       this.recordedBlob = null;
       this.videoData = null;
-      (this.uploadValue = 0),
-        (this.$refs.inputForFile.value = null),
-        (this.video = {
-          userId: null,
-          title: null,
-          topic: null,
-          url: null,
-        });
+      this.uploadValue = 0;
+      this.$refs.inputForFile.value = null;
+      this.video = {
+        userId: null,
+        title: null,
+        topic: null,
+        url: null,
+      };      
+      this.player.record().getDevice();
     },
     onUpload(video) {
       this.videoData = null;
