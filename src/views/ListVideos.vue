@@ -18,6 +18,7 @@
         <router-link to="/home">
           <ion-button>HOME</ion-button>
         </router-link>
+        <DisplayListVideos />
       </div>
     </ion-content>
   </ion-page>
@@ -32,6 +33,7 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
+import DisplayListVideos from "../components/DisplayListVideos.vue";
 
 export default defineComponent({
   name: "ListVideos",
@@ -41,6 +43,7 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar,
+    DisplayListVideos,
   },
 });
 </script>
