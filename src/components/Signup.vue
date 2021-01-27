@@ -90,11 +90,10 @@ export default defineComponent({
         .then(res => {
           res.user
             .updateProfile({
-              displayName: "this.user.name",
-              phoneNumber: "employee"
-            })
+              displayName: this.user.name,
+               })
             .then(() => {
-              this.$router.push("/upload");
+              this.$router.push("/signedin");
             });
         })
         .catch(error => {

@@ -90,7 +90,7 @@ export default defineComponent({
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(() => {
-          this.$router.push("/home");
+          this.$router.push("/signedin");
         })
         .catch(error => {
           alert(error.message);
