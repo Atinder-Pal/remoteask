@@ -9,7 +9,7 @@
     <li
       v-for="item in itemsArray"
       :key="item"
-      :id="item"
+      :id="JSON.stringify(item)"
       class="listItem"
       @click="selectVideo"
     >
@@ -34,17 +34,18 @@ export default {
     };
   },
   methods: {
-    defaultVideo(video) {
+    setDisplayVideo(video) {
       this.selectedItem = {
-        link: video[0].link,
-        title: video[0].title,
-        topic: video[0].topic,
-        createdAt: video[0].createdAt.toDate().toDateString(),
+        link: video.link,
+        title: video.title,
+        topic: video.topic,
+        createdAt: video.createdAt,
       };
     },
     selectVideo(e) {
-      this.selectedItem = e.target.id;
-      console.log(e.target.id);
+      const video = JSON.parse(e.target.id);
+      console.log(video.createdAt);
+      this.setDisplayVideo(video);
     },
   },
   beforeMount() {
@@ -53,7 +54,7 @@ export default {
         return doc.data();
       });
       this.itemsArray.push(...items);
-      this.defaultVideo(items);
+      this.setDisplayVideo(items[0]);
     });
   },
 };
