@@ -31,18 +31,18 @@
 
       <div>
         <label>Email</label>
-        <input
+        <ion-input
           type="email"
           v-model="user.email"
-        />
+        placeholder="Enter email"></ion-input>
       </div>
 
       <div>
         <label>Password</label>
-        <input
+        <ion-input
           type="password"
           v-model="user.password"
-        />
+        placeholder="Enter Password"></ion-input>
       </div>
 
       <ion-button type="submit">
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonInput } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
@@ -75,6 +75,7 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonButton,
+    IonInput
   },
  data() {
     return {
@@ -89,8 +90,10 @@ export default defineComponent({
       firebase
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then(() => {
-          this.$router.push("/signedin");
+        // eslint-disable-next-line no-unused-vars
+        .then(data => {
+         // this.$router.push("/signedin");
+          this.$router.replace({ name: "Signedin" });
         })
         .catch(error => {
           alert(error.message);

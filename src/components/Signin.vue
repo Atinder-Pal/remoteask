@@ -29,7 +29,7 @@
 
  <h3>Welcome</h3>
     <!-- <p>{{ user.displayName }}</p> -->
-    <!-- <p>{{ user.email }}</p> -->
+    <!-- <p>{{ user.providerData.email }}</p> -->
 <pre>{{ user }}</pre>
     <button
       type="submit"
@@ -38,6 +38,24 @@
     >
       Log out
     </button>
+
+  <p v-if="user">You are logged in!</p>
+
+
+ <!-- <ul>
+          <template v-if="user.loggedIn">
+            <div>{{user.data.displayName}}</div>
+            <li>
+              <a @click.prevent="logOut">Sign out</a>
+            </li>
+          </template>
+          <template v-else>
+            <li>
+              yeh nothing yet
+            </li>
+
+          </template>
+        </ul> -->
 
 
         
@@ -53,6 +71,9 @@ import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from '../db'
 
+// eslint-disable-next-line no-unused-vars
+import { mapGetters } from "vuex";
+
 export default defineComponent({
   name: 'Login',
   components: {
@@ -63,11 +84,17 @@ export default defineComponent({
     IonToolbar,
     IonButton,
   },
-  data() {
-    return {
-      user: null
-    };
-  },
+  // data() {
+  //   return {
+  //     user: null
+  //   };
+  // },
+  //  computed: {
+  //   // map `this.user` to `this.$store.getters.user`
+  //   ...mapGetters({
+  //     user: "user"
+  //   })
+  // },
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
