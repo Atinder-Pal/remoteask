@@ -3,6 +3,8 @@
     <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
     <div v-if="recordedBlob!=null">      
         <form @submit.prevent="onUpload(recordedBlob)">            
+            <label for="videoName">Name of Video</label><br />
+            <input type="text" id="videoName" v-model="videoName" ><br />
             <label for="topic">Topic of Video</label><br />
             <input type="text" id="topic" v-model="topic" >
             <button type="submit"> Upload </button>            
@@ -21,6 +23,8 @@
         <iframe class="preview" :src="blobURL"></iframe>
         <br />
         <form @submit.prevent="onUpload(videoData)">
+            <label for="videoName">Name of Video</label><br />
+            <input type="text" id="videoName" v-model="videoName" ><br />
             <label for="topic">Topic of Video</label><br />
             <input type="text" id="topic" v-model="topic" >
             <button type="submit"> Upload </button>            
@@ -48,7 +52,8 @@
         data() {
             return { 
                 userId: null,
-                recordings: {},                                   
+                recordings: {}, 
+                videoName: '',                                  
                 i:0,                
                 blobURL:null,
                 videoData: null,
@@ -103,12 +108,14 @@
                     storageRef.snapshot.ref.getDownloadURL().then((url)=>{
                         this.url =url;                        
                         const videoInfo = {
-                            name: video.name,
+                            //name: video.name,
+                            name: this.videoName,
                             link: this.url,
                             topic: this.topic,
                             userId: this.userId
                         }
-                        db.collection('videos').add(videoInfo).then(()=>{this.topic = ''});                        
+                        db.collection('videos').add(videoInfo).then(()=>{this.topic = '';
+                            this.videoName = ''});                        
                         });
                     });
                     this.recordedBlob = null;
