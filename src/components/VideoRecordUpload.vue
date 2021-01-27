@@ -26,31 +26,28 @@
 
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
-
         <label for="title">Title of Video</label><br />
         <input
           type="text"
           id="title"
           name="title"
-          autocomplete="off"          
+          autocomplete="off"
           v-model="video.title"
         /><br />
 
         <label for="topic">Topic of Video</label><br />
-        <input 
-          type="text" 
-          id="topic" 
-          name="topic" 
+        <input
+          type="text"
+          id="topic"
+          name="topic"
           autocomplete="off"
           v-model="video.topic"
-          required 
-          /><br />
+          required
+        /><br />
 
         <button type="submit">Upload</button>
-
       </form>
     </div>
-
   </div>
 
   <div v-if="uploaded">
@@ -85,12 +82,12 @@ export default {
         topic: null,
         url: null,
       },
-      //i: 0,
+
       uploaded: false,
       blobURL: null,
       videoData: null,
       recordedBlob: null,
-      uploadValue: 0,      
+      uploadValue: 0,
       player: "",
       options: {
         controls: true,
@@ -101,7 +98,7 @@ export default {
         height: 240,
         bigPlayButton: true,
         controlBar: {
-          volumePanel: true          
+          volumePanel: true,
         },
         plugins: {
           // configure videojs-record plugin
@@ -119,7 +116,7 @@ export default {
   methods: {
     previewVideo() {
       this.uploadValue = 0;
-      this.video.url = null;      
+      this.video.url = null;
       this.videoData = this.$refs.inputForFile.files[0];
       this.recordedBlob = this.videoData;
       this.blobURL = URL.createObjectURL(this.videoData);
@@ -127,12 +124,13 @@ export default {
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
       const videoInfo = {
-        title: this.video.title || "Untitled video related to "+ this.video.topic ,
+        title:
+          this.video.title || "Untitled video related to " + this.video.topic,
         link: this.video.url,
         topic: this.video.topic,
         userId: this.video.userId,
-        createdAt: serverTimestamp()
-    };
+        createdAt: serverTimestamp(),
+      };
       db.collection("videos")
         .add(videoInfo)
         .then(() => {
@@ -156,14 +154,14 @@ export default {
         title: null,
         topic: null,
         url: null,
-      };      
+      };
       this.player.record().getDevice();
     },
     onUpload(video) {
       this.videoData = null;
       this.video.url = null;
-      //this.i++;
 
+      //Citation: Danish suggested to save file with timestamp name, referenced code from her
       const date = new Date();
       const fileName =
         date.toDateString() +
@@ -172,11 +170,9 @@ export default {
         "-" +
         date.getMinutes() +
         ".webm";
-
-      const storageRef = firebase
-        .storage()
-        .ref(`${fileName}`)
-        .put(video);
+      // Citation end
+      
+      const storageRef = firebase.storage().ref(`${fileName}`).put(video);
       storageRef.on(
         `state_changed`,
         (snapshot) => {
@@ -199,11 +195,9 @@ export default {
   mounted() {
     /* eslint-disable no-console */
 
-    //=================this code needs testing with Authentication
     firebase.auth().onAuthStateChanged((user) => {
       this.video.userId = user.uid;
     });
-    //=================================================================
 
     this.player = videojs("#myVideo", this.options, () => {
       // print version information at startup
@@ -235,7 +229,7 @@ export default {
       console.log("finished recording: ", this.player.recordedData);
       this.recordedBlob = this.player.recordedData;
       // ==========================save video on desktop====================================
-      // this.player.record().saveAs({'video': 'recording'+this.i+'.mp4'});
+      // this.player.record().saveAs({'video': 'recording.mp4'});
       // ===================================================================================
     });
 
