@@ -27,13 +27,12 @@
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
 
-        <label for="title">Name of Video</label><br />
+        <label for="title">Title of Video</label><br />
         <input
           type="text"
           id="title"
           name="title"
-          autocomplete="off"
-          autofocus
+          autocomplete="off"          
           v-model="video.title"
         /><br />
 
@@ -43,7 +42,8 @@
           id="topic" 
           name="topic" 
           autocomplete="off"
-          v-model="video.topic" 
+          v-model="video.topic"
+          required 
           /><br />
 
         <button type="submit">Upload</button>
@@ -127,7 +127,7 @@ export default {
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
       const videoInfo = {
-        title: this.video.title,
+        title: this.video.title || "Untitled video related to "+ this.video.topic ,
         link: this.video.url,
         topic: this.video.topic,
         userId: this.video.userId,
