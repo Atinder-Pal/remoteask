@@ -18,7 +18,6 @@
         <router-link to="/home">
           <ion-button>HOME</ion-button>
         </router-link>
-        <button @click="list">List videos</button>
         <ul>
           <li v-for="item in itemsArray" :key="item">
             {{ item }}
@@ -54,15 +53,14 @@ export default defineComponent({
       itemsArray: [],
     };
   },
-  methods: {
-    list() {
-      db.collection("videos").onSnapshot((querySnapshot) => {
-        const items = querySnapshot.docs.map((doc) => {
-          return doc.data();
-        });
-        this.itemsArray.push(...items);
+  methods: {},
+  mounted() {
+    db.collection("videos").onSnapshot((querySnapshot) => {
+      const items = querySnapshot.docs.map((doc) => {
+        return doc.data();
       });
-    },
+      this.itemsArray.push(...items);
+    });
   },
 });
 </script>
