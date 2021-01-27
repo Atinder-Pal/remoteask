@@ -18,26 +18,41 @@
         <progress id="progress" :value="uploadValue" max="100"></progress>
       </p>
     </div>
+
     <div v-if="videoData != null">
       <p>Preview Video before uploading:</p>
       <iframe class="preview" :src="blobURL"></iframe>
     </div>
+
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
+
         <label for="title">Name of Video</label><br />
         <input
           type="text"
           id="title"
           name="title"
+          autocomplete="off"
+          autofocus
           v-model="video.title"
         /><br />
+
         <label for="topic">Topic of Video</label><br />
-        <input type="text" id="topic" name="topic" v-model="video.topic" />
-        <br />
+        <input 
+          type="text" 
+          id="topic" 
+          name="topic" 
+          autocomplete="off"
+          v-model="video.topic" 
+          /><br />
+
         <button type="submit">Upload</button>
+
       </form>
     </div>
+
   </div>
+  
   <div v-if="uploaded">
     <h4>Video submitted successfully!</h4>
     <!-- <button @click="newVideo">Add more videos</button> -->
@@ -75,8 +90,7 @@ export default {
       blobURL: null,
       videoData: null,
       recordedBlob: null,
-      uploadValue: 0,
-      // storageRef: '',
+      uploadValue: 0,      
       player: "",
       options: {
         controls: true,
@@ -103,10 +117,10 @@ export default {
     };
   },
   methods: {
-    previewVideo(event) {
+    previewVideo() {
       this.uploadValue = 0;
-      this.video.url = null;
-      this.videoData = event.target.files[0];
+      this.video.url = null;      
+      this.videoData = this.$refs.inputForFile.files[0];
       this.recordedBlob = this.videoData;
       this.blobURL = URL.createObjectURL(this.videoData);
     },
@@ -171,7 +185,7 @@ export default {
   },
   mounted() {
     /* eslint-disable no-console */
-    
+
     //=================this code needs testing with Authentication
     firebase.auth().onAuthStateChanged((user) => {
       this.video.userId = user.uid;
