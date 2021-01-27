@@ -125,12 +125,14 @@ export default {
       this.blobURL = URL.createObjectURL(this.videoData);
     },
     saveToFirestore() {
+      const { serverTimestamp } = firebase.firestore.FieldValue;
       const videoInfo = {
-        name: this.video.title,
+        title: this.video.title,
         link: this.video.url,
         topic: this.video.topic,
         userId: this.video.userId,
-      };
+        createdAt: serverTimestamp()
+    };
       db.collection("videos")
         .add(videoInfo)
         .then(() => {
