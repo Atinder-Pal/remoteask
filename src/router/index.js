@@ -3,6 +3,8 @@ import Upload from '../views/Upload.vue'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import ListVideos from '../views/ListVideos.vue'
+import Signup from '../components/Signup.vue'
+import Signedin from '../components/Signin.vue'
 
 const routes = [
   {
@@ -28,6 +30,16 @@ const routes = [
     path: '/listVideos',
     name: 'ListVideos',
     component: ListVideos
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup 
+  },
+  {
+    path: "/signedin",
+    name: "Signedin",
+    component: Signedin 
   }
 ]
 
