@@ -7,7 +7,7 @@ Pre-Requisities
 2. GitHub account
 3. Access to repository
 4. npm installed
-5. ionic framework installed
+5. ionic framework CLI installed https://ionicframework.com/docs/intro/cli
 
 
 
