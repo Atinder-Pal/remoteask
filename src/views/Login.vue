@@ -97,6 +97,8 @@ export default defineComponent({
         // eslint-disable-next-line no-unused-vars
         .then((data) => {
           // this.$router.push("/signedin");
+              this.user.email = "";
+              this.user.password = "";
           this.$router.replace({ name: "Upload" });
         })
         .catch((error) => {

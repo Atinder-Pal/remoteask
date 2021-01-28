@@ -11,9 +11,7 @@
           </router-link>
         </ion-col>
         <ion-col>
-          <router-link to="/signup">
-            <ion-button fill="outline">Sign In</ion-button>
-          </router-link>
+
         </ion-col>
         <ion-col>
           <router-link to="/signup">
@@ -21,7 +19,16 @@
           </router-link>
         </ion-col>
         <ion-col>
+
+            <div v-if="user== null">
           <ion-button type="submit" @click="logOut()">Log out</ion-button>
+
+            </div>
+            <div>
+           <router-link to="/login">
+            <ion-button fill="outline">Sign In</ion-button>
+          </router-link>
+</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -41,7 +48,7 @@ import firebase from "firebase/app";
 import { db } from "../db";
 
 export default defineComponent({
-  name: "LogoutTemplate",
+//   name: "NavBar",
   components: {
     // IonHeader,
     // IonPage,
