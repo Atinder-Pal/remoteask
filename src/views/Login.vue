@@ -1,12 +1,8 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Welcome to Login Page</ion-title>
-        <router-link to="/home">
-          <ion-button>HOME</ion-button>
-        </router-link>
-      </ion-toolbar>
+ 
+ <NavBar />
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -61,8 +57,8 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  // IonTitle,
+  // IonToolbar,
   IonButton,
   IonInput,
 } from "@ionic/vue";
@@ -71,16 +67,19 @@ import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from "../db";
 
+import NavBar from "../components/NavBar";
+
 export default defineComponent({
   name: "Login",
   components: {
     IonContent,
     IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar,
+    // IonTitle,
+    // IonToolbar,
     IonButton,
     IonInput,
+    NavBar,
   },
   data() {
     return {
