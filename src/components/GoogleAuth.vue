@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Welcome to Login Page</ion-title>
+        <ion-title>Login with google auth</ion-title>
           <router-link to="/home">
         <ion-button>HOME</ion-button>
         </router-link>
@@ -13,7 +13,7 @@
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Login Page</ion-title>
+          <ion-title size="large">Google auth page Page</ion-title>
         </ion-toolbar>
       </ion-header>
     
@@ -53,7 +53,10 @@
      </form>
 
 
-   <ion-button @click="googleLogin">SignIn With Google</ion-button>
+   <router-link to="/googleauth">
+        <ion-button>SignIn With Google</ion-button>
+    </router-link>
+
     </ion-content>
   </ion-page>
 </template>
@@ -97,20 +100,10 @@ export default defineComponent({
         .catch(error => {
           alert(error.message);
         });
-    },
-    googleLogin(){
-       // Firebase Google Sign-in
-
-    const provider = new firebase.auth.GoogleAuthProvider();
-        // eslint-disable-next-line no-unused-vars
-        firebase.auth().signInWithPopup(provider).then((result) => {
-          this.$router.replace('Signedin');
-        }).catch((err) => {
-          alert('Oops. ' + err.message)
-        });
-    
-    },
+    }
   }
+
+
 
 
 

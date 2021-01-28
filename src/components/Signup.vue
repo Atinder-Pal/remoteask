@@ -25,16 +25,16 @@
       <form @submit.prevent="userRegistration">
         <div>
           <label>Name</label>
-          <input type="text" v-model="user.name"/>
+          <ion-input  type="text" v-model="user.name" placeholder="Enter Name"></ion-input>
         </div>
         <div>
           <label>Email</label>
-          <input type="email" v-model="user.email" />
+          <ion-input  type="email" v-model="user.email" placeholder="Enter Email"></ion-input>
         </div>
 
         <div>
           <label>Password</label>
-          <input type="password"  v-model="user.password" />
+          <ion-input  type="password"  v-model="user.password" placeholder="Enter Password"></ion-input>
         </div>
 
           <ion-button type="submit">
@@ -55,6 +55,7 @@ import {
   IonTitle,
   IonToolbar,
   IonButton,
+  IonInput
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 
@@ -71,6 +72,7 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonButton,
+    IonInput,
   },
 
  data() {
