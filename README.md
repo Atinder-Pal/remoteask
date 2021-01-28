@@ -6,6 +6,8 @@ Pre-Requisities
 1. Git
 2. GitHub account
 3. Access to repository
+4. npm installed
+5. ionic framework installed
 
 
 
