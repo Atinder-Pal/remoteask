@@ -8,7 +8,7 @@ Pre-Requisities
 3. Access to repository
 4. npm installed
 5. Vue.js 3.0+ CLI
-6. ionic framework CLI installed https://ionicframework.com/docs/intro/cli
+6. ionic framework CLI installed https://ionicframework.com/docs/intro/cli , or update to the latest ionic with 'npm i -g ionic'
 
 
 
