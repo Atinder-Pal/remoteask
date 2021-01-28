@@ -16,6 +16,22 @@
       <pre>{{ user }}</pre>
  
   
+
+ <h3>Welcome</h3>
+ <!-- ================================================= -->
+         <router-link to="/upload">
+        <ion-button>UPLOAD</ion-button>
+        </router-link>
+       
+       <router-link to="/listVideos">
+        <ion-button>LIST VIDEOS</ion-button>
+        </router-link>
+ <!-- ================================================= -->
+    <!-- <p>{{ user.displayName }}</p> -->
+    <!-- <p>{{ user.email }}</p> -->
+<pre>{{ user }}</pre>
+         
+
     </ion-content>
   </ion-page>
 </template>

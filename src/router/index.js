@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import ListVideos from '../views/ListVideos.vue'
 import Signup from '../components/Signup.vue'
 import Signedin from '../components/Signin.vue'
+import firebase from 'firebase'
 
 const routes = [
   {
@@ -14,7 +15,10 @@ const routes = [
   {
     path: '/upload',
     name: 'Upload',
-    component: Upload
+    component: Upload,
+    meta: {
+      requiresAuth: true
+    }
   },
    {
     path: '/login',
@@ -29,7 +33,10 @@ const routes = [
   {
     path: '/listVideos',
     name: 'ListVideos',
-    component: ListVideos
+    component: ListVideos,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/signup",
@@ -39,14 +46,26 @@ const routes = [
   {
     path: "/signedin",
     name: "Signedin",
-    component: Signedin 
-  },
-
+    component: Signedin,
+    meta: {
+      requiresAuth: true
+    }
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  const currentUser = firebase.auth().currentUser  
+  console.log(currentUser)
+  if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })  
+  else next();
+})
+
 
 export default router
