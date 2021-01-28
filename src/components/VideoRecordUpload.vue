@@ -9,6 +9,12 @@
     </section>
     <div>
       <p>or Add video from Device:</p>
+      <!-- <ion-input
+        type="file"
+        @change="previewVideo"
+        accept="video/*"
+        ref="inputForFile"
+      /> -->
       <input
         type="file"
         @change="previewVideo"
@@ -30,7 +36,20 @@
 
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
-        <label for="title">Title of Video</label><br />
+        <ion-list>
+
+            <ion-item>
+                <ion-label stacked>Video Title</ion-label>
+                <ion-input type="text" v-model="video.title"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Video Topic</ion-label>
+                <ion-input type="text" v-model="video.topic" required></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <!-- <label for="title">Title of Video</label><br />
         <input
           type="text"
           id="title"
@@ -47,9 +66,9 @@
           autocomplete="off"
           v-model="video.topic"
           required
-        /><br />
-
-        <button type="submit">Upload</button>
+        /><br /> -->
+        <ion-button expand="block" type="submit">Upload</ion-button>
+        <!-- <button type="submit">Upload</button> -->
       </form>
     </div>
   </div>
