@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <p>Record video</p>
-    <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
-
+  <div>  
+    <section> 
+        <section>       
+            <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
+        </section>
+        <p>Click/Tap on the video player to enable camera</p>
+        <p>Hit the Record button on bottom left of the video player and begin recording</p>
+    </section>
     <div>
       <p>or Add video from Device:</p>
+      <!-- <ion-input
+        type="file"
+        @change="previewVideo"
+        accept="video/*"
+        ref="inputForFile"
+      /> -->
       <input
         type="file"
         @change="previewVideo"
@@ -26,7 +36,20 @@
 
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
-        <label for="title">Title of Video</label><br />
+        <ion-list>
+
+            <ion-item>
+                <ion-label stacked>Video Title</ion-label>
+                <ion-input type="text" v-model="video.title"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Video Topic</ion-label>
+                <ion-input type="text" v-model="video.topic" required></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <!-- <label for="title">Title of Video</label><br />
         <input
           type="text"
           id="title"
@@ -43,9 +66,9 @@
           autocomplete="off"
           v-model="video.topic"
           required
-        /><br />
-
-        <button type="submit">Upload</button>
+        /><br /> -->
+        <ion-button expand="block" type="submit">Upload</ion-button>
+        <!-- <button type="submit">Upload</button> -->
       </form>
     </div>
   </div>
@@ -55,6 +78,9 @@
     <!-- <button @click="newVideo">Add more videos</button> -->
   </div>
 
+  <div>
+    <h4 v-if="errorOnUploading"> {{errorOnUploading.errorOnStorage ? errorOnUploading.errorOnStorage : errorOnUploading.errorOnFirestore}}</h4>
+  </div>
   <!-- ===========================Render Uploaded Video========================== -->
   <!-- <div v-if="video.url!=null">
         <p> Here is the video you just uploaded:</p>
@@ -82,7 +108,10 @@ export default {
         topic: null,
         url: null,
       },
-
+      errorOnUploading: {
+        errorOnStorage: null,
+        errorOnFirestore: null
+      },
       uploaded: false,
       blobURL: null,
       videoData: null,
@@ -138,9 +167,10 @@ export default {
           this.uploaded = true;
           this.player.reset();
           setTimeout(this.newVideo, 3000);
+          console.log("Media File uploaded to Firestore")
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((error) => {
+            this.errorOnUploading.errorOnFirestore = "Error uploading video info to Firestore"+ error
         });
     },
     newVideo() {
@@ -155,6 +185,10 @@ export default {
         topic: null,
         url: null,
       };
+      this.errorOnUploading = {
+          errorOnStorage: null,
+          errorOnFirestore: null
+      }
       this.player.record().getDevice();
     },
     onUpload(video) {
@@ -171,8 +205,8 @@ export default {
         date.getMinutes() +
         ".webm";
       // Citation end
-      
-      const storageRef = firebase.storage().ref(`${fileName}`).put(video);
+
+      const storageRef = firebase.storage().ref(`${fileName}`).put(video);   
       storageRef.on(
         `state_changed`,
         (snapshot) => {
@@ -180,14 +214,14 @@ export default {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          console.log(error.message);
+          this.errorOnUploading.errorOnStorage = "Error uploading media file to Storage"+ error
         },
         () => {
           this.uploadValue = 100;
           storageRef.snapshot.ref.getDownloadURL().then((url) => {
             this.video.url = url;
             this.saveToFirestore();
-          });
+          });          
         }
       );
     },
