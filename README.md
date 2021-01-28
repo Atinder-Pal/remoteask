@@ -18,8 +18,8 @@ To start with the project:
   2. Go into the Project Folder in Terminal:
   `cd remoteAsk`
   
-  3. Configure db-example.js file before building the project
-      * Rename the file `db-example.js` in src folder to `db.js`
+  3. Configure src/db-example.js file before building the project
+      * Rename the file `db-example.js`to `db.js`
       * Values of the below keys have been deleted intentionally. 
         Replace the below code with SDK's from your Firebase Project <br />
               ```
