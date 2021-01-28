@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <p>Record video</p>
-    <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
-
+  <div>  
+    <section> 
+        <section>       
+            <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
+        </section>
+        <p>Click/Tap on the video player to enable camera</p>
+        <p>Hit the Record button on bottom left of the video player and begin recording</p>
+    </section>
     <div>
       <p>or Add video from Device:</p>
       <input
