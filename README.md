@@ -1,15 +1,25 @@
 # remoteask
 Remoteask Private
 
+Pre-Requisities
+
+1. Git
+2. GitHub account
+3. Access to repository
+
+
+
 To start with the project:
   1. Clone the repository by running this command in Terminal:<br />
-  `git clone https://github.com/JasPanesar/remoteask.git`
+  `git clone git@github.com:WEMP/project-slideshow.git`
+  
+  You may be asked for your password if your id_rsa.pub file is not configured in github yet.
   
   2. Go into the Project Folder in Terminal:
   `cd remoteAsk`
   
-  3. Configure db-example.js file before building the project
-      * Rename the file `db-example.js` in src folder to `db.js`
+  3. Configure src/db-example.js file before building the project
+      * Rename the file `db-example.js`to `db.js`
       * Values of the below keys have been deleted intentionally. 
         Replace the below code with SDK's from your Firebase Project <br />
               ```

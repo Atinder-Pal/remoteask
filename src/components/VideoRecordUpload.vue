@@ -1,20 +1,10 @@
 <template>
-  <div>  
-    <section> 
-        <section>       
-            <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
-        </section>
-        <p>Click/Tap on the video player to enable camera</p>
-        <p>Hit the Record button on bottom left of the video player and begin recording</p>
-    </section>
+  <div>
+    <p>Record video</p>
+    <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
+
     <div>
       <p>or Add video from Device:</p>
-      <!-- <ion-input
-        type="file"
-        @change="previewVideo"
-        accept="video/*"
-        ref="inputForFile"
-      /> -->
       <input
         type="file"
         @change="previewVideo"
@@ -36,26 +26,14 @@
 
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
-        <ion-list>
-
-            <ion-item>
-                <ion-label stacked>Video Title</ion-label>
-                <ion-input type="text" v-model="video.title"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label stacked>Video Topic</ion-label>
-                <ion-input type="text" v-model="video.topic" required></ion-input>
-            </ion-item>
-
-        </ion-list>
-        <!-- <label for="title">Title of Video</label><br />
+        <label for="title">Title of Video</label><br />
         <input
           type="text"
           id="title"
           name="title"
           autocomplete="off"
           v-model="video.title"
+          required
         /><br />
 
         <label for="topic">Topic of Video</label><br />
@@ -66,9 +44,9 @@
           autocomplete="off"
           v-model="video.topic"
           required
-        /><br /> -->
-        <ion-button expand="block" type="submit">Upload</ion-button>
-        <!-- <button type="submit">Upload</button> -->
+        /><br />
+
+        <button type="submit">Upload</button>
       </form>
     </div>
   </div>
@@ -153,8 +131,7 @@ export default {
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
       const videoInfo = {
-        title:
-          this.video.title || "Untitled video related to " + this.video.topic,
+        title: this.video.title,
         link: this.video.url,
         topic: this.video.topic,
         userId: this.video.userId,
@@ -179,12 +156,11 @@ export default {
       this.videoData = null;
       this.uploadValue = 0;
       this.$refs.inputForFile.value = null;
-      this.video = {
-        userId: null,
-        title: null,
-        topic: null,
-        url: null,
-      };
+             
+    this.video.title= null;
+    this.video.topic= null;
+    this.video.url= null;
+      
       this.errorOnUploading = {
           errorOnStorage: null,
           errorOnFirestore: null
@@ -194,7 +170,6 @@ export default {
     onUpload(video) {
       this.videoData = null;
       this.video.url = null;
-
       //Citation: Danish suggested to save file with timestamp name, referenced code from her
       const date = new Date();
       const fileName =
@@ -205,7 +180,6 @@ export default {
         date.getMinutes() +
         ".webm";
       // Citation end
-
       const storageRef = firebase.storage().ref(`${fileName}`).put(video);   
       storageRef.on(
         `state_changed`,
@@ -228,11 +202,9 @@ export default {
   },
   mounted() {
     /* eslint-disable no-console */
-
     firebase.auth().onAuthStateChanged((user) => {
       this.video.userId = user.uid;
     });
-
     this.player = videojs("#myVideo", this.options, () => {
       // print version information at startup
       var msg =
@@ -244,17 +216,14 @@ export default {
         RecordRTC.version;
       videojs.log(msg);
     });
-
     // device is ready
     this.player.on("deviceReady", () => {
       console.log("device is ready!");
     });
-
     // user clicked the record button and started recording
     this.player.on("startRecord", () => {
       console.log("started recording!");
     });
-
     // user completed recording and stream is available
     this.player.on("finishRecord", () => {
       this.i++;
@@ -266,12 +235,10 @@ export default {
       // this.player.record().saveAs({'video': 'recording.mp4'});
       // ===================================================================================
     });
-
     // error handling
     this.player.on("error", (element, error) => {
       console.warn(error);
     });
-
     this.player.on("deviceError", () => {
       console.error("device error:", this.player.deviceErrorCode);
     });
