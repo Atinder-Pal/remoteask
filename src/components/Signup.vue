@@ -10,14 +10,58 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Login Page</ion-title>
-        </ion-toolbar>
-      </ion-header>
+
+
+          <ion-card class="center-ra">
+        <ion-card-header>
+          <h1>SignUp to to create your RemoteAsk account</h1>
+        </ion-card-header>
+
+        <ion-card-content>
+           <form @submit.prevent="userRegistration">
+            <ion-list>
+              <ion-item>
+                <ion-label stacked>Name</ion-label>
+                <ion-input
+                  type="text" v-model="user.name" placeholder="Enter Name"
+                ></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input
+                 type="email" v-model="user.email" placeholder="Enter Email"
+                ></ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label stacked>Password</ion-label>
+                <ion-input
+                 type="password"  v-model="user.password" placeholder="Enter Password"
+                ></ion-input>
+              </ion-item>
+            </ion-list>
+
+            <ion-button expand="block" type="submit" class="margin-ra"> Sign Up </ion-button>
+          </form>
+
+
+        </ion-card-content>
+
+        <ion-card-footer >
+          <p class="margin-ra">Already have an account click here to
+           <router-link to="/login">Sign In</router-link></p>
+        </ion-card-footer>
+      </ion-card>
+
+
+
+
+
 
       <div>
-        <router-link to="/">Sign In</router-link>
+       
 
         <p>SignUp</p>
       </div>
@@ -95,7 +139,11 @@ export default defineComponent({
               displayName: this.user.name,
                })
             .then(() => {
-              this.$router.push("/signedin");
+             this.user.name = "";
+             this.user.email = "";
+             this.user.password = "";
+        
+              this.$router.push("/login");
             });
         })
         .catch(error => {

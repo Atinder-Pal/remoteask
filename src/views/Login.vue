@@ -45,9 +45,9 @@
           >
         </ion-card-content>
 
-        <ion-card-footer>
-          Dont have an account yet click here to
-          <router-link to="/signup">Sign Up</router-link>
+        <ion-card-footer >
+          <p class="margin-ra">Dont have an account yet click here to
+          <router-link to="/signup">Sign Up</router-link></p>
         </ion-card-footer>
       </ion-card>
 
