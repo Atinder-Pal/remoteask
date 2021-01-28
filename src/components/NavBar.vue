@@ -11,7 +11,9 @@
           </router-link>
         </ion-col>
         <ion-col>
-
+       <router-link to="/login">
+            <ion-button fill="outline">Sign In</ion-button>
+          </router-link>
         </ion-col>
         <ion-col>
           <router-link to="/signup">
@@ -20,15 +22,12 @@
         </ion-col>
         <ion-col>
 
-            <div v-if="user== null">
+      
           <ion-button type="submit" @click="logOut()">Log out</ion-button>
 
-            </div>
-            <div>
-           <router-link to="/login">
-            <ion-button fill="outline">Sign In</ion-button>
-          </router-link>
-</div>
+  
+    
+
         </ion-col>
       </ion-row>
     </ion-grid>
