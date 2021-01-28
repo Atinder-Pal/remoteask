@@ -3,7 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar>
 
-        <LogoutTemplate />
+        <NavBar />
       </ion-toolbar>
     </ion-header>
 
@@ -50,7 +50,7 @@ import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from "../db";
 
-import LogoutTemplate from "../components/LogoutTemplate";
+import NavBar from "../components/NavBar";
 
 export default defineComponent({
   name: "Login",
@@ -63,7 +63,7 @@ export default defineComponent({
     IonToolbar,
     // eslint-disable-next-line vue/no-unused-components
     IonButton,
-    LogoutTemplate,
+    NavBar,
   },
   // data() {
   //   return {
