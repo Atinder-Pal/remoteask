@@ -34,4 +34,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+#container {
+  max-width: 600px;
+  margin: auto;
+}
+</style>
