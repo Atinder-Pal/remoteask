@@ -1,52 +1,84 @@
 <template>
-  <div>
-    <p>Record video</p>
-    <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
-
-    <div>
-      <p>or Add video from Device:</p>
-      <input
-        type="file"
-        @change="previewVideo"
-        accept="video/*"
-        ref="inputForFile"
-      />
-    </div>
-    <div>
-      <p>
-        Progress: {{ uploadValue.toFixed() + "%" }}
-        <progress id="progress" :value="uploadValue" max="100"></progress>
+  <div class="align-center container">
+    <div class="video-player">
+      <video
+        id="myVideo"
+        class="video-js vjs-default-skin vjs-16-9"
+        data-setup='{"fluid": true}'
+        playsinline
+      ></video>
+      <p class="align-center" v-if="!deviceReady">
+        Click or Tap on Camera Icon to enable the camera
       </p>
+      <p class="align-center" v-if="deviceReady">Record a video</p>
+    </div>
+    <p>or</p>
+    <div class="show-border">
+      <ion-label class="import-video-label" stacked
+        >Add video from Device</ion-label
+      >
+      <section>
+        <input
+          class="center"
+          type="file"
+          @change="previewVideo"
+          accept="video/*"
+          ref="inputForFile"
+        />
+      </section>
+    </div>
+    <div v-if="showProgress" class="progress-bar">
+      Progress: {{ uploadValue.toFixed() + "%" + " " }}
+      <progress
+        id="progress"
+        :value="uploadValue"
+        max="100"
+        color="primary"
+      ></progress>
     </div>
 
     <div v-if="videoData != null">
       <p>Preview Video before uploading:</p>
-      <iframe class="preview" :src="blobURL"></iframe>
+      <div class="resp-container">
+        <iframe
+          class="preview resp-iframe"
+          :src="blobURL"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
 
     <div v-if="recordedBlob != null">
       <form @submit.prevent="onUpload(recordedBlob)">
-        <label for="title">Title of Video</label><br />
-        <input
-          type="text"
-          id="title"
-          name="title"
-          autocomplete="off"
-          v-model="video.title"
-          required
-        /><br />
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-class" stacked>Video Title</ion-label>
+            <ion-input
+              type="text"
+              id="title"
+              name="title"
+              autocomplete="off"
+              v-model="video.title"
+              required
+            ></ion-input>
+          </ion-item>
 
-        <label for="topic">Topic of Video</label><br />
-        <input
-          type="text"
-          id="topic"
-          name="topic"
-          autocomplete="off"
-          v-model="video.topic"
-          required
-        /><br />
-
-        <button type="submit">Upload</button>
+          <ion-item>
+            <ion-label class="label-class" stacked>Video Topic</ion-label>
+            <ion-input
+              type="text"
+              id="topic"
+              name="topic"
+              autocomplete="off"
+              v-model="video.topic"
+              required
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" type="submit" class="margin-ra">
+          Upload</ion-button
+        >
       </form>
     </div>
   </div>
@@ -57,7 +89,13 @@
   </div>
 
   <div>
-    <h4 v-if="errorOnUploading"> {{errorOnUploading.errorOnStorage ? errorOnUploading.errorOnStorage : errorOnUploading.errorOnFirestore}}</h4>
+    <h4 v-if="errorOnUploading">
+      {{
+        errorOnUploading.errorOnStorage
+          ? errorOnUploading.errorOnStorage
+          : errorOnUploading.errorOnFirestore
+      }}
+    </h4>
   </div>
   <!-- ===========================Render Uploaded Video========================== -->
   <!-- <div v-if="video.url!=null">
@@ -77,6 +115,16 @@ import RecordRTC from "recordrtc";
 import Record from "videojs-record/dist/videojs.record.js";
 import firebase from "firebase";
 import db from "@/db.js";
+import {
+  IonList,
+  IonItem,
+  IonButton,
+  IonInput,
+  IonProgressBar,
+  IonCard,
+  IonLabel,
+} from "@ionic/vue";
+
 export default {
   data() {
     return {
@@ -88,8 +136,10 @@ export default {
       },
       errorOnUploading: {
         errorOnStorage: null,
-        errorOnFirestore: null
+        errorOnFirestore: null,
       },
+      deviceReady: false,
+      showProgress: false,
       uploaded: false,
       blobURL: null,
       videoData: null,
@@ -101,8 +151,6 @@ export default {
         autoplay: false,
         fluid: false,
         loop: false,
-        width: 320,
-        height: 240,
         bigPlayButton: true,
         controlBar: {
           volumePanel: true,
@@ -120,11 +168,19 @@ export default {
       },
     };
   },
+  components: {
+    IonList,
+    IonItem,
+    IonButton,
+    IonInput,
+    IonProgressBar,
+    IonLabel,
+  },
   methods: {
-    previewVideo() {
+    previewVideo(event) {
       this.uploadValue = 0;
-      this.video.url = null;
       this.videoData = this.$refs.inputForFile.files[0];
+      this.videoData = event.target.files[0];
       this.recordedBlob = this.videoData;
       this.blobURL = URL.createObjectURL(this.videoData);
     },
@@ -144,10 +200,11 @@ export default {
           this.uploaded = true;
           this.player.reset();
           setTimeout(this.newVideo, 3000);
-          console.log("Media File uploaded to Firestore")
+          console.log("Media File uploaded to Firestore");
         })
         .catch((error) => {
-            this.errorOnUploading.errorOnFirestore = "Error uploading video info to Firestore"+ error
+          this.errorOnUploading.errorOnFirestore =
+            "Error uploading video info to Firestore" + error;
         });
     },
     newVideo() {
@@ -155,19 +212,21 @@ export default {
       this.recordedBlob = null;
       this.videoData = null;
       this.uploadValue = 0;
+      this.showProgress = false;
       this.$refs.inputForFile.value = null;
-             
-    this.video.title= null;
-    this.video.topic= null;
-    this.video.url= null;
-      
+
+      this.video.title = null;
+      this.video.topic = null;
+      this.video.url = null;
+
       this.errorOnUploading = {
-          errorOnStorage: null,
-          errorOnFirestore: null
-      }
+        errorOnStorage: null,
+        errorOnFirestore: null,
+      };
       this.player.record().getDevice();
     },
     onUpload(video) {
+      this.showProgress = true;
       this.videoData = null;
       this.video.url = null;
       //Citation: Danish suggested to save file with timestamp name, referenced code from her
@@ -180,7 +239,10 @@ export default {
         date.getMinutes() +
         ".webm";
       // Citation end
-      const storageRef = firebase.storage().ref(`${fileName}`).put(video);   
+      const storageRef = firebase
+        .storage()
+        .ref(`${fileName}`)
+        .put(video);
       storageRef.on(
         `state_changed`,
         (snapshot) => {
@@ -188,14 +250,15 @@ export default {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          this.errorOnUploading.errorOnStorage = "Error uploading media file to Storage"+ error
+          this.errorOnUploading.errorOnStorage =
+            "Error uploading media file to Storage" + error;
         },
         () => {
           this.uploadValue = 100;
           storageRef.snapshot.ref.getDownloadURL().then((url) => {
             this.video.url = url;
             this.saveToFirestore();
-          });          
+          });
         }
       );
     },
@@ -219,6 +282,7 @@ export default {
     // device is ready
     this.player.on("deviceReady", () => {
       console.log("device is ready!");
+      this.deviceReady = true;
     });
     // user clicked the record button and started recording
     this.player.on("startRecord", () => {
@@ -251,12 +315,84 @@ export default {
 };
 </script>
 <style scoped="">
-img.preview {
-  width: 200px;
+.resp-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
 }
+.resp-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 #myVideo {
+  margin-right: auto;
+  margin-bottom: 1.5em;
+}
+.video-player {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 3em;
+}
+iframe {
+  object-fit: fill;
+}
+.align-center {
+  text-align: center;
+}
+
+.show-border {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888;
+}
+section {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.label-class {
+  font-size: small;
+}
+.progress-bar {
+  margin-top: 2em;
+}
+h4 {
+  text-align: center;
+  color: green;
+}
+@media only screen and (min-width: 760px) {
+  .progress-bar {
+    font-size: 1.3em;
+  }
+  p {
+    font-size: 1.3em;
+  }
+  .import-video-label {
+    font-size: 1.3em;
+  }
+  .center {
+    font-size: 1.3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+  .label-class {
+    font-size: large;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .center {
+    width: 45%;
+  }
 }
 </style>
