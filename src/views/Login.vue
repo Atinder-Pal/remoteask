@@ -1,8 +1,8 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
- 
- <NavBar />
+ <NavBar v-bind:togglelogin="togglelogin"/>
+ <!-- <NavBar /> -->
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -81,8 +81,10 @@ export default defineComponent({
     IonInput,
     NavBar,
   },
+
   data() {
     return {
+     togglelogin:true,
       user: {
         email: "",
         password: "",

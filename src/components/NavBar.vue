@@ -15,6 +15,7 @@
             <ion-button fill="outline">Sign In</ion-button>
           </router-link>
         </ion-col>
+
         <ion-col>
           <router-link to="/signup">
             <ion-button fill="outline">Sign Up</ion-button>
@@ -31,6 +32,9 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <p>{{togglelogin}}</p>
+    <div v-if="togglelogin==true">true</div>
+    <div v-else>hello</div>
   </ion-toolbar>
 </template>
 
@@ -46,14 +50,18 @@ import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from "../db";
 
+
+
 export default defineComponent({
 //   name: "NavBar",
+  props:['togglelogin'],
   components: {
     // IonHeader,
     // IonPage,
     // IonTitle,
     // IonToolbar,
     //  IonButton,
+
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
