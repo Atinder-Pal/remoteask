@@ -120,7 +120,7 @@ export default defineComponent({
         .then((result) => {
           this.user.email = "";
           this.user.password = "";
-          this.$router.replace("Signedin");
+          this.$router.replace('/');
         })
         .catch((err) => {
           alert("Oops. " + err.message);
