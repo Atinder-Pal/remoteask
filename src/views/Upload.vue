@@ -2,21 +2,21 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title></ion-title>
       </ion-toolbar>
     </ion-header>
     
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large"></ion-title>
         </ion-toolbar>
       </ion-header>
     
       <div id="container">               
-        <router-link to="/home">
+        <!-- <router-link to="/home">
         <ion-button>HOME</ion-button>
-        </router-link>
+        </router-link> -->
         <VideoRecordUpload />
       </div>
     </ion-content>
