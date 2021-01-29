@@ -2,7 +2,6 @@
   <ion-page>
     <ion-header :translucent="true">
  <NavBar v-bind:togglelogin="togglelogin"/>
- <!-- <NavBar /> -->
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -57,8 +56,6 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  // IonTitle,
-  // IonToolbar,
   IonButton,
   IonInput,
 } from "@ionic/vue";
@@ -75,8 +72,6 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
     IonButton,
     IonInput,
     NavBar,

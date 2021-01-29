@@ -63,8 +63,6 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  // IonTitle,
-  // IonToolbar,
   IonButton,
   IonInput,
 } from "@ionic/vue";
@@ -82,8 +80,6 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
     IonButton,
     IonInput,
     NavBar
