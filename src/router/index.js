@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Upload from '../views/Upload.vue'
 import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
 import ListVideos from '../views/ListVideos.vue'
 import Signup from '../components/Signup.vue'
 import Signedin from '../components/Signin.vue'
@@ -30,8 +30,7 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'Home',
-    component: Home
+    redirect: '/upload'
   },
   {
     path: '/listVideos',
@@ -68,8 +67,8 @@ router.beforeEach((to, from, next) => {
   const currentUser = store.getters.user.loggedIn  
   console.log(currentUser)
   if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } }) 
-  else if (!requiresAuth && currentUser) next('/')
-  else if (!requiresAuth && !currentUser) next() 
+  // else if (!requiresAuth && currentUser) next('/')
+  // else if (!requiresAuth && !currentUser) next() 
   else next();
 })
 // router.beforeEach((to, from, next) => {
