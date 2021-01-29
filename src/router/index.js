@@ -60,7 +60,7 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const currentUser = firebase.auth().currentUser  
   console.log(currentUser)
   if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })  

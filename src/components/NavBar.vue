@@ -5,8 +5,12 @@
         <ion-col>
           <ion-title
             ><router-link to="/home">RemoteAsk</router-link>
-            <p>{{ user ? user.email : null }}</p></ion-title
+            <!-- <p>{{ user ? user.email : null }}</p> -->
+            </ion-title
           >
+            <div v-if="user.loggedIn">
+            <div class="nav-item">{{user.data.displayName}}</div>     
+          </div>
         </ion-col>
 
         <div v-if="upload == true">
@@ -44,24 +48,33 @@
 </template>
 
 <script>
-import "@ionic/vue";
+import {IonButton, IonGrid} from "@ionic/vue";
 import { defineComponent } from "vue";
 import firebase from "firebase/app";
 // eslint-disable-next-line no-unused-vars
 import { db } from "../db";
-
+import { mapGetters } from "vuex";
 export default defineComponent({
   name: "NavBar",
   props: ["togglelogin", "signup", "upload"],
-  components: {},
-  created() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.user = user;
-      } else {
-        this.user = null;
-      }
-    });
+  components: {
+      IonButton,
+      IonGrid,
+  },
+//   created() {
+//     firebase.auth().onAuthStateChanged((user) => {
+//       if (user) {
+//         this.user = user;
+//       } else {
+//         this.user = null;
+//       }
+//     });
+//   },
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user"
+    })
   },
   methods: {
     logOut() {

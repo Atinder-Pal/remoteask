@@ -26,6 +26,11 @@ import './theme/variables.css';
 /* vuex store */
 import store from './store/index';
 
+import firebase from 'firebase';
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
 
 const app = createApp(App)
   .use(IonicVue)

@@ -47,12 +47,12 @@
           </form>
         </ion-card-content>
 
-        <ion-card-footer>
+        <ion-card-subtitle>
           <p class="margin-ra">
             Already have an account click here to
             <router-link to="/login">Sign In</router-link>
           </p>
-        </ion-card-footer>
+        </ion-card-subtitle>
       </ion-card>
     </ion-content>
   </ion-page>
@@ -65,6 +65,7 @@ import {
   IonPage,
   IonButton,
   IonInput,
+  IonCard,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 
@@ -82,7 +83,8 @@ export default defineComponent({
     IonPage,
     IonButton,
     IonInput,
-    NavBar
+    NavBar,
+    IonCard,
   },
 
   data() {
