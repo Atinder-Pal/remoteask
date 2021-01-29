@@ -118,7 +118,7 @@ export default {
   padding: 10px;
   border-radius: 5px;
   outline: solid 0.1px rgba(0, 0, 0, 0.1);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .list-title {
