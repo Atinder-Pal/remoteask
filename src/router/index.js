@@ -8,12 +8,12 @@ import Signedin from '../components/Signin.vue'
 
 import firebase from 'firebase'
 // eslint-disable-next-line no-unused-vars
-import store from '../store/index'
+//import store from '../store/index'
 
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/upload'
   },
   {
     path: '/upload',
@@ -67,9 +67,19 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const currentUser = firebase.auth().currentUser  
   console.log(currentUser)
-  if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })  
+  if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } }) 
+  else if (!requiresAuth && currentUser) next('/')
+  else if (!requiresAuth && !currentUser) next() 
   else next();
 })
+// router.beforeEach((to, from, next) => {
+//   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+//   const currentUser = store.getters.user.loggedIn  
+//   console.log(currentUser)
+//   if (requiresAuth && !currentUser)
+//     next({ path: '/login', query: { redirect: to.fullPath } })  
+//   else next();
+// })
 
 
 // router.beforeEach((to, from, next) => {
