@@ -116,14 +116,11 @@ export default {
   font-size: 20px;
   text-transform: capitalize;
   width: max-content;
-  border: solid;
 }
 .list-topic {
   width: max-content;
-  border: solid;
 }
 .list-timestamp {
   width: max-content;
-  border: solid;
 }
 </style>
