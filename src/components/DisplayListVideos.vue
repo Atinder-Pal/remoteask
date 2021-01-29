@@ -88,7 +88,7 @@ export default {
 }
 
 #video-info {
-  padding: 10px;
+  padding: 15px;
 }
 
 #video-title {
@@ -114,8 +114,11 @@ export default {
   display: block;
   display: flex;
   flex-direction: column;
-  margin: 2px;
+  margin: 10px;
   padding: 10px;
+  border-radius: 5px;
+  outline: solid 0.1px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 .list-title {
