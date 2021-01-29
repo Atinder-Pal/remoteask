@@ -85,6 +85,7 @@ export default {
 <style scoped="">
 #video-frame {
   width: 100%;
+  height: 200px;
 }
 
 #video-info {
@@ -137,5 +138,11 @@ export default {
   width: max-content;
   font-size: 11px;
   opacity: 0.5;
+}
+
+@media screen and (min-width: 500px) {
+  #video-frame {
+    height: 300px;
+  }
 }
 </style>
