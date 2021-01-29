@@ -1,17 +1,11 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title></ion-title>
-      </ion-toolbar>
+<NavBar v-bind:upload="upload" /> 
     </ion-header>
     
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large"></ion-title>
-        </ion-toolbar>
-      </ion-header>
+
     
       <div id="container">               
         <!-- <router-link to="/home">
@@ -24,9 +18,10 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import VideoRecordUpload from '../components/VideoRecordUpload';
+import NavBar from "../components/NavBar";
 
 export default defineComponent({
   name: 'Upload',
@@ -34,9 +29,14 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar,
-    VideoRecordUpload
+
+    VideoRecordUpload,
+    NavBar
+  },
+   data() {
+    return {
+      upload:true,
+    };
   },
 
 });

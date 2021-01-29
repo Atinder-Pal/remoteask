@@ -1,8 +1,7 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
- 
- <NavBar />
+ <NavBar v-bind:togglelogin="togglelogin"/>
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -57,8 +56,6 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  // IonTitle,
-  // IonToolbar,
   IonButton,
   IonInput,
 } from "@ionic/vue";
@@ -75,14 +72,14 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
     IonButton,
     IonInput,
     NavBar,
   },
+
   data() {
     return {
+     togglelogin:true,
       user: {
         email: "",
         password: "",
