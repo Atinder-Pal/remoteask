@@ -5,6 +5,8 @@
     <p id="video-topic">{{ selectedItem.topic }}</p>
     <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
   </section>
+
+  <h1 v-if="toogle">Home Button</h1>
   <ul class="videosList">
     <li
       v-for="item in itemsArray"
@@ -13,11 +15,24 @@
       class="listItem"
       @click.capture="selectVideo"
     >
-      <span class="list-title">{{ item.title }}</span>
-      <span class="list-topic">{{ item.topic }}</span>
-      <span class="list-timestamp">{{
-        item.createdAt.toDate().toDateString()
-      }}</span>
+      <span
+        class="list-title"
+        :class="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.title }}</span
+      >
+      <span
+        class="list-topic"
+        :class="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.topic }}</span
+      >
+      <span
+        class="list-timestamp"
+        :class="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.createdAt.toDate().toDateString() }}</span
+      >
     </li>
   </ul>
 </template>
@@ -29,6 +44,7 @@ import firebase from "firebase";
 export default {
   data() {
     return {
+      toggle: false,
       selectedItem: {},
       itemsArray: [],
     };
@@ -47,7 +63,6 @@ export default {
       this.selectedItem.createdAt = myDate.toDateString();
     },
     selectVideo(e) {
-      event.stopPropagation();
       const video = JSON.parse(e.target.id);
       this.setDisplayVideo(video);
     },
