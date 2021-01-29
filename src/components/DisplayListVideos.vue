@@ -1,12 +1,13 @@
 <template>
   <section class="display">
     <iframe id="video-frame" :src="selectedItem.link" frameborder="0"></iframe>
-    <h3 id="video-title">{{ selectedItem.title }}</h3>
-    <p id="video-topic">{{ selectedItem.topic }}</p>
-    <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
+    <div id="video-info">
+      <h3 id="video-title">{{ selectedItem.title }}</h3>
+      <p id="video-topic">{{ selectedItem.topic }}</p>
+      <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
+    </div>
   </section>
-
-  <h1 v-if="toogle">Home Button</h1>
+  <hr />
   <ul class="videosList">
     <li
       v-for="item in itemsArray"
@@ -44,7 +45,6 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      toggle: false,
       selectedItem: {},
       itemsArray: [],
     };
@@ -84,12 +84,11 @@ export default {
 </script>
 <style scoped="">
 #video-frame {
-  border: solid;
-  width: 100vw;
+  width: 100%;
 }
 
-.videosList {
-  padding: 0px;
+#video-info {
+  padding: 10px;
 }
 
 #video-title {
@@ -103,25 +102,37 @@ export default {
 
 #video-timestamp {
   margin: 0px;
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.videosList {
+  padding: 0px;
 }
 
 .listItem {
-  border: solid;
   display: block;
   display: flex;
   flex-direction: column;
   margin: 2px;
+  padding: 10px;
 }
 
 .list-title {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
   text-transform: capitalize;
   width: max-content;
+  margin-bottom: 2px;
 }
 .list-topic {
   width: max-content;
+  font-size: 14px;
+  font-weight: 300;
 }
 .list-timestamp {
   width: max-content;
+  font-size: 11px;
+  opacity: 0.5;
 }
 </style>
