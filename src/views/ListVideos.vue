@@ -1,23 +1,10 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
+      <NavBar v-bind:upload="upload" />
     </ion-header>
-
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <div id="container">
-        <strong>List of Videos</strong>
-        <router-link to="/home">
-          <ion-button>HOME</ion-button>
-        </router-link>
         <DisplayListVideos />
       </div>
     </ion-content>
@@ -25,15 +12,10 @@
 </template>
 
 <script>
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/vue";
+import { IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
 import DisplayListVideos from "../components/DisplayListVideos.vue";
+import NavBar from "../components/NavBar";
 
 export default defineComponent({
   name: "ListVideos",
@@ -41,9 +23,13 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar,
     DisplayListVideos,
+    NavBar,
+  },
+  data() {
+    return {
+      upload: true,
+    };
   },
 });
 </script>

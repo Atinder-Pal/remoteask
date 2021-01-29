@@ -110,6 +110,7 @@ export default {
   display: block;
   display: flex;
   flex-direction: column;
+  margin: 2px;
 }
 
 .list-title {

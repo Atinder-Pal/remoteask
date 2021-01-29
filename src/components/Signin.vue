@@ -2,36 +2,30 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-
         <NavBar />
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
-
-
-      <h3>Welcome</h3>    <p v-if="user">You are logged in!</p>
+      <h3>Welcome</h3>
+      <p v-if="user">You are logged in!</p>
       <p>{{ user ? user.email : null }}</p>
       <!-- <p>{{ user.providerData.email }}</p> -->
       <pre>{{ user }}</pre>
- 
-  
 
- <h3>Welcome</h3>
- <!-- ================================================= -->
-         <router-link to="/upload">
+      <h3>Welcome</h3>
+      <!-- ================================================= -->
+      <router-link to="/upload">
         <ion-button>UPLOAD</ion-button>
-        </router-link>
-       
-       <router-link to="/listVideos">
-        <ion-button>LIST VIDEOS</ion-button>
-        </router-link>
- <!-- ================================================= -->
-    <!-- <p>{{ user.displayName }}</p> -->
-    <!-- <p>{{ user.email }}</p> -->
-<pre>{{ user }}</pre>
-         
+      </router-link>
 
+      <router-link to="/listVideos">
+        <ion-button>LIST VIDEOS</ion-button>
+      </router-link>
+      <!-- ================================================= -->
+      <!-- <p>{{ user.displayName }}</p> -->
+      <!-- <p>{{ user.email }}</p> -->
+      <pre>{{ user }}</pre>
     </ion-content>
   </ion-page>
 </template>
@@ -79,10 +73,7 @@ export default defineComponent({
       }
     });
   },
-  methods: {
-
-
-  },
+  methods: {},
 });
 </script>
 
