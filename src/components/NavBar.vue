@@ -3,39 +3,46 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-title>RemoteAsk</ion-title>
-        </ion-col>
+          <ion-title><router-link to="/home">RemoteAsk</router-link> 
+         <p> {{ user ? user.email : null }}</p></ion-title>
+           
+         </ion-col>
+
+
+       <div  v-if="upload==true">  
         <ion-col>
-          <router-link to="/home">
-            <ion-button>HOME</ion-button>
+          <router-link to="/upload">
+            <ion-button fill="outline">Upload</ion-button>
           </router-link>
         </ion-col>
         <ion-col>
+          <router-link to="/listVideos">
+            <ion-button fill="outline">Listing</ion-button>
+          </router-link>
+        </ion-col>
+                <ion-col>
+    
+          <ion-button fill="outline" type="submit" @click="logOut()">Log out</ion-button>
+   
+
+        </ion-col>
+</div>
+
+        <ion-col v-if="signup==true">
        <router-link to="/login">
             <ion-button fill="outline">Sign In</ion-button>
           </router-link>
         </ion-col>
 
-        <ion-col>
+        <ion-col v-if="togglelogin==true">
           <router-link to="/signup">
             <ion-button fill="outline">Sign Up</ion-button>
           </router-link>
         </ion-col>
-        <ion-col>
 
-      
-          <ion-button type="submit" @click="logOut()">Log out</ion-button>
-
-  
-    
-
-        </ion-col>
       </ion-row>
     </ion-grid>
-    <p>{{togglelogin}}</p>
-    <div v-if="togglelogin==true">true</div>
-    <div v-else>hello</div>
-  </ion-toolbar>
+   </ion-toolbar>
 </template>
 
 <script>
@@ -54,7 +61,7 @@ import { db } from "../db";
 
 export default defineComponent({
 //   name: "NavBar",
-  props:['togglelogin'],
+  props:['togglelogin','signup','upload'],
   components: {
     // IonHeader,
     // IonPage,
@@ -79,7 +86,7 @@ export default defineComponent({
         .signOut()
         .then(() => {
           firebase.auth().onAuthStateChanged(() => {
-            this.$router.push("/home");
+            this.$router.push("/login");
           });
         });
     },

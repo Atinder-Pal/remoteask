@@ -1,9 +1,7 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
+        <NavBar/>
     </ion-header>
     
     <ion-content :fullscreen="true">
@@ -35,6 +33,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
+import NavBar from "../components/NavBar";
+
 export default defineComponent({
   name: 'Home',
   components: {
@@ -42,7 +42,8 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    NavBar
   }
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-  <NavBar />
+ <NavBar v-bind:signup="signup"/>
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -91,7 +91,7 @@ export default defineComponent({
 
   data() {
     return {
-        togglelogin:false,
+        signup:true,
       user: {
         name: "",
         email: "",
