@@ -6,11 +6,13 @@
           <ion-title
             ><router-link to="/home">RemoteAsk</router-link>
             <!-- <p>{{ user ? user.email : null }}</p> -->
+            <div v-if="user.loggedIn">
+                
+           {{user.data.email}}</div>  
             </ion-title
           >
-            <div v-if="user.loggedIn">
-            <div class="nav-item">{{user.data.displayName}}</div>     
-          </div>
+              
+        
         </ion-col>
 
         <div v-if="upload == true">

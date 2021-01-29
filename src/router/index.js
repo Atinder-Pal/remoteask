@@ -5,7 +5,10 @@ import Home from '../views/Home.vue'
 import ListVideos from '../views/ListVideos.vue'
 import Signup from '../components/Signup.vue'
 import Signedin from '../components/Signin.vue'
+
 import firebase from 'firebase'
+// eslint-disable-next-line no-unused-vars
+import store from '../store/index'
 
 const routes = [
   {
@@ -50,7 +53,8 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  
 ]
 
 const router = createRouter({
@@ -67,5 +71,17 @@ router.beforeEach((to, from, next) => {
   else next();
 })
 
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//       if (store.getters.user.loggedIn) {
+//           next()
+//           return
+//       }
+//       next('/login')
+//   } else {
+//       next()
+//   }
+// })
 
 export default router
