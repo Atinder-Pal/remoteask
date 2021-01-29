@@ -6,9 +6,9 @@ import ListVideos from '../views/ListVideos.vue'
 import Signup from '../components/Signup.vue'
 import Signedin from '../components/Signin.vue'
 
-import firebase from 'firebase'
+//import firebase from 'firebase'
 // eslint-disable-next-line no-unused-vars
-//import store from '../store/index'
+import store from '../store/index'
 
 const routes = [
   {
@@ -65,7 +65,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const currentUser = firebase.auth().currentUser  
+  const currentUser = store.getters.user.loggedIn  
   console.log(currentUser)
   if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } }) 
   else if (!requiresAuth && currentUser) next('/')
