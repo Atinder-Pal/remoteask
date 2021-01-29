@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
- <NavBar v-bind:togglelogin="togglelogin"/>
+      <NavBar v-bind:togglelogin="togglelogin" />
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -32,21 +32,27 @@
               </ion-item>
             </ion-list>
 
-            <ion-button expand="block" type="submit" class="margin-ra"> Sign In </ion-button>
+            <ion-button expand="block" type="submit" class="margin-ra">
+              Sign In
+            </ion-button>
           </form>
 
-          <ion-button expand="block" fill="outline" class="margin-ra" @click="googleLogin"
+          <ion-button
+            expand="block"
+            fill="outline"
+            class="margin-ra"
+            @click="googleLogin"
             >Sign In With Google</ion-button
           >
         </ion-card-content>
 
-        <ion-card-footer >
-          <p class="margin-ra">Dont have an account yet click here to
-          <router-link to="/signup">Sign Up</router-link></p>
+        <ion-card-footer>
+          <p class="margin-ra">
+            Dont have an account yet click here to
+            <router-link to="/signup">Sign Up</router-link>
+          </p>
         </ion-card-footer>
       </ion-card>
-
-
     </ion-content>
   </ion-page>
 </template>
@@ -79,7 +85,7 @@ export default defineComponent({
 
   data() {
     return {
-     togglelogin:true,
+      togglelogin: true,
       user: {
         email: "",
         password: "",
@@ -94,8 +100,8 @@ export default defineComponent({
         // eslint-disable-next-line no-unused-vars
         .then((data) => {
           // this.$router.push("/signedin");
-              this.user.email = "";
-              this.user.password = "";
+          this.user.email = "";
+          this.user.password = "";
           this.$router.replace({ name: "Upload" });
         })
         .catch((error) => {
@@ -106,14 +112,14 @@ export default defineComponent({
       // Firebase Google Sign-in
 
       const provider = new firebase.auth.GoogleAuthProvider();
-     
+
       firebase
         .auth()
         .signInWithPopup(provider)
-         // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars
         .then((result) => {
-              this.user.email = "";
-              this.user.password = "";
+          this.user.email = "";
+          this.user.password = "";
           this.$router.replace("Signedin");
         })
         .catch((err) => {
@@ -132,7 +138,6 @@ export default defineComponent({
 .center-ra {
   max-width: 400px;
   margin-right: auto;
-  margin-left:auto;
+  margin-left: auto;
 }
-
 </style>

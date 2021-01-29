@@ -14,7 +14,7 @@ Pre-Requisities
 
 To start with the project:
   1. Clone the repository by running this command in Terminal:<br />
-  `git clone git@github.com:WEMP/project-slideshow.git`
+  `git clone git@github.com:JasPanesar/remoteask.git`
   
   You may be asked for your password if your id_rsa.pub file is not configured in github yet.
   

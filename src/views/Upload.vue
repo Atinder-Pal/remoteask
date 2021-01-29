@@ -1,13 +1,11 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-<NavBar v-bind:upload="upload" /> 
+      <NavBar v-bind:upload="upload" />
     </ion-header>
-    
-    <ion-content :fullscreen="true">
 
-    
-      <div id="container">               
+    <ion-content :fullscreen="true">
+      <div id="container">
         <!-- <router-link to="/home">
         <ion-button>HOME</ion-button>
         </router-link> -->
@@ -18,30 +16,27 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage } from '@ionic/vue';
-import { defineComponent } from 'vue';
-import VideoRecordUpload from '../components/VideoRecordUpload';
+import { IonContent, IonHeader, IonPage } from "@ionic/vue";
+import { defineComponent } from "vue";
+import VideoRecordUpload from "../components/VideoRecordUpload";
 import NavBar from "../components/NavBar";
 
 export default defineComponent({
-  name: 'Upload',
+  name: "Upload",
   components: {
     IonContent,
     IonHeader,
     IonPage,
 
     VideoRecordUpload,
-    NavBar
+    NavBar,
   },
-   data() {
+  data() {
     return {
-      upload:true,
+      upload: true,
     };
   },
-
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

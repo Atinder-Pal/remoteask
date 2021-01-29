@@ -15,31 +15,28 @@
       </ion-toolbar>
     </ion-header>
  -->
-    <!-- <p>{{ user.displayName }}</p> -->
-    <!-- <p>{{ user.providerData.email }}</p> -->
-    <!-- <pre>{{ user }}</pre> -->
-  <!-- </ion-page> --> 
+  <!-- <p>{{ user.displayName }}</p> -->
+  <!-- <p>{{ user.providerData.email }}</p> -->
+  <!-- <pre>{{ user }}</pre> -->
+  <!-- </ion-page> -->
   <div>
+    <router-link to="/home">
+      <ion-button>Home</ion-button>
+    </router-link>
 
-  <router-link to="/home">
-          <ion-button>Home</ion-button>
-        </router-link>
-
-        
-          <!-- <router-link to="/signup"><ion-button>Sign Up</ion-button></router-link> -->
-          <ion-button type="submit" @click="logOut()">Log out</ion-button>
-          <p v-if="user">You are logged in!</p>
-    <!-- <p>{{ user.displayName }}</p> -->   
-
+    <!-- <router-link to="/signup"><ion-button>Sign Up</ion-button></router-link> -->
+    <ion-button type="submit" @click="logOut()">Log out</ion-button>
+    <p v-if="user">You are logged in!</p>
+    <!-- <p>{{ user.displayName }}</p> -->
   </div>
 </template>
 
 <script>
 import {
-//   IonHeader,
-//   IonPage,
-//   IonTitle,
-//   IonToolbar,
+  //   IonHeader,
+  //   IonPage,
+  //   IonTitle,
+  //   IonToolbar,
   IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
