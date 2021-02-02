@@ -75,7 +75,7 @@ export default {
           const items = querySnapshot.docs.map((doc) => {
             return doc.data();
           });
-          this.itemsArray.push(...items);
+          this.itemsArray = items;
           this.setDisplayVideo(items[0]);
         });
     });
