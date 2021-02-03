@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col>
           <ion-title
-            ><router-link to="/home">RemoteAsk</router-link>
+            ><router-link to="/upload">RemoteAsk</router-link>
             <!-- <p>{{ user ? user.email : null }}</p> -->
             <div v-if="user.loggedIn">
                 
@@ -23,7 +23,7 @@
           </ion-col>
           <ion-col>
             <router-link to="/listVideos">
-              <ion-button fill="outline">Listing</ion-button>
+              <ion-button fill="outline">My Videos</ion-button>
             </router-link>
           </ion-col>
           <ion-col>
