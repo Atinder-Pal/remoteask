@@ -159,7 +159,14 @@ export default {
           // configure videojs-record plugin
           record: {
             audio: true,
-            video: true,
+             video: {
+                // video media constraints: set resolution of camera
+                width: { min: 640, ideal: 1280, max: 1920 },
+                height: { min: 480, ideal: 720, max: 1080 }
+            },
+            // dimensions of captured video frames           
+            frameWidth: 1280,
+            frameHeight: 720,
             debug: true,
             maxLength: 600,
             videoMimeType: "video/webm;codecs=vp9",
@@ -282,11 +289,12 @@ export default {
     // device is ready
     this.player.on("deviceReady", () => {
       console.log("device is ready!");
-      this.deviceReady = true;
+      this.deviceReady = true;      
     });
     // user clicked the record button and started recording
     this.player.on("startRecord", () => {
       console.log("started recording!");
+    
     });
     // user completed recording and stream is available
     this.player.on("finishRecord", () => {
@@ -296,7 +304,7 @@ export default {
       console.log("finished recording: ", this.player.recordedData);
       this.recordedBlob = this.player.recordedData;
       // ==========================save video on desktop====================================
-      // this.player.record().saveAs({'video': 'recording.mp4'});
+       this.player.record().saveAs({'video': 'recording.mp4'});
       // ===================================================================================
     });
     // error handling
