@@ -12,25 +12,25 @@
     <li
       v-for="item in itemsArray"
       :key="item"
-      :id="JSON.stringify(item)"
+      :data-item="JSON.stringify(item)"
       class="listItem"
       @click.capture="selectVideo"
     >
       <span
         class="list-title"
-        :class="JSON.stringify(item)"
+        :data-item="JSON.stringify(item)"
         @click.capture="selectVideo"
         >{{ item.title }}</span
       >
       <span
         class="list-topic"
-        :class="JSON.stringify(item)"
+        :data-item="JSON.stringify(item)"
         @click.capture="selectVideo"
         >{{ item.topic }}</span
       >
       <span
         class="list-timestamp"
-        :class="JSON.stringify(item)"
+        :data-item="JSON.stringify(item)"
         @click.capture="selectVideo"
         >{{ item.createdAt.toDate().toDateString() }}</span
       >
@@ -63,7 +63,7 @@ export default {
       this.selectedItem.createdAt = myDate.toDateString();
     },
     selectVideo(e) {
-      const video = JSON.parse(e.target.id);
+      const video = JSON.parse(e.target.getAttribute("data-item"));
       this.setDisplayVideo(video);
     },
   },
@@ -75,7 +75,7 @@ export default {
           const items = querySnapshot.docs.map((doc) => {
             return doc.data();
           });
-          this.itemsArray.push(...items);
+          this.itemsArray = items;
           this.setDisplayVideo(items[0]);
         });
     });

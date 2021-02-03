@@ -23,7 +23,7 @@
           </ion-col>
           <ion-col>
             <router-link to="/listVideos">
-              <ion-button fill="outline">Listing</ion-button>
+              <ion-button fill="outline">My Videos</ion-button>
             </router-link>
           </ion-col>
           <ion-col>
