@@ -68,8 +68,8 @@ router.beforeEach((to, from, next) => {
   console.log(currentUser)
   
   if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })
-  // else if (!requiresAuth && currentUser) next('/')
-  // else if (!requiresAuth && !currentUser) next() 
+   else if (!requiresAuth && currentUser) next('/')
+   else if (!requiresAuth && !currentUser) next() 
   else next();
 })
 
