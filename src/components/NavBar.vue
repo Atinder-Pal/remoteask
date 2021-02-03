@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col>
           <ion-title
-            ><router-link to="/home">RemoteAsk</router-link>
+            ><router-link to="/upload">RemoteAsk</router-link>
             <!-- <p>{{ user ? user.email : null }}</p> -->
             <div v-if="user.loggedIn">
                 
