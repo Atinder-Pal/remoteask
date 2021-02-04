@@ -7,7 +7,16 @@
       <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
     </div>
     <button @click="openModal">Share</button>
-    <div v-if="modal" id="modal">Modal Show</div>
+    <div v-if="modal" id="modal">
+      <textarea
+        name="copyContent"
+        id="copyContent"
+        cols="30"
+        rows="10"
+        :value="shareLink"
+      ></textarea>
+      <button @click="copyLink">Copy</button>
+    </div>
   </section>
   <hr />
   <ul class="videosList">
@@ -50,6 +59,7 @@ export default {
       selectedItem: {},
       itemsArray: [],
       modal: false,
+      shareLink: "",
     };
   },
   methods: {
@@ -71,6 +81,11 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
+      this.shareLink = `${this.selectedItem.title} ${this.selectedItem.link}`;
+    },
+    copyLink() {
+      document.querySelector("#copyContent").select();
+      document.execCommand("copy");
     },
   },
   beforeMount() {
