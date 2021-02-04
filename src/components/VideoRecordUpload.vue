@@ -160,15 +160,18 @@ export default {
           record: {
             audio: true,
              video: {
-                // video media constraints: set resolution of camera
-                width: { min: 640, ideal: 1280, max: 1920 },
-                height: { min: 480, ideal: 720, max: 1080 }
-            },
-            // dimensions of captured video frames           
-            // frameWidth: 1280,
-            // frameHeight: 720,
+        mandatory: {
+            // chromeMediaSource: 'screen',
+            minWidth: 1280,
+            minHeight: 720,
+            maxWidth: 1920,
+            maxHeight: 1080,
+            minAspectRatio: 1.77
+        },
+        optional: []
+    },
             minFrameRate: 30,
-            maxFramerate:30,
+            maxFramerate:30,                        
             debug: true,
             maxLength: 600,
             videoMimeType: "video/webm;codecs=vp9",
