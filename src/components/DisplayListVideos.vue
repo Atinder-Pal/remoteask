@@ -78,6 +78,7 @@ export default {
     selectVideo(e) {
       const video = JSON.parse(e.target.getAttribute("data-item"));
       this.setDisplayVideo(video);
+      this.modal = false;
     },
     openModal() {
       this.modal = !this.modal;
