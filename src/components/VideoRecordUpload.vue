@@ -165,8 +165,10 @@ export default {
                 height: { min: 480, ideal: 720, max: 1080 }
             },
             // dimensions of captured video frames           
-            frameWidth: 1280,
-            frameHeight: 720,
+            // frameWidth: 1280,
+            // frameHeight: 720,
+            minFrameRate: 30,
+            maxFramerate:30,
             debug: true,
             maxLength: 600,
             videoMimeType: "video/webm;codecs=vp9",
@@ -374,6 +376,11 @@ h4 {
   color: green;
 }
 @media only screen and (min-width: 760px) {
+  .container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .progress-bar {
     font-size: 1.3em;
   }
