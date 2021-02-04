@@ -6,6 +6,8 @@
       <p id="video-topic">{{ selectedItem.topic }}</p>
       <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
     </div>
+    <button @click="openModal">Share</button>
+    <div v-if="modal" id="modal">Modal Show</div>
   </section>
   <hr />
   <ul class="videosList">
@@ -47,6 +49,7 @@ export default {
     return {
       selectedItem: {},
       itemsArray: [],
+      modal: false,
     };
   },
   methods: {
