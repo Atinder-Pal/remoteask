@@ -69,6 +69,9 @@ export default {
       const video = JSON.parse(e.target.getAttribute("data-item"));
       this.setDisplayVideo(video);
     },
+    openModal() {
+      this.modal = !this.modal;
+    },
   },
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
