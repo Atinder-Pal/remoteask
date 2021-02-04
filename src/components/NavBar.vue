@@ -85,7 +85,8 @@ export default defineComponent({
         .signOut()
         .then(() => {
           firebase.auth().onAuthStateChanged(() => {
-            this.$router.push("/login");
+            //this.$router.push({ path: '/login',query: { redirect: '/upload' } });
+            this.$router.replace('login')
           });
         });
     },

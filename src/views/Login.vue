@@ -101,8 +101,8 @@ export default defineComponent({
         .then((data) => {
           // this.$router.push("/signedin");
           this.user.email = "";
-          this.user.password = "";
-          this.$router.replace({ name: "Upload" });
+          this.user.password = "";          
+          setTimeout( () => this.$router.push({ path: '/upload'}), 1000);
         })
         .catch((error) => {
           alert(error.message);
@@ -120,7 +120,7 @@ export default defineComponent({
         .then((result) => {
           this.user.email = "";
           this.user.password = "";
-          this.$router.replace('/');
+          setTimeout( () => this.$router.push({ path: '/upload'}), 1000);
         })
         .catch((err) => {
           alert("Oops. " + err.message);
