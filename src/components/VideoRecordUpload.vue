@@ -159,7 +159,19 @@ export default {
           // configure videojs-record plugin
           record: {
             audio: true,
-            video: true,
+             video: {
+        mandatory: {
+            // chromeMediaSource: 'screen',
+            minWidth: 1280,
+            minHeight: 720,
+            maxWidth: 1920,
+            maxHeight: 1080,
+            minAspectRatio: 1.77
+        },
+        optional: []
+    },
+            minFrameRate: 30,
+            maxFramerate:30,                        
             debug: true,
             maxLength: 600,
             videoMimeType: "video/webm;codecs=vp9",
@@ -282,11 +294,12 @@ export default {
     // device is ready
     this.player.on("deviceReady", () => {
       console.log("device is ready!");
-      this.deviceReady = true;
+      this.deviceReady = true;      
     });
     // user clicked the record button and started recording
     this.player.on("startRecord", () => {
       console.log("started recording!");
+    
     });
     // user completed recording and stream is available
     this.player.on("finishRecord", () => {
@@ -296,7 +309,7 @@ export default {
       console.log("finished recording: ", this.player.recordedData);
       this.recordedBlob = this.player.recordedData;
       // ==========================save video on desktop====================================
-      // this.player.record().saveAs({'video': 'recording.mp4'});
+       this.player.record().saveAs({'video': 'recording.mp4'});
       // ===================================================================================
     });
     // error handling
@@ -366,6 +379,11 @@ h4 {
   color: green;
 }
 @media only screen and (min-width: 760px) {
+  .container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .progress-bar {
     font-size: 1.3em;
   }

@@ -70,31 +70,12 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
   const currentUser = store.getters.user.loggedIn;
   console.log(currentUser);
+
   if (requiresAuth && !currentUser)
     next({ path: "/login", query: { redirect: to.fullPath } });
-  // else if (!requiresAuth && currentUser) next('/')
-  // else if (!requiresAuth && !currentUser) next()
+  else if (!requiresAuth && currentUser) next("/");
+  else if (!requiresAuth && !currentUser) next();
   else next();
 });
-// router.beforeEach((to, from, next) => {
-//   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-//   const currentUser = store.getters.user.loggedIn
-//   console.log(currentUser)
-//   if (requiresAuth && !currentUser)
-//     next({ path: '/login', query: { redirect: to.fullPath } })
-//   else next();
-// })
-
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//       if (store.getters.user.loggedIn) {
-//           next()
-//           return
-//       }
-//       next('/login')
-//   } else {
-//       next()
-//   }
-// })
 
 export default router;
