@@ -1,4 +1,12 @@
-<template> <h1>Landing page</h1></template>
+<template>
+  <h1>Landing page</h1>
+  <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
+  <div id="video-info">
+    <h3 id="video-title">{{ video.title }}</h3>
+    <p id="video-topic">{{ video.topic }}</p>
+    <!-- <p id="video-timestamp">{{ video.createdAt }}</p> -->
+  </div>
+</template>
 
 <script>
 import db from "../db.js";
@@ -6,18 +14,24 @@ import db from "../db.js";
 export default {
   data() {
     return {
-      video: "gmOKtGq4MPrlY0tJQ4mz",
+      video: {},
     };
   },
   methods: {
-    setDisplayVideo() {},
+    setDisplayVideo(video) {
+      this.video = {
+        title: video.title,
+        topic: video.topic,
+        link: video.link,
+      };
+    },
   },
   beforeMount() {
     db.collection("videos")
-      .doc(this.video)
+      .doc("gmOKtGq4MPrlY0tJQ4mz")
       .get()
       .then((snapshot) => {
-        console.log(snapshot.data());
+        this.setDisplayVideo(snapshot.data());
       });
   },
 };
