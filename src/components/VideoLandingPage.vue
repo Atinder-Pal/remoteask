@@ -4,7 +4,7 @@
   <div id="video-info">
     <h3 id="video-title">{{ video.title }}</h3>
     <p id="video-topic">{{ video.topic }}</p>
-    <!-- <p id="video-timestamp">{{ video.createdAt }}</p> -->
+    <p id="video-timestamp">{{ video.createdAt }}</p>
   </div>
 </template>
 
@@ -23,7 +23,12 @@ export default {
         title: video.title,
         topic: video.topic,
         link: video.link,
+        createdAt: video.createdAt,
       };
+
+      let timestamp = this.video.createdAt;
+      let myDate = new Date(timestamp.seconds * 1000);
+      this.video.createdAt = myDate.toDateString();
     },
   },
   beforeMount() {
