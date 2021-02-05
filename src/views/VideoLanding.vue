@@ -5,7 +5,7 @@
     </ion-header>
     <ion-content :fullscreen="true">
       <div id="container">
-        <VideoLandingPage />
+        <VideoLandingPage v-bind:videoDocUID="$route.params.uid" />
       </div>
     </ion-content>
   </ion-page>

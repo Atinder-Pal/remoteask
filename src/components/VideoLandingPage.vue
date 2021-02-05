@@ -1,5 +1,5 @@
 <template>
-  <h1>Landing page</h1>
+  <h1>Playing: {{ videoDocUID }}</h1>
   <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
   <div id="video-info">
     <h3 id="video-title">{{ video.title }}</h3>
@@ -12,6 +12,7 @@
 import db from "../db.js";
 
 export default {
+  props: ["videoDocUID"],
   data() {
     return {
       video: {},
@@ -32,6 +33,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log(this.videoDocUID);
     db.collection("videos")
       .doc("gmOKtGq4MPrlY0tJQ4mz")
       .get()
