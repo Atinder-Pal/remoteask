@@ -18,7 +18,7 @@ import NavBar from "../components/NavBar";
 import VideoLandingPage from "../components/VideoLandingPage";
 
 export default defineComponent({
-  name: "ListVideos",
+  name: "VideoLanding",
   components: {
     IonContent,
     IonHeader,
