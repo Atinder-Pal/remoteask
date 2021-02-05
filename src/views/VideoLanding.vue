@@ -5,8 +5,7 @@
     </ion-header>
     <ion-content :fullscreen="true">
       <div id="container">
-        <VideoLandingPage />
-        <DisplayListVideos />
+        <VideoLandingPage v-bind:videoDocUID="$route.params.uid" />
       </div>
     </ion-content>
   </ion-page>
@@ -15,17 +14,15 @@
 <script>
 import { IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
-import DisplayListVideos from "../components/DisplayListVideos.vue";
 import NavBar from "../components/NavBar";
 import VideoLandingPage from "../components/VideoLandingPage";
 
 export default defineComponent({
-  name: "ListVideos",
+  name: "VideoLanding",
   components: {
     IonContent,
     IonHeader,
     IonPage,
-    DisplayListVideos,
     VideoLandingPage,
     NavBar,
   },
