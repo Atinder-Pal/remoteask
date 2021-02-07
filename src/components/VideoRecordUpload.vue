@@ -50,36 +50,7 @@
     </div>
 
     <div v-if="recordedBlob != null">
-      <form @submit.prevent="onUpload(recordedBlob)">
-        <ion-list>
-          <ion-item>
-            <ion-label class="label-class" stacked>Video Title</ion-label>
-            <ion-input
-              type="text"
-              id="title"
-              name="title"
-              autocomplete="off"
-              v-model="video.title"
-              required
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label class="label-class" stacked>Video Topic</ion-label>
-            <ion-input
-              type="text"
-              id="topic"
-              name="topic"
-              autocomplete="off"
-              v-model="video.topic"
-              required
-            ></ion-input>
-          </ion-item>
-        </ion-list>
-        <ion-button expand="block" type="submit" class="margin-ra">
-          Upload</ion-button
-        >
-      </form>
+      <FormForVideoInfo @clickedUpload="onUpload"> </FormForVideoInfo>
     </div>
   </div>
 
@@ -115,6 +86,7 @@ import RecordRTC from "recordrtc";
 import Record from "videojs-record/dist/videojs.record.js";
 import firebase from "firebase";
 import db from "@/db.js";
+import FormForVideoInfo from './FormForVideoInfo.vue';
 import {
   IonList,
   IonItem,
@@ -187,6 +159,7 @@ export default {
     IonInput,
     IonProgressBar,
     IonLabel,
+    FormForVideoInfo
   },
   methods: {
     previewVideo(event) {
@@ -237,10 +210,12 @@ export default {
       };
       this.player.record().getDevice();
     },
-    onUpload(video) {
+    onUpload(formData) {    
       this.showProgress = true;
       this.videoData = null;
       this.video.url = null;
+      this.video.title = formData.title;
+      this.video.topic = formData.topic;
       //Citation: Danish suggested to save file with timestamp name, referenced code from her
       const date = new Date();
       const fileName =
@@ -254,7 +229,7 @@ export default {
       const storageRef = firebase
         .storage()
         .ref(`${fileName}`)
-        .put(video);
+        .put(this.recordedBlob);
       storageRef.on(
         `state_changed`,
         (snapshot) => {
@@ -405,7 +380,7 @@ h4 {
 }
 @media screen and (min-width: 1024px) {
   .container {
-    width: 60%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
   }
