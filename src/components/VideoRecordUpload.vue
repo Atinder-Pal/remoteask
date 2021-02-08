@@ -54,10 +54,10 @@
     </div>
   </div>
 
-  <div v-if="uploaded">
-    <h4>Video submitted successfully!</h4>
+  <video-uploaded-modal v-if="uploaded" @close="newVideo">
+    <!-- <h4>Video submitted successfully!</h4> -->
     <!-- <button @click="newVideo">Add more videos</button> -->
-  </div>
+  </video-uploaded-modal>
 
   <div>
     <h4 v-if="errorOnUploading">
@@ -87,6 +87,7 @@ import Record from "videojs-record/dist/videojs.record.js";
 import firebase from "firebase";
 import db from "@/db.js";
 import FormForVideoInfo from './FormForVideoInfo.vue';
+import VideoUploadedModal from './VideoUploadedModal.vue'
 import {
   IonList,
   IonItem,
@@ -159,7 +160,8 @@ export default {
     IonInput,
     IonProgressBar,
     IonLabel,
-    FormForVideoInfo
+    FormForVideoInfo,
+    VideoUploadedModal
   },
   methods: {
     previewVideo(event) {
@@ -184,7 +186,7 @@ export default {
           console.log("Video uploaded successfully!");
           this.uploaded = true;
           this.player.reset();
-          setTimeout(this.newVideo, 3000);
+          //setTimeout(this.newVideo, 3000);
           console.log("Media File uploaded to Firestore");
         })
         .catch((error) => {
@@ -210,7 +212,8 @@ export default {
       };
       this.player.record().getDevice();
     },
-    onUpload(formData) {    
+    onUpload(formData) {
+     
       this.showProgress = true;
       this.videoData = null;
       this.video.url = null;
