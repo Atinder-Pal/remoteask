@@ -1,5 +1,5 @@
 <template>
-    <div class="align-center container">
+    
     <div class="video-player">
       <video
         id="myVideo"
@@ -12,7 +12,7 @@
       </p>
       <p class="align-center" v-if="deviceReady">Record a video</p>
     </div>
-    </div>
+   
 </template>
 
 <script>
