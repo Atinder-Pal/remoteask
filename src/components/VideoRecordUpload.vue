@@ -4,20 +4,9 @@
     <video-record @videoRecorded="videoRecorded" ref="videoRecordComponent" >
     </video-record>   
     <p>or</p>
-    <div class="show-border">
-      <ion-label class="import-video-label" stacked
-        >Add video from Device</ion-label
-      >
-      <section>
-        <input
-          class="center"
-          type="file"
-          @change="previewVideo"
-          accept="video/*"
-          ref="inputForFile"
-        />
-      </section>
-    </div>
+    <import-video @videoImported='previewVideo' ref="videoImportComponent">
+    </import-video>
+    
     <div v-if="showProgress" class="progress-bar">
       Progress: {{ uploadValue.toFixed() + "%" + " " }}
       <progress
@@ -26,19 +15,7 @@
         max="100"
         color="primary"
       ></progress>
-    </div>
-
-    <div v-if="videoData != null">
-      <p>Preview Video before uploading:</p>
-      <div class="resp-container">
-        <iframe
-          class="preview resp-iframe"
-          :src="blobURL"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
+    </div>   
 
     <div v-if="recordedBlob != null">
       <FormForVideoInfo @clickedUpload="onUpload"> </FormForVideoInfo>
@@ -77,17 +54,18 @@ import Record from "videojs-record/dist/videojs.record.js";
 import firebase from "firebase";
 import db from "@/db.js";
 import FormForVideoInfo from './FormForVideoInfo.vue';
-import VideoUploadedModal from './VideoUploadedModal.vue'
-import VideoRecord from './VideoRecord.vue'
-import {
-  IonList,
-  IonItem,
-  IonButton,
-  IonInput,
-  IonProgressBar,
-  IonCard,
-  IonLabel,
-} from "@ionic/vue";
+import VideoUploadedModal from './VideoUploadedModal.vue';
+import VideoRecord from './VideoRecord.vue';
+import ImportVideo from './ImportVideo.vue';
+// import {
+//   IonList,
+//   IonItem,
+//   IonButton,
+//   IonInput,
+//   IonProgressBar,
+//   IonCard,
+//   IonLabel,
+// } from "@ionic/vue";
 
 export default {
   data() {
@@ -112,26 +90,26 @@ export default {
     };
   },
   components: {
-    IonList,
-    IonItem,
-    IonButton,
-    IonInput,
-    IonProgressBar,
-    IonLabel,
+    // IonList,
+    // IonItem,
+    // IonButton,
+    // IonInput,
+    // IonProgressBar,
+    // IonLabel,
     FormForVideoInfo,
     VideoUploadedModal,
-    VideoRecord
+    VideoRecord,
+    ImportVideo
   },
   methods: {
     videoRecorded(value){
       this.recordedBlob= value
     },
-    previewVideo(event) {
+    previewVideo(value) {
       this.uploadValue = 0;
-      this.videoData = this.$refs.inputForFile.files[0];
-      this.videoData = event.target.files[0];
-      this.recordedBlob = this.videoData;
-      this.blobURL = URL.createObjectURL(this.videoData);
+     
+      this.recordedBlob = value;
+      this.blobURL = URL.createObjectURL(value);
     },
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
@@ -159,10 +137,10 @@ export default {
     newVideo() {
       this.uploaded = false;
       this.recordedBlob = null;
-      this.videoData = null;
+      //this.videoData = null;
       this.uploadValue = 0;
       this.showProgress = false;
-      this.$refs.inputForFile.value = null;
+      this.$refs.videoImportComponent.resetInput();
 
       this.video.title = null;
       this.video.topic = null;
