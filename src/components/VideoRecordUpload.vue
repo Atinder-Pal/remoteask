@@ -1,17 +1,8 @@
 <template>
+
   <div class="align-center container">
-    <div class="video-player">
-      <video
-        id="myVideo"
-        class="video-js vjs-default-skin vjs-16-9"
-        data-setup='{"fluid": true}'
-        playsinline
-      ></video>
-      <p class="align-center" v-if="!deviceReady">
-        Click or Tap on Camera Icon to enable the camera
-      </p>
-      <p class="align-center" v-if="deviceReady">Record a video</p>
-    </div>
+    <video-record @videoRecorded="videoRecorded" ref="videoRecordComponent" >
+    </video-record>   
     <p>or</p>
     <div class="show-border">
       <ion-label class="import-video-label" stacked
@@ -54,12 +45,10 @@
     </div>
   </div>
 
-  <video-uploaded-modal v-if="uploaded" @close="newVideo">
-    <!-- <h4>Video submitted successfully!</h4> -->
-    <!-- <button @click="newVideo">Add more videos</button> -->
+  <video-uploaded-modal v-if="uploaded" @close="newVideo"> 
   </video-uploaded-modal>
 
-  <div>
+  <!-- <div>
     <h4 v-if="errorOnUploading">
       {{
         errorOnUploading.errorOnStorage
@@ -67,7 +56,7 @@
           : errorOnUploading.errorOnFirestore
       }}
     </h4>
-  </div>
+  </div> -->
   <!-- ===========================Render Uploaded Video========================== -->
   <!-- <div v-if="video.url!=null">
         <p> Here is the video you just uploaded:</p>
@@ -78,6 +67,7 @@
 
 <script>
 /* eslint-disable */
+
 import "video.js/dist/video-js.css";
 import "videojs-record/dist/css/videojs.record.css";
 import videojs from "video.js";
@@ -88,6 +78,7 @@ import firebase from "firebase";
 import db from "@/db.js";
 import FormForVideoInfo from './FormForVideoInfo.vue';
 import VideoUploadedModal from './VideoUploadedModal.vue'
+import VideoRecord from './VideoRecord.vue'
 import {
   IonList,
   IonItem,
@@ -110,47 +101,14 @@ export default {
       errorOnUploading: {
         errorOnStorage: null,
         errorOnFirestore: null,
-      },
+      },      
       deviceReady: false,
       showProgress: false,
       uploaded: false,
       blobURL: null,
       videoData: null,
       recordedBlob: null,
-      uploadValue: 0,
-      player: "",
-      options: {
-        controls: true,
-        autoplay: false,
-        fluid: false,
-        loop: false,
-        bigPlayButton: true,
-        controlBar: {
-          volumePanel: true,
-        },
-        plugins: {
-          // configure videojs-record plugin
-          record: {
-            audio: true,
-             video: {
-        mandatory: {
-            // chromeMediaSource: 'screen',
-            minWidth: 1280,
-            minHeight: 720,
-            maxWidth: 1920,
-            maxHeight: 1080,
-            minAspectRatio: 1.77
-        },
-        optional: []
-    },
-            minFrameRate: 30,
-            maxFramerate:30,                        
-            debug: true,
-            maxLength: 600,
-            videoMimeType: "video/webm;codecs=vp9",
-          },
-        },
-      },
+      uploadValue: 0,    
     };
   },
   components: {
@@ -161,9 +119,13 @@ export default {
     IonProgressBar,
     IonLabel,
     FormForVideoInfo,
-    VideoUploadedModal
+    VideoUploadedModal,
+    VideoRecord
   },
   methods: {
+    videoRecorded(value){
+      this.recordedBlob= value
+    },
     previewVideo(event) {
       this.uploadValue = 0;
       this.videoData = this.$refs.inputForFile.files[0];
@@ -210,7 +172,9 @@ export default {
         errorOnStorage: null,
         errorOnFirestore: null,
       };
-      this.player.record().getDevice();
+      this.resetRecorder = true;
+      this.$refs.videoRecordComponent.resetRecorder();
+      //this.player.record().getDevice();
     },
     onUpload(formData) {
      
@@ -257,52 +221,8 @@ export default {
     /* eslint-disable no-console */
     firebase.auth().onAuthStateChanged((user) => {
       this.video.userId = user.uid;
-    });
-    this.player = videojs("#myVideo", this.options, () => {
-      // print version information at startup
-      var msg =
-        "Using video.js " +
-        videojs.VERSION +
-        " with videojs-record " +
-        videojs.getPluginVersion("record") +
-        " and recordrtc " +
-        RecordRTC.version;
-      videojs.log(msg);
-    });
-    // device is ready
-    this.player.on("deviceReady", () => {
-      console.log("device is ready!");
-      this.deviceReady = true;      
-    });
-    // user clicked the record button and started recording
-    this.player.on("startRecord", () => {
-      console.log("started recording!");
-    
-    });
-    // user completed recording and stream is available
-    this.player.on("finishRecord", () => {
-      this.i++;
-      // the blob object contains the recorded data that
-      // can be downloaded by the user, stored on server etc.
-      console.log("finished recording: ", this.player.recordedData);
-      this.recordedBlob = this.player.recordedData;
-      // ==========================save video on desktop====================================
-       this.player.record().saveAs({'video': 'recording.mp4'});
-      // ===================================================================================
-    });
-    // error handling
-    this.player.on("error", (element, error) => {
-      console.warn(error);
-    });
-    this.player.on("deviceError", () => {
-      console.error("device error:", this.player.deviceErrorCode);
-    });
-  },
-  beforeUnmount() {
-    if (this.player) {
-      this.player.dispose();
-    }
-  },
+    });  
+  },  
 };
 </script>
 <style scoped="">
