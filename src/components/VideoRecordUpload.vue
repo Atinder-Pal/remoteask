@@ -18,28 +18,13 @@
     </div>   
 
     <div v-if="recordedBlob != null">
-      <FormForVideoInfo @clickedUpload="onUpload"> </FormForVideoInfo>
+      <form-for-video-info @clickedUpload="onUpload"> </form-for-video-info>
     </div>
   </div>
 
   <video-uploaded-modal v-if="uploaded" @close="newVideo"> 
   </video-uploaded-modal>
 
-  <!-- <div>
-    <h4 v-if="errorOnUploading">
-      {{
-        errorOnUploading.errorOnStorage
-          ? errorOnUploading.errorOnStorage
-          : errorOnUploading.errorOnFirestore
-      }}
-    </h4>
-  </div> -->
-  <!-- ===========================Render Uploaded Video========================== -->
-  <!-- <div v-if="video.url!=null">
-        <p> Here is the video you just uploaded:</p>
-        <iframe id="recordedVideo" :src="video.url"></iframe>     
-    </div> -->
-  <!-- ============================================================================= -->
 </template>
 
 <script>
@@ -57,15 +42,6 @@ import FormForVideoInfo from './FormForVideoInfo.vue';
 import VideoUploadedModal from './VideoUploadedModal.vue';
 import VideoRecord from './VideoRecord.vue';
 import ImportVideo from './ImportVideo.vue';
-// import {
-//   IonList,
-//   IonItem,
-//   IonButton,
-//   IonInput,
-//   IonProgressBar,
-//   IonCard,
-//   IonLabel,
-// } from "@ionic/vue";
 
 export default {
   data() {
@@ -83,19 +59,12 @@ export default {
       deviceReady: false,
       showProgress: false,
       uploaded: false,
-      blobURL: null,
-      videoData: null,
+      blobURL: null,      
       recordedBlob: null,
       uploadValue: 0,    
     };
   },
-  components: {
-    // IonList,
-    // IonItem,
-    // IonButton,
-    // IonInput,
-    // IonProgressBar,
-    // IonLabel,
+  components: {   
     FormForVideoInfo,
     VideoUploadedModal,
     VideoRecord,
@@ -125,8 +94,7 @@ export default {
         .then(() => {
           console.log("Video uploaded successfully!");
           this.uploaded = true;
-          this.player.reset();
-          //setTimeout(this.newVideo, 3000);
+          this.player.reset();         
           console.log("Media File uploaded to Firestore");
         })
         .catch((error) => {
@@ -136,8 +104,7 @@ export default {
     },
     newVideo() {
       this.uploaded = false;
-      this.recordedBlob = null;
-      //this.videoData = null;
+      this.recordedBlob = null;      
       this.uploadValue = 0;
       this.showProgress = false;
       this.$refs.videoImportComponent.resetInput();
@@ -156,8 +123,7 @@ export default {
     },
     onUpload(formData) {
      
-      this.showProgress = true;
-      this.videoData = null;
+      this.showProgress = true;      
       this.video.url = null;
       this.video.title = formData.title;
       this.video.topic = formData.topic;
