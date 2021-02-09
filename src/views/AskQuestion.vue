@@ -8,6 +8,7 @@
       <div id="container">        
         <h1>Ask a Question</h1>
         <form-for-video-info @clickedUpload="shareQuestion"> </form-for-video-info>
+        <button @click="webShare"> Share</button>
         <div v-if="modal" id="modal">
             <textarea
                 name="copyContent"
@@ -72,14 +73,33 @@ export default defineComponent({
         .then((docRef) => {
           this.docId = docRef.id;
           console.log(`This is document id: ${docRef.id}`)
-          this.modal = !this.modal;
+          //this.modal = !this.modal;
+
           console.log(this.docId);
           this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
+          //this.webShare();
         })
         .catch((error) => {
          console.log(error);
         });
     },
+    webShare(){
+        this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
+        console.log("butoon clicked")
+        if (navigator.share) {
+            navigator.share({
+            title: 'WebShare API Demo',
+            url: this.shareLink
+            }).then(() => {
+            console.log('Thanks for sharing!');
+            })
+            .catch(console.error);
+        } else {
+                // fallback
+                console.log("WEB share API not supported!");
+               this.modal = !this.modal;
+            }
+        }
   },
    mounted() {
     /* eslint-disable no-console */
