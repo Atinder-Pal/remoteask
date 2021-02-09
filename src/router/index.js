@@ -7,6 +7,7 @@ import Signup from "../components/Signup.vue";
 import Signedin from "../components/Signin.vue";
 import VideoLanding from "../views/VideoLanding.vue";
 import AskQuestion from "../views/AskQuestion.vue";
+import AnswerQuestion from "../views/AnswerQuestion.vue";
 
 //import firebase from 'firebase'
 // eslint-disable-next-line no-unused-vars
@@ -51,6 +52,11 @@ const routes = [
     path: "/video/:uid",
     name: "VideoLanding",
     component: VideoLanding,
+  },
+  {
+    path: "/answerquestion/:id",
+    name: "AnswerQuestion",
+    component: AnswerQuestion,   
   },
   {
     path: "/askquestion",
