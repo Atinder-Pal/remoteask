@@ -8,7 +8,7 @@
       <div id="container">        
         <h1>Ask a Question</h1>
         <form-for-video-info @clickedUpload="shareQuestion"> </form-for-video-info>
-        <button @click="webShare"> Share</button>
+        <button v-if="showShareButton" @click="webShare"> Share</button>
         <div v-if="modal" id="modal">
             <textarea
                 name="copyContent"
@@ -49,11 +49,13 @@ export default defineComponent({
       docId: null,
        modal: false,
       shareLink: "",
+      showShareButton: false
     };
   },
   methods: {
-       shareQuestion(formData) {
-         this.saveToFirestore(formData);          
+       async shareQuestion(formData) {
+        await this.saveToFirestore(formData);  
+        this.showShareButton = true;
       },
       copyLink() {
       document.querySelector("#copyContent").select();
