@@ -101,7 +101,7 @@ export default defineComponent({
       this.blobURL = URL.createObjectURL(value);
     },
     saveToFirestore() {
-     // const { serverTimestamp } = firebase.firestore.FieldValue;
+      const { serverTimestamp } = firebase.firestore.FieldValue;
     //   const videoInfo = {
     //     title: this.video.title,
     //     link: this.video.url,
@@ -112,7 +112,8 @@ export default defineComponent({
       db.collection("videos")
         .doc(this.id)
         .update({
-           link: this.video.url 
+           link: this.video.url,
+           createdAt: serverTimestamp(),
         })
         .then(() => {
           console.log("Video uploaded successfully!");
