@@ -74,7 +74,7 @@ export default defineComponent({
           console.log(`This is document id: ${docRef.id}`)
           this.modal = !this.modal;
           console.log(this.docId);
-          this.shareLink = `https://localhost:8100/answerquestion/${this.docId}`;
+          this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
         })
         .catch((error) => {
          console.log(error);
