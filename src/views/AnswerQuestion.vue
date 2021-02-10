@@ -26,7 +26,10 @@
     </div>   
 
     <div v-if="recordedBlob != null">
-      <button @click="onUpload"> Upload</button>
+      <!-- <button @click="onUpload"> Upload</button> -->
+       <ion-button expand="block" type="submit" class="margin-ra" @click="onUpload">
+          Upload</ion-button
+        >
     </div>
   </div>
 
@@ -71,10 +74,7 @@ export default defineComponent({
     return {    
       upload: true,  
       id: this.$route.params.id,
-      video: {
-        // userId: null,
-        // title: null,
-        // topic: null,
+      video: {        
         url: null,
       },
       errorOnUploading: {
@@ -102,13 +102,7 @@ export default defineComponent({
     },
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
-    //   const videoInfo = {
-    //     title: this.video.title,
-    //     link: this.video.url,
-    //     topic: this.video.topic,
-    //     userId: this.video.userId,
-    //     createdAt: serverTimestamp(),
-    //   };
+    
       db.collection("videos")
         .doc(this.id)
         .update({
@@ -188,10 +182,7 @@ export default defineComponent({
    mounted() {
     console.log(this.id)
     /* eslint-disable no-console */
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   this.userId = user.uid;
-    //   console.log(`This is user's id : ${user.uid}`)
-    // }); 
+ 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
@@ -200,8 +191,7 @@ export default defineComponent({
             console.log(uid);
             // ...
         } else {
-            // User is signed out
-            // ...
+            // User is signed out          
             console.log("User is signed out")
         }
     }); 
