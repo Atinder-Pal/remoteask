@@ -1,6 +1,16 @@
 <template>
+  <ion-page>
+    <ion-header :translucent="true">
+      <NavBar v-bind:upload="upload" />
+    </ion-header>
 
-  <div class="align-center container">
+    <ion-content :fullscreen="true">
+      <div id="container">        
+        <h1>Answer a Question</h1>
+       
+       <p>{{title}}</p>
+        <p>{{topic}}</p>
+       <div class="align-center container">
     <video-record @videoRecorded="videoRecorded" ref="videoRecordComponent" >
     </video-record>   
     <p>or</p>
@@ -18,60 +28,74 @@
     </div>   
 
     <div v-if="recordedBlob != null">
-      <form-for-video-info @clickedUpload="onUpload" submitButton="Upload"> </form-for-video-info>
+      <!-- <button @click="onUpload"> Upload</button> -->
+       <ion-button expand="block" type="submit" class="margin-ra" @click="onUpload">
+          Upload</ion-button
+        >
     </div>
   </div>
 
   <video-uploaded-modal v-if="uploaded" @close="newVideo"> 
   </video-uploaded-modal>
 
+    
+      </div>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-/* eslint-disable */
-
-import "video.js/dist/video-js.css";
-import "videojs-record/dist/css/videojs.record.css";
-import videojs from "video.js";
-import "webrtc-adapter";
-import RecordRTC from "recordrtc";
-import Record from "videojs-record/dist/videojs.record.js";
 import firebase from "firebase";
 import db from "@/db.js";
-import FormForVideoInfo from './FormForVideoInfo.vue';
-import VideoUploadedModal from './VideoUploadedModal.vue';
-import VideoRecord from './VideoRecord.vue';
-import ImportVideo from './ImportVideo.vue';
+import { IonContent, IonHeader, IonPage } from "@ionic/vue";
+import { defineComponent } from "vue";
+//import VideoRecordUpload from "../components/VideoRecordUpload";
+import NavBar from "../components/NavBar";
+import "video.js/dist/video-js.css";
+import "videojs-record/dist/css/videojs.record.css";
+//import videojs from "video.js";
+import "webrtc-adapter";
+//import RecordRTC from "recordrtc";
+//import Record from "videojs-record/dist/videojs.record.js";
+import VideoUploadedModal from '../components/VideoUploadedModal.vue';
+import VideoRecord from '../components/VideoRecord.vue';
+import ImportVideo from '../components/ImportVideo.vue';
 
-export default {
+export default defineComponent({
+  name: "AskQuestion",
+  components: {
+    IonContent,
+    IonHeader,
+    IonPage,
+    NavBar,
+    VideoUploadedModal,
+    VideoRecord,
+    ImportVideo
+  },
   data() {
-    return {
-      video: {
-        userId: null,
-        title: null,
-        topic: null,
+    return {    
+      upload: true,  
+      id: this.$route.params.id,
+      video: {        
         url: null,
-      },
+      },      
       errorOnUploading: {
         errorOnStorage: null,
         errorOnFirestore: null,
-      },      
+      },    
+      title: null,
+      topic: null,  
       deviceReady: false,
       showProgress: false,
       uploaded: false,
       blobURL: null,      
       recordedBlob: null,
       uploadValue: 0,    
-    };
+    }; 
   },
-  components: {   
-    FormForVideoInfo,
-    VideoUploadedModal,
-    VideoRecord,
-    ImportVideo
-  },
+ 
   methods: {
-    videoRecorded(value){
+         videoRecorded(value){
       this.recordedBlob= value
     },
     previewVideo(value) {
@@ -82,15 +106,13 @@ export default {
     },
     saveToFirestore() {
       const { serverTimestamp } = firebase.firestore.FieldValue;
-      const videoInfo = {
-        title: this.video.title,
-        link: this.video.url,
-        topic: this.video.topic,
-        userId: this.video.userId,
-        createdAt: serverTimestamp(),
-      };
+    
       db.collection("videos")
-        .add(videoInfo)
+        .doc(this.id)
+        .update({
+           link: this.video.url,
+           createdAt: serverTimestamp(),
+        })
         .then(() => {
           console.log("Video uploaded successfully!");
           this.uploaded = true;
@@ -161,14 +183,50 @@ export default {
       );
     },
   },
-  mounted() {
+   mounted() {
+    console.log(this.id)
     /* eslint-disable no-console */
+ 
     firebase.auth().onAuthStateChanged((user) => {
-      this.video.userId = user.uid;
-    });  
-  },  
-};
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            console.log(uid);
+            // ...
+        } else {
+            // User is signed out          
+            console.log("User is signed out")
+        }
+    }); 
+     db.collection("videos")
+      .doc(this.id)
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot.data());
+        this.title= snapshot.data().title;
+        this.topic=snapshot.data().topic;
+      });
+  },   
+  beforeMount() {
+    // console.log(this.id);
+    
+    firebase.auth().signInAnonymously()
+    .then(() => {
+        // Signed in..
+        console.log("User signed in anonymously")
+    })
+    .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log("error while signing in anonymously", errorCode, errorMessage)
+    });
+   
+  },
+});
 </script>
+
 <style scoped="">
 .resp-container {
   position: relative;
