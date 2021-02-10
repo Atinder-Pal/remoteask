@@ -6,6 +6,7 @@
     <ion-content :fullscreen="true">
       <div id="container">
         <VideoLandingPage v-bind:videoDocUID="$route.params.uid" />
+        <!-- Log in option if not logged in -->
       </div>
     </ion-content>
   </ion-page>

@@ -1,5 +1,4 @@
 <template>
-  <h1>Playing: {{ videoDocUID }}</h1>
   <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
   <div id="video-info">
     <h3 id="video-title">{{ video.title }}</h3>
@@ -33,9 +32,8 @@ export default {
     },
   },
   beforeMount() {
-    console.log(this.videoDocUID);
     db.collection("videos")
-      .doc("gmOKtGq4MPrlY0tJQ4mz")
+      .doc(this.videoDocUID)
       .get()
       .then((snapshot) => {
         this.setDisplayVideo(snapshot.data());
@@ -43,3 +41,29 @@ export default {
   },
 };
 </script>
+
+<style>
+#video-frame {
+  width: 100%;
+  height: 300px;
+}
+
+#video-info {
+  padding: 15px;
+}
+
+#video-title {
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+#video-topic {
+  margin-bottom: 0px;
+}
+
+#video-timestamp {
+  margin: 0px;
+  font-size: 13px;
+  opacity: 0.5;
+}
+</style>
