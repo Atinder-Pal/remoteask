@@ -18,7 +18,7 @@
     </div>   
 
     <div v-if="recordedBlob != null">
-      <form-for-video-info @clickedUpload="onUpload"> </form-for-video-info>
+      <form-for-video-info @clickedUpload="onUpload" submitButton="Upload"> </form-for-video-info>
     </div>
   </div>
 

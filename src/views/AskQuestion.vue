@@ -7,8 +7,8 @@
     <ion-content :fullscreen="true">
       <div id="container">        
         <h1>Ask a Question</h1>
-        <form-for-video-info @clickedUpload="shareQuestion"> </form-for-video-info>
-        <button v-if="showShareButton" @click="webShare"> Share</button>
+        <form-for-video-info @clickedUpload="shareQuestion" submitButton="Share Question"> </form-for-video-info>
+        <!-- <button v-if="showShareButton" @click="webShare"> Share</button> -->
         <div v-if="modal" id="modal">
             <textarea
                 name="copyContent"
@@ -55,7 +55,20 @@ export default defineComponent({
   methods: {
        async shareQuestion(formData) {
         await this.saveToFirestore(formData);  
-        this.showShareButton = true;
+        // this.showShareButton = true;
+        if (navigator.share) {
+            navigator.share({
+            title: 'WebShare API Demo',
+            url: this.shareLink
+            }).then(() => {
+            console.log('Thanks for sharing!');
+            })
+            .catch(console.error);
+        } else {
+                // fallback
+                console.log("WEB share API not supported!");
+               this.modal = !this.modal;
+            }
       },
       copyLink() {
       document.querySelector("#copyContent").select();
@@ -87,7 +100,7 @@ export default defineComponent({
     },
     webShare(){
         this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
-        console.log("butoon clicked")
+        
         if (navigator.share) {
             navigator.share({
             title: 'WebShare API Demo',

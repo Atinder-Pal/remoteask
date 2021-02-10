@@ -27,7 +27,7 @@
         </ion-list>
        
         <ion-button expand="block" type="submit" class="margin-ra">
-          Upload</ion-button
+          {{submitButton}}</ion-button
         >
       </form>
 </template>
@@ -49,6 +49,7 @@ export default {
             }                
         }             
     },
+    props: ['submitButton'],
     components: {
     IonList,
     IonItem,
