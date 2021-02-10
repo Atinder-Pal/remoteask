@@ -7,7 +7,9 @@
     <ion-content :fullscreen="true">
       <div id="container">        
         <h1>Answer a Question</h1>
-       <p>{{id}}</p>
+       
+       <p>{{title}}</p>
+        <p>{{topic}}</p>
        <div class="align-center container">
     <video-record @videoRecorded="videoRecorded" ref="videoRecordComponent" >
     </video-record>   
@@ -76,11 +78,13 @@ export default defineComponent({
       id: this.$route.params.id,
       video: {        
         url: null,
-      },
+      },      
       errorOnUploading: {
         errorOnStorage: null,
         errorOnFirestore: null,
-      },      
+      },    
+      title: null,
+      topic: null,  
       deviceReady: false,
       showProgress: false,
       uploaded: false,
@@ -195,15 +199,18 @@ export default defineComponent({
             console.log("User is signed out")
         }
     }); 
+     db.collection("videos")
+      .doc(this.id)
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot.data());
+        this.title= snapshot.data().title;
+        this.topic=snapshot.data().topic;
+      });
   },   
   beforeMount() {
     // console.log(this.id);
-    // db.collection("videos")
-    //   .doc("gmOKtGq4MPrlY0tJQ4mz")
-    //   .get()
-    //   .then((snapshot) => {
-    //     this.setDisplayVideo(snapshot.data());
-    //   });
+    
     firebase.auth().signInAnonymously()
     .then(() => {
         // Signed in..
@@ -215,6 +222,7 @@ export default defineComponent({
         // ...
         console.log("error while signing in anonymously", errorCode, errorMessage)
     });
+   
   },
 });
 </script>
