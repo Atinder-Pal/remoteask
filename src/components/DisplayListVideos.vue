@@ -65,6 +65,7 @@ export default {
   methods: {
     setDisplayVideo(video) {
       this.selectedItem = {
+        id: video.id,
         link: video.link,
         title: video.title,
         topic: video.topic,
@@ -82,7 +83,7 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
-      this.shareLink = `${this.selectedItem.title} ${this.selectedItem.link}`;
+      this.shareLink = `http://localhost:8100/video/${this.selectedItem.id}`;
     },
     copyLink() {
       document.querySelector("#copyContent").select();
@@ -94,9 +95,14 @@ export default {
       db.collection("videos")
         .where("userId", "==", user.uid)
         .onSnapshot((querySnapshot) => {
-          const items = querySnapshot.docs.map((doc) => {
-            return doc.data();
-          });
+          const items = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            link: doc.data().link,
+            title: doc.data().title,
+            topic: doc.data().topic,
+            createdAt: doc.data().createdAt,
+          }));
+
           this.itemsArray = items;
           this.setDisplayVideo(items[0]);
         });
