@@ -16,14 +16,14 @@
         </ion-item>
 
         <ion-item>
-          <ion-button
+          <!-- <ion-button
             expand="block"
             fill="outline"
             @click="sendOtp()"
             class="margin-ra"
           >
             Resend Verification code
-          </ion-button>
+          </ion-button> -->
 
           <div id="recaptcha-container"></div>
         </ion-item>
