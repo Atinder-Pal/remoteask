@@ -44,6 +44,8 @@
             @click="googleLogin"
             >Sign In With Google</ion-button
           >
+          <hr />
+          <PhoneLogin />
         </ion-card-content>
 
         <ion-card-footer>
@@ -71,6 +73,7 @@ import firebase from "firebase/app";
 import { db } from "../db";
 
 import NavBar from "../components/NavBar";
+import PhoneLogin from "../components/PhoneLogin";
 
 export default defineComponent({
   name: "Login",
@@ -81,6 +84,7 @@ export default defineComponent({
     IonButton,
     IonInput,
     NavBar,
+    PhoneLogin,
   },
 
   data() {
@@ -101,8 +105,8 @@ export default defineComponent({
         .then((data) => {
           // this.$router.push("/signedin");
           this.user.email = "";
-          this.user.password = "";          
-          setTimeout( () => this.$router.push({ path: '/upload'}), 1000);
+          this.user.password = "";
+          setTimeout(() => this.$router.push({ path: "/upload" }), 1000);
         })
         .catch((error) => {
           alert(error.message);
@@ -120,7 +124,7 @@ export default defineComponent({
         .then((result) => {
           this.user.email = "";
           this.user.password = "";
-          setTimeout( () => this.$router.push({ path: '/upload'}), 1000);
+          setTimeout(() => this.$router.push({ path: "/upload" }), 1000);
         })
         .catch((err) => {
           alert("Oops. " + err.message);
