@@ -44,6 +44,15 @@
             @click="googleLogin"
             >Sign In With Google</ion-button
           >
+
+                    <ion-button
+            expand="block"
+            fill="outline"
+            class="margin-ra"
+            @click="googleCapacitorLogin"
+            >Sign In With Capacitor Google</ion-button
+          >
+
           <hr />
           <PhoneLogin />
         </ion-card-content>
@@ -74,6 +83,9 @@ import { db } from "../db";
 
 import NavBar from "../components/NavBar";
 import PhoneLogin from "../components/PhoneLogin";
+
+import'@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core'
 
 export default defineComponent({
   name: "Login",
@@ -133,10 +145,25 @@ export default defineComponent({
 
     // https://devdactic.com/capacitor-google-sign-in/
 
-        googleCapacitorLogin() {
+        async googleCapacitorLogin() {
   
-  
+   let googleUser =  await Plugins.GoogleAuth.signIn();
+console.log('my user: ', googleUser);
+const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
 
+  firebase
+        .auth()
+        .signInWithCredential(credential)
+        // eslint-disable-next-line no-unused-vars
+        .then((result) => {
+          // this.user.email = "";
+          // this.user.password = "";
+          setTimeout( () => this.$router.push({ path: '/upload'}), 1000);
+        })
+        .catch((err) => {
+          alert("Oops. " + err);
+        });
+        
 
     }, // end google capacitor login
 
