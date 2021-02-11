@@ -130,6 +130,17 @@ export default defineComponent({
           alert("Oops. " + err.message);
         });
     },
+
+    // https://devdactic.com/capacitor-google-sign-in/
+
+        googleCapacitorLogin() {
+  
+  
+
+
+    }, // end google capacitor login
+
+
   },
 });
 </script>
