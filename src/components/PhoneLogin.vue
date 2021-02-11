@@ -1,7 +1,6 @@
 <template>
   <h2>Sign In with Phone number</h2>
-  <ion-card class="center-ra">
-    <ion-card-content>
+
       <ion-list>
         <ion-item>
           +1 <ion-input
@@ -15,17 +14,18 @@
           </ion-button>
         </ion-item>
 
+  
         <ion-item>
-          <!-- <ion-button
+          <ion-button
             expand="block"
             fill="outline"
             @click="sendOtp()"
             class="margin-ra"
           >
             Resend Verification code
-          </ion-button> -->
+          </ion-button>
 
-          <div id="recaptcha-container"></div>
+        
         </ion-item>
 
         <ion-item>
@@ -40,8 +40,9 @@
           </ion-button>
         </ion-item>
       </ion-list>
-    </ion-card-content>
-  </ion-card>
+
+<div id="recaptcha-container"></div>
+
 </template>
 
 <script>
