@@ -18,6 +18,11 @@
               <ion-button fill="outline">Upload</ion-button>
             </router-link>
           </ion-col>
+            <ion-col>
+            <router-link to="/askquestion">
+              <ion-button fill="outline">Ask</ion-button>
+            </router-link>
+          </ion-col>
           <ion-col>
             <router-link to="/listVideos">
               <ion-button fill="outline">My Videos</ion-button>
