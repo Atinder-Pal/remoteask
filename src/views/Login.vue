@@ -150,7 +150,7 @@ export default defineComponent({
    let googleUser =  await Plugins.GoogleAuth.signIn();
 console.log('my user: ', googleUser);
 const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
-
+console.log('credential: ', credential);
   firebase
         .auth()
         .signInWithCredential(credential)
@@ -163,7 +163,7 @@ const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authen
         .catch((err) => {
           alert("Oops. " + err);
         });
-        
+
 
     }, // end google capacitor login
 
