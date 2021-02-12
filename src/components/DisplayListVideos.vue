@@ -1,6 +1,15 @@
 <template>
   <section class="display" v-if="!videosExist">
-    <iframe id="video-frame" :src="selectedItem.link" frameborder="0"></iframe>
+    <iframe
+      v-if="selectedItem.link"
+      id="video-frame"
+      :src="selectedItem.link"
+      frameborder="0"
+    ></iframe>
+    <div v-else>
+      <h3>This question does not have an answer yet</h3>
+    </div>
+
     <div id="video-info">
       <h3 id="video-title">{{ selectedItem.title }}</h3>
       <p id="video-topic">{{ selectedItem.topic }}</p>
@@ -62,10 +71,15 @@ export default {
       modal: false,
       shareLink: "",
       videosExist: false,
+      qWithoutA: false,
     };
   },
   methods: {
     setDisplayVideo(video) {
+      if (!video.link) {
+        this.qWithoutA = false;
+        console.log("doesn't exist");
+      }
       this.selectedItem = {
         id: video.id,
         link: video.link,
