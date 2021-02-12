@@ -1,5 +1,5 @@
 <template>
-  <section class="display">
+  <section class="display" v-if="selectedItem.link">
     <iframe id="video-frame" :src="selectedItem.link" frameborder="0"></iframe>
     <div id="video-info">
       <h3 id="video-title">{{ selectedItem.title }}</h3>
@@ -18,6 +18,7 @@
       <button @click="copyLink">Copy</button>
     </div>
   </section>
+  <div v-else><h3>You have no videos yet</h3></div>
   <hr />
   <ul class="videosList">
     <li
