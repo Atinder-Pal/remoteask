@@ -7,6 +7,7 @@
       <div id="container">
         <VideoLandingPage v-bind:videoDocUID="$route.params.uid" />
         <!-- Log in option if not logged in -->
+        <LoginPrompt />
       </div>
     </ion-content>
   </ion-page>
@@ -17,6 +18,7 @@ import { IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
 import NavBar from "../components/NavBar";
 import VideoLandingPage from "../components/VideoLandingPage";
+import LoginPrompt from "../components/LoginPrompt";
 
 export default defineComponent({
   name: "VideoLanding",
@@ -26,6 +28,7 @@ export default defineComponent({
     IonPage,
     VideoLandingPage,
     NavBar,
+    LoginPrompt,
   },
   data() {
     return {
