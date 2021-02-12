@@ -1,5 +1,5 @@
 <template>
-  <section class="display" v-if="selectedItem.link">
+  <section class="display" v-if="!videosExist">
     <iframe id="video-frame" :src="selectedItem.link" frameborder="0"></iframe>
     <div id="video-info">
       <h3 id="video-title">{{ selectedItem.title }}</h3>
@@ -61,6 +61,7 @@ export default {
       itemsArray: [],
       modal: false,
       shareLink: "",
+      videosExist: false,
     };
   },
   methods: {
@@ -103,7 +104,9 @@ export default {
             topic: doc.data().topic,
             createdAt: doc.data().createdAt,
           }));
-
+          if (items && items[0].link) {
+            this.videosExist = false;
+          }
           this.itemsArray = items;
           this.setDisplayVideo(items[0]);
         });
