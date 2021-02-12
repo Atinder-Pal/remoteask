@@ -1,21 +1,31 @@
 <template>
-  <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
-  <div id="video-info">
-    <h3 id="video-title">{{ video.title }}</h3>
-    <p id="video-topic">{{ video.topic }}</p>
-    <p id="video-timestamp">{{ video.createdAt }}</p>
+  <section v-if="video.link">
+    <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
+    <div id="video-info">
+      <h3 id="video-title">{{ video.title }}</h3>
+      <p id="video-topic">{{ video.topic }}</p>
+      <p id="video-timestamp">{{ video.createdAt }}</p>
+    </div>
+  </section>
+  <div v-if="!validLink">
+    <NotFound />
   </div>
 </template>
 
 <script>
 import db from "../db.js";
+import NotFound from "./NotFound";
 
 export default {
   props: ["videoDocUID"],
   data() {
     return {
       video: {},
+      validLink: true,
     };
+  },
+  components: {
+    NotFound,
   },
   methods: {
     setDisplayVideo(video) {
@@ -37,6 +47,9 @@ export default {
       .get()
       .then((snapshot) => {
         this.setDisplayVideo(snapshot.data());
+        if (snapshot.exist) {
+          this.validLink = false;
+        }
       });
   },
 };
