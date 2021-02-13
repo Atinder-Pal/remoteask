@@ -9,19 +9,24 @@ Pre-Requisities
 4. npm installed
 5. Vue.js 3.0+ CLI
 6. ionic framework CLI installed https://ionicframework.com/docs/intro/cli , or update to the latest ionic with 'npm i -g ionic'
+7. Firebase CLI 
 
 
 
 To start with the project:
   1. Clone the repository by running this command in Terminal:<br />
   `git clone git@github.com:JasPanesar/remoteask.git`
+ 
+   You may be asked for your password if your id_rsa.pub file is not configured in github yet.
   
-  You may be asked for your password if your id_rsa.pub file is not configured in github yet.
+  2.  Install Firebase CLI to connect to Firebase Hosting
   
-  2. Go into the Project Folder in Terminal:
+    npm install -g firebase-tools
+
+  3. Go into the Project Folder in Terminal:
   `cd remoteAsk`
   
-  3. Configure src/db-example.js file before building the project
+  4. Configure src/db-example.js file before building the project
       * Rename the file `db-example.js`to `db.js`
       * Values of the below keys have been deleted intentionally. 
         Replace the below code with SDK's from your Firebase Project <br />
@@ -38,8 +43,8 @@ To start with the project:
                 ```
   
 
-4. Run the following command to install all dependencies in terminal <br />
+5. Run the following command to install all dependencies in terminal <br />
   `npm install`
   
-5. To run the project, run the following command in terminal <br />
+6. To run the project, run the following command in terminal <br />
   `ionic serve`
