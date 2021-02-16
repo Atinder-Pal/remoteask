@@ -8,7 +8,7 @@
 			<div id="container">
 				<h1>Ask a Question</h1>
 				<form-for-video-info
-					@clickedUpload="shareQuestion"
+					@formSubmitted="shareQuestion"
 					submitButton="Share Question"
 				>
 				</form-for-video-info>
