@@ -7,8 +7,11 @@
         data-setup='{"fluid": true}'
         playsinline
       ></video>
+      <ion-button fill="outline" @click.prevent="startCamera()">Start Camera</ion-button>
+      <ion-button fill="outline" @click.prevent="startRecording()">Start Recording</ion-button>
+      <ion-button fill="outline" @click.prevent="stopRecording()">Stop Recording</ion-button>
       <p class="align-center" v-if="!deviceReady">
-        Click or Tap on Camera Icon to enable the camera
+        Click or Tap on Start Camera Button to enable the camera
       </p>
       <p class="align-center" v-if="deviceReady">Record a video</p>
     </div>
@@ -33,14 +36,18 @@ export default {
                 autoplay: false,
                 fluid: false,
                 loop: false,
-                bigPlayButton: true,
+                bigPlayButton: false,
                 controlBar: {
                     volumePanel: true,
+                    deviceButton: false,
+                    recordToggle: false,
+                    pipTggle: false
                 },
                 plugins: {
                     // configure videojs-record plugin
                     record: {
                         audio: true,
+                        pip: false,
                         video: {
                             mandatory: {
                                 // chromeMediaSource: 'screen',
@@ -64,8 +71,18 @@ export default {
     },
    methods: {
        resetRecorder() {
-           this.player.record().getDevice();
-       }
+           this.player.record().getDevice();           
+       },
+       startCamera() {
+         this.player.record().getDevice();
+       },
+       startRecording() {              
+            this.player.record().start();
+       },
+       stopRecording() {            
+         this.player.record().stop();
+         //this.player.record().stopDevice();         
+       },
    },
     mounted() {
     /* eslint-disable no-console */
