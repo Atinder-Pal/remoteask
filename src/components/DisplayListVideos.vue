@@ -6,7 +6,7 @@
       :src="selectedItem.link"
       frameborder="0"
     ></iframe>
-    <div v-else>
+    <div v-if="!selectedItem.link">
       <h3>This question does not have an answer yet</h3>
     </div>
 
@@ -27,7 +27,10 @@
       <button @click="copyLink">Copy</button>
     </div>
   </section>
-  <div v-else><h3>You have no videos yet</h3></div>
+  <div v-else>
+    <h3>You have no videos yet!</h3>
+    <button>Create a Video</button>
+  </div>
   <hr />
   <ul class="videosList">
     <li
