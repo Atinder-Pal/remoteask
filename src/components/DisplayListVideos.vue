@@ -1,5 +1,5 @@
 <template>
-  <section class="display" v-if="!videosExist">
+  <section class="display" v-if="selectedItem.id">
     <iframe
       v-if="selectedItem.link"
       id="video-frame"
