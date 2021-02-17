@@ -29,7 +29,9 @@
   </section>
   <div v-else>
     <h3>You have no videos yet!</h3>
-    <button>Create a Video</button>
+    <router-link to="/upload">
+      <button>Create a Video</button>
+    </router-link>
   </div>
   <hr />
   <ul class="videosList">
