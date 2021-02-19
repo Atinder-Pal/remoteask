@@ -17,27 +17,24 @@
           >
           </form-for-video-info>
         </ion-card-content>
- </ion-card>
+      </ion-card>
 
-     <ion-card v-if="modal" id="modal">
-
-         <ion-card-header>
+      <ion-card v-if="modal" id="modal">
+        <ion-card-header>
           <h2>Copy and share this link to get your video answer !</h2>
         </ion-card-header>
 
-
-        <ion-card-content >
+        <ion-card-content>
           <!-- <button v-if="showShareButton" @click="webShare"> Share</button> -->
-         
-            <textarea
-              name="copyContent"
-              id="copyContent"
-              cols="55"
-              rows="3"
-              :value="shareLink"
-            ></textarea>
-            <ion-button expand="block" @click="copyLink">Copy</ion-button>
-        
+
+          <textarea
+            name="copyContent"
+            id="copyContent"
+            cols="55"
+            rows="3"
+            :value="shareLink"
+          ></textarea>
+          <ion-button expand="block" @click="copyLink">Copy</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-content>
