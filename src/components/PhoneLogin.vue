@@ -1,5 +1,5 @@
 <template>
-  <h2>Sign In with Phone number</h2>
+  <h1>Sign In with Phone number</h1>
 
       <ion-list>
         <ion-item>
@@ -15,7 +15,7 @@
         </ion-item>
 
   
-        <ion-item>
+        <!-- <ion-item>
           <ion-button
             expand="block"
             fill="outline"
@@ -26,7 +26,7 @@
           </ion-button>
 
         
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-input
