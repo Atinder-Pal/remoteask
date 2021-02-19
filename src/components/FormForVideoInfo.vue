@@ -55,6 +55,11 @@
 			formSubmitted() {
 				this.$emit('formSubmitted', this.video);
 			},
+			clearInputFields() {
+				this.video.title = null
+				this.video.topic = null
+				console.log("clearInputFields was called")
+			}
 		},
 	};
 </script>
