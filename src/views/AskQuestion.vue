@@ -12,18 +12,8 @@
 					submitButton="Share Question"
 				>
 				</form-for-video-info>
-				<link-share-modal v-if="modal" :link="shareLink" @close="modal=false">
-				</link-share-modal>
-				<!-- <div v-if="modal" id="modal">
-					<textarea
-						name="copyContent"
-						id="copyContent"
-						cols="30"
-						rows="10"
-						:value="shareLink"
-					></textarea>
-					<button @click="copyLink">Copy</button>
-				</div> -->
+				<link-share-modal v-if="modal" :link="shareLink" @close="modal=false" @copyLink="copyLink">
+				</link-share-modal>				
 			</div>
 		</ion-content>
 	</ion-page>
@@ -77,9 +67,15 @@
 					console.log("modal: "+ this.modal)
 				}
 			},
-			copyLink() {
-				document.querySelector('#copyContent').select();
+			copyLink() {			
+				let textField = document.createElement('textarea');
+				textField.innerText = this.shareLink;
+				document.body.appendChild(textField);
+				textField.select();
+				textField.focus(); //SET FOCUS on the TEXTFIELD
 				document.execCommand('copy');
+				textField.remove();
+				console.log('should have copied ' + this.shareLink);				
 			},
 			saveToFirestore(formData) {
 				const { serverTimestamp } = firebase.firestore.FieldValue;
@@ -101,25 +97,7 @@
 					.catch((error) => {
 						console.log(error);
 					});
-			},
-			webShare() {
-				this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
-				if (navigator.share) {
-					navigator
-						.share({
-							title: 'WebShare API Demo',
-							url: this.shareLink,
-						})
-						.then(() => {
-							console.log('Thanks for sharing!');
-						})
-						.catch(console.error);
-				} else {
-					// fallback
-					console.log('WEB share API not supported!');
-					this.modal = !this.modal;
-				}
-			},
+			},			
 		},
 		mounted() {
 			/* eslint-disable no-console */

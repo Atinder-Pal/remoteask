@@ -14,16 +14,17 @@
                 <slot name="body" >
                   {{link}}
                 </slot>
+                <ion-button class="modal-default-button" @click="$emit('close')">
+                    X
+                  </ion-button>
+                  <ion-button class="modal-default-button" @click="$emit('copyLink')">
+                    Copy
+                  </ion-button>
               </div>
 
               <div class="modal-footer">
                 <slot name="footer">                  
-                  <button class="modal-default-button" @click="$emit('close')">
-                    X
-                  </button>
-                  <button class="modal-default-button" @click="copyLink">
-                    Copy
-                  </button>
+                  
                 </slot>
               </div>
             </div>
@@ -31,20 +32,16 @@
         </div>
       </transition>
  </template>
- <script>
-   
-  export default {
+ <script>   
+   import { IonButton } from '@ionic/vue';
+   export default {
     name: 'LinkShareModal',
     props: {
       link: { type: String, default: 'Link' },
-    },  
-    methods: {
-      copyLink() {
-        await document.getElementById('#link-to-copy').select().focus();
-       
-        document.execCommand('copy');
-      },
-    },
+    },     
+    components: {
+			IonButton			
+		}, 
   }
  </script>
 
