@@ -91,6 +91,11 @@ https://ionicframework.com/docs/theming/advanced */
 --ion-border-color: #d2d4db;
 
 
+--ion-tab-bar-background:#212549;
+
+
+
+--ionicon-stroke-width: 80px;
 
 
 
@@ -101,6 +106,24 @@ https://ionicframework.com/docs/theming/advanced */
 h1{
   color: #d2d4db;
 }
+
+/* ion-tab-bar {
+  bottom: 20px;
+  position: relative;
+  border-radius: 16px;
+  width: 92%;
+  margin: 0 auto;
+  
+} */
+
+ion-tab-button {
+  --color: #d2d4db;
+  /* --color-selected: red; */
+
+ 
+}
+
+
 
 
 

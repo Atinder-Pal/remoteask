@@ -8,6 +8,8 @@
         <DisplayListVideos />
       </div>
     </ion-content>
+
+      <TabBar />
   </ion-page>
 </template>
 
@@ -16,6 +18,7 @@ import { IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
 import DisplayListVideos from "../components/DisplayListVideos.vue";
 import NavBar from "../components/NavBar";
+import TabBar from "../components/TabBar";
 
 export default defineComponent({
   name: "ListVideos",
@@ -25,6 +28,7 @@ export default defineComponent({
     IonPage,
     DisplayListVideos,
     NavBar,
+    TabBar,
   },
   data() {
     return {
