@@ -45,28 +45,35 @@
 				userId: null,
 				docId: null,
 				modal: false,
-				shareLink: '',
+				shareLink: null,
 			};
 		},
 		methods: {
 			async shareQuestion(formData) {
-				await this.saveToFirestore(formData);
-				if (navigator.share) {
-					navigator
-						.share({
-							title: 'WebShare API Demo',
-							url: this.shareLink,
-						})
-						.then(() => {
-							console.log('Thanks for sharing!');
-						})
-						.catch(console.error);
+				console.log("Share Link: ",this.shareLink)
+				if(this.shareLink == null) {
+					await this.saveToFirestore(formData);
+					if (navigator.share) {
+						navigator
+							.share({
+								title: 'WebShare API Demo',
+								url: this.shareLink,
+							})
+							.then(() => {
+								console.log('Thanks for sharing!');
+							})
+							.catch(console.error);
+					} else {
+						// fallback
+						console.log('WEB share API not supported!');
+						this.modal = true;
+						console.log("modal: "+ this.modal)
+					}
 				} else {
-					// fallback
-					console.log('WEB share API not supported!');
 					this.modal = true;
 					console.log("modal: "+ this.modal)
 				}
+				
 			},
 			copyLink() {			
 				let textField = document.createElement('textarea');
