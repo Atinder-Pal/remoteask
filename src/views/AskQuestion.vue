@@ -14,7 +14,7 @@
 				>
 				</form-for-video-info>				
 				<link-share-modal v-if="modal" :link="shareLink" @close="modal=false" @copyLink="copyLink">
-				</link-share-modal>				
+				</link-share-modal>								
 			</div>
 		</ion-content>
 	</ion-page>
@@ -23,18 +23,19 @@
 <script>
 	import firebase from 'firebase';
 	import db from '@/db.js';
-	import { IonContent, IonHeader, IonPage } from '@ionic/vue';
+	import { IonContent, IonHeader, IonPage, IonButton, modalController } from '@ionic/vue';
 	import { defineComponent } from 'vue';
 	import NavBar from '../components/NavBar';
 	import FormForVideoInfo from '../components/FormForVideoInfo';
 	import LinkShareModal from '../components/LinkShareModal';
-
+	import Modal from '../components/IonModal.vue'
 	export default defineComponent({
 		name: 'AskQuestion',
 		components: {
 			IonContent,
 			IonHeader,
 			IonPage,
+			IonButton,
 			NavBar,
 			FormForVideoInfo,
 			LinkShareModal
@@ -44,7 +45,7 @@
 				upload: true,
 				userId: null,
 				docId: null,
-				modal: false,
+				// modal: false,
 				shareLink: null,
 			};
 		},
@@ -66,26 +67,28 @@
 					} else {
 						// fallback
 						console.log('WEB share API not supported!');
-						this.modal = true;
-						console.log("modal: "+ this.modal)
+						//this.modal = true;
+						//console.log("modal: "+ this.modal)
+						this.openModal();
 					}
 				} else {
-					this.modal = true;
-					console.log("modal: "+ this.modal)
+					//this.modal = true;
+					//console.log("modal: "+ this.modal)
+					this.openModal();
 				}
 				
 			},
-			copyLink() {			
-				let textField = document.createElement('textarea');
-				textField.innerText = this.shareLink;
-				document.body.appendChild(textField);
-				textField.select();
-				textField.focus(); //SET FOCUS on the TEXTFIELD
-				document.execCommand('copy');
-				textField.remove();
-				console.log('should have copied ' + this.shareLink);				
-			},
-			saveToFirestore(formData) {
+			// copyLink() {			
+			// 	let textField = document.createElement('textarea');
+			// 	textField.innerText = this.shareLink;
+			// 	document.body.appendChild(textField);
+			// 	textField.select();
+			// 	textField.focus(); //SET FOCUS on the TEXTFIELD
+			// 	document.execCommand('copy');
+			// 	textField.remove();
+			// 	console.log('should have copied ' + this.shareLink);				
+			// },
+			async saveToFirestore(formData) {
 				const { serverTimestamp } = firebase.firestore.FieldValue;
 				const videoInfo = {
 					title: formData.title,
@@ -94,7 +97,7 @@
 					userId: this.userId,
 					createdAt: serverTimestamp(),
 				};
-				db.collection('videos')
+				await db.collection('videos')
 					.add(videoInfo)
 					.then((docRef) => {
 						this.docId = docRef.id;
@@ -109,7 +112,18 @@
 			newQuestion() {
 				this.shareLink = null;
 				this.$refs.form.clearInputFields()
-			}	
+			},
+			async openModal() {
+				const modal = await modalController
+					.create({
+					component: Modal,
+					cssClass: 'my-custom-class',
+					componentProps: {
+						link: this.shareLink
+					}					
+					})
+				return modal.present();
+			},
 		},
 		mounted() {
 			/* eslint-disable no-console */
