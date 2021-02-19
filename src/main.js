@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 import router from './router';
-
+import VueClipboards from 'vue-clipboards';
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
@@ -28,15 +28,16 @@ import store from './store/index';
 
 import firebase from 'firebase';
 
-firebase.auth().onAuthStateChanged(user => {
-  store.dispatch("fetchUser", user);
+firebase.auth().onAuthStateChanged((user) => {
+	store.dispatch('fetchUser', user);
 });
 
 const app = createApp(App)
-  .use(IonicVue)
-  .use(store)
-  .use(router);
-  
+	.use(IonicVue)
+	.use(store)
+	.use(router)
+	.use(VueClipboards);
+
 router.isReady().then(() => {
-  app.mount('#app');
+	app.mount('#app');
 });

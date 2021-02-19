@@ -12,8 +12,9 @@
 					submitButton="Share Question"
 				>
 				</form-for-video-info>
-				<!-- <button v-if="showShareButton" @click="webShare"> Share</button> -->
-				<div v-if="modal" id="modal">
+				<link-share-modal v-if="modal" :link="shareLink" @close="modal=false">
+				</link-share-modal>
+				<!-- <div v-if="modal" id="modal">
 					<textarea
 						name="copyContent"
 						id="copyContent"
@@ -22,7 +23,7 @@
 						:value="shareLink"
 					></textarea>
 					<button @click="copyLink">Copy</button>
-				</div>
+				</div> -->
 			</div>
 		</ion-content>
 	</ion-page>
@@ -35,6 +36,7 @@
 	import { defineComponent } from 'vue';
 	import NavBar from '../components/NavBar';
 	import FormForVideoInfo from '../components/FormForVideoInfo';
+	import LinkShareModal from '../components/LinkShareModal';
 
 	export default defineComponent({
 		name: 'AskQuestion',
@@ -44,6 +46,7 @@
 			IonPage,
 			NavBar,
 			FormForVideoInfo,
+			LinkShareModal
 		},
 		data() {
 			return {
@@ -70,7 +73,8 @@
 				} else {
 					// fallback
 					console.log('WEB share API not supported!');
-					this.modal = !this.modal;
+					this.modal = true;
+					console.log("modal: "+ this.modal)
 				}
 			},
 			copyLink() {
