@@ -2,7 +2,7 @@
  
     <ion-tabs>
       <!-- Tab bar -->
-      <ion-tab-bar slot="bottom">
+      <ion-tab-bar>
         <ion-tab-button>
           <router-link to="/upload">
             <ion-icon :icon="add" size="large"></ion-icon>

@@ -21,6 +21,7 @@
     </div>
       </div>
     </ion-content>
+      <TabBar />
   </ion-page>
 </template>
 
@@ -31,6 +32,7 @@ import { IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
 //import VideoRecordUpload from "../components/VideoRecordUpload";
 import NavBar from "../components/NavBar";
+import TabBar from "../components/TabBar";
 import FormForVideoInfo from "../components/FormForVideoInfo";
 
 export default defineComponent({
@@ -40,7 +42,8 @@ export default defineComponent({
     IonHeader,
     IonPage,
     NavBar,
-    FormForVideoInfo
+    FormForVideoInfo,
+    TabBar,
   },
   data() {
     return {    
