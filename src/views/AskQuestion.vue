@@ -5,23 +5,43 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <div id="container">        
-        <h1>Ask a Question</h1>
-        <form-for-video-info @clickedUpload="shareQuestion" submitButton="Share Question"> </form-for-video-info>
-        <!-- <button v-if="showShareButton" @click="webShare"> Share</button> -->
-        <div v-if="modal" id="modal">
+      <ion-card>
+        <img src="" />
+        <ion-card-header>
+          <h1>Ask a Question</h1>
+        </ion-card-header>
+        <ion-card-content>
+          <form-for-video-info
+            @clickedUpload="shareQuestion"
+            submitButton="Share Question"
+          >
+          </form-for-video-info>
+        </ion-card-content>
+ </ion-card>
+
+     <ion-card v-if="modal" id="modal">
+
+         <ion-card-header>
+          <h2>Copy and share this link to get your video answer !</h2>
+        </ion-card-header>
+
+
+        <ion-card-content >
+          <!-- <button v-if="showShareButton" @click="webShare"> Share</button> -->
+         
             <textarea
-                name="copyContent"
-                id="copyContent"
-                cols="30"
-                rows="10"
-                :value="shareLink"
+              name="copyContent"
+              id="copyContent"
+              cols="55"
+              rows="3"
+              :value="shareLink"
             ></textarea>
-      <button @click="copyLink">Copy</button>
-    </div>
-      </div>
+            <ion-button expand="block" @click="copyLink">Copy</ion-button>
+        
+        </ion-card-content>
+      </ion-card>
     </ion-content>
-      <TabBar />
+    <TabBar />
   </ion-page>
 </template>
 
@@ -46,38 +66,40 @@ export default defineComponent({
     TabBar,
   },
   data() {
-    return {    
+    return {
       upload: true,
       userId: null,
       docId: null,
-       modal: false,
+      modal: false,
       shareLink: "",
-      showShareButton: false
+      showShareButton: false,
     };
   },
   methods: {
-       async shareQuestion(formData) {
-        await this.saveToFirestore(formData);  
-        // this.showShareButton = true;
-        if (navigator.share) {
-            navigator.share({
-            title: 'WebShare API Demo',
-            url: this.shareLink
-            }).then(() => {
-            console.log('Thanks for sharing!');
-            })
-            .catch(console.error);
-        } else {
-                // fallback
-                console.log("WEB share API not supported!");
-               this.modal = !this.modal;
-            }
-      },
-      copyLink() {
+    async shareQuestion(formData) {
+      await this.saveToFirestore(formData);
+      // this.showShareButton = true;
+      if (navigator.share) {
+        navigator
+          .share({
+            title: "WebShare API Demo",
+            url: this.shareLink,
+          })
+          .then(() => {
+            console.log("Thanks for sharing!");
+          })
+          .catch(console.error);
+      } else {
+        // fallback
+        console.log("WEB share API not supported!");
+        this.modal = !this.modal;
+      }
+    },
+    copyLink() {
       document.querySelector("#copyContent").select();
       document.execCommand("copy");
     },
-      saveToFirestore(formData) {
+    saveToFirestore(formData) {
       const { serverTimestamp } = firebase.firestore.FieldValue;
       const videoInfo = {
         title: formData.title,
@@ -90,7 +112,7 @@ export default defineComponent({
         .add(videoInfo)
         .then((docRef) => {
           this.docId = docRef.id;
-          console.log(`This is document id: ${docRef.id}`)
+          console.log(`This is document id: ${docRef.id}`);
           //this.modal = !this.modal;
 
           console.log(this.docId);
@@ -98,34 +120,36 @@ export default defineComponent({
           //this.webShare();
         })
         .catch((error) => {
-         console.log(error);
+          console.log(error);
         });
     },
-    webShare(){
-        this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
-        
-        if (navigator.share) {
-            navigator.share({
-            title: 'WebShare API Demo',
-            url: this.shareLink
-            }).then(() => {
-            console.log('Thanks for sharing!');
-            })
-            .catch(console.error);
-        } else {
-                // fallback
-                console.log("WEB share API not supported!");
-               this.modal = !this.modal;
-            }
-        }
+    webShare() {
+      this.shareLink = `http://localhost:8100/answerquestion/${this.docId}`;
+
+      if (navigator.share) {
+        navigator
+          .share({
+            title: "WebShare API Demo",
+            url: this.shareLink,
+          })
+          .then(() => {
+            console.log("Thanks for sharing!");
+          })
+          .catch(console.error);
+      } else {
+        // fallback
+        console.log("WEB share API not supported!");
+        this.modal = !this.modal;
+      }
+    },
   },
-   mounted() {
+  mounted() {
     /* eslint-disable no-console */
     firebase.auth().onAuthStateChanged((user) => {
       this.userId = user.uid;
-      console.log(`This is user's id : ${user.uid}`)
-    });  
-  }, 
+      console.log(`This is user's id : ${user.uid}`);
+    });
+  },
   beforeUnmount() {
     if (this.modal) {
       this.modal = !this.modal;
