@@ -6,12 +6,13 @@
 
 		<ion-content :fullscreen="true">
 			<div id="container">
-				<h1>Ask a Question</h1>
+				<h1>Ask a Question <span><ion-button fill="outline" @click.prevent="newQuestion">New Question</ion-button> </span></h1>
 				<form-for-video-info
 					@formSubmitted="shareQuestion"
 					submitButton="Share Question"
+					ref="form"
 				>
-				</form-for-video-info>
+				</form-for-video-info>				
 				<link-share-modal v-if="modal" :link="shareLink" @close="modal=false" @copyLink="copyLink">
 				</link-share-modal>				
 			</div>
@@ -97,19 +98,24 @@
 					.catch((error) => {
 						console.log(error);
 					});
-			},			
+			},		
+			newQuestion() {
+				this.shareLink = null;
+				this.$refs.form.clearInputFields()
+			}	
 		},
 		mounted() {
 			/* eslint-disable no-console */
 			firebase.auth().onAuthStateChanged((user) => {
 				this.userId = user.uid;
 				console.log(`This is user's id : ${user.uid}`);
-			});
+			});			
 		},
 		beforeUnmount() {
 			if (this.modal) {
 				this.modal = !this.modal;
 			}
+			
 		},
 	});
 </script>
