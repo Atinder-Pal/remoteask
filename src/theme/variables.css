@@ -1,15 +1,18 @@
 /* Ionic Variables and Theming. For more info, please see:
-http://ionicframework.com/docs/theming/ */
+http://ionicframework.com/docs/theming/ 
+https://ionicframework.com/docs/theming/advanced */
 
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+
+  --ion-color-primary: #7138c5;
+  --ion-color-primary-rgb: 113,56,197;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #6331ad;
+  --ion-color-primary-tint: #7f4ccb;
+
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -74,7 +77,22 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** background colors  **/
+--ion-toolbar-background: #212549;
+
+--ion-item-background: #212549;
+
+--ion-card-background: #212549;
+
+--ion-text-color:  #808289;
+
+/* --ion-background-color: #c1359e; */
+
 }
+
+
+
 
 @media (prefers-color-scheme: dark) {
   /*
