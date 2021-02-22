@@ -83,15 +83,14 @@
 				id: this.$route.params.id,
 				video: {
 					url: null,
-          title: null,
-          topic: null
+					title: null,
+					topic: null,
 				},
 				errorOnUploading: {
 					errorOnStorage: null,
 					errorOnFirestore: null,
 				},
-				// title: null,
-				// topic: null,
+				docId: null,
 				deviceReady: false,
 				showProgress: false,
 				uploaded: false,
@@ -114,7 +113,7 @@
 				const { serverTimestamp } = firebase.firestore.FieldValue;
 
 				db.collection('videos')
-					.doc(this.id)
+					.doc(this.docId)
 					.update({
 						link: this.video.url,
 						createdAt: serverTimestamp(),
@@ -185,6 +184,26 @@
 					}
 				);
 			},
+			async createNewVideoDoc(data) {
+				const { serverTimestamp } = firebase.firestore.FieldValue;
+				const videoInfo = {
+					title: data.title,
+					link: null,
+					topic: data.topic,
+					userId: data.userId,
+					createdAt: serverTimestamp(),
+				};
+				await db
+					.collection('videos')
+					.add(videoInfo)
+					.then((docRef) => {
+						this.docId = docRef.id;
+						console.log(`This is new document id: ${docRef.id}`);
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			},
 		},
 		mounted() {
 			console.log(this.id);
@@ -203,7 +222,12 @@
 							console.log(snapshot.data());
 							this.video.title = snapshot.data().title;
 							this.video.topic = snapshot.data().topic;
-						});					
+							if (snapshot.data().link) {
+								this.createNewVideoDoc(snapshot.data());
+							} else {
+								this.docId = this.id;
+							}
+						});
 				} else {
 					// User is signed out
 					console.log('User is signed out');
