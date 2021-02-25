@@ -29,6 +29,7 @@
 				</link-share-modal>
 			</div>
 		</ion-content>
+		<TabBar />
 	</ion-page>
 </template>
 
@@ -44,6 +45,7 @@
 	} from '@ionic/vue';
 	import { defineComponent } from 'vue';
 	import NavBar from '../components/NavBar';
+	import TabBar from "../components/TabBar";
 	import FormForVideoInfo from '../components/FormForVideoInfo';
 	import LinkShareModal from '../components/LinkShareModal';
 	import Modal from '../components/IonModal.vue';
@@ -57,6 +59,7 @@
 			NavBar,
 			FormForVideoInfo,
 			LinkShareModal,
+			TabBar,
 		},
 		data() {
 			return {
