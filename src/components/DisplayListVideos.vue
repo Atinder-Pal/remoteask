@@ -137,7 +137,7 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
-      this.shareLink = `http://localhost:8100/video/${this.selectedItem.id}`;
+      this.shareLink = `${window.location.protocol}//${window.location.host}/video/${this.selectedItem.id}`;
     },
     copyLink() {
       document.querySelector("#copyContent").select();
@@ -145,6 +145,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log(`${window.location.protocol}//${window.location.host}`);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")
         .where("userId", "==", user.uid)

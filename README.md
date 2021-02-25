@@ -19,7 +19,7 @@ To start with the project:
  
    You may be asked for your password if your id_rsa.pub file is not configured in github yet.
   
-  2.  Install Firebase CLI to connect to Firebase Hosting
+  2.  Install Firebase CLI to connect to Firebase tools
   
     npm install -g firebase-tools
 
@@ -48,3 +48,8 @@ To start with the project:
   
 6. To run the project, run the following command in terminal <br />
   `ionic serve`
+
+7. Run the following commands to deploy app to firebase hosting
+  `npm run build`
+  `firebase deploy`
+  This may not work if you do not have the Firebase CLI installed. If not, check step 2 to install the Firebase CLI  
