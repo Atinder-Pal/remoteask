@@ -192,7 +192,8 @@ export default {
 }
 
 .videosList {
-  padding: 0px;
+  padding: 10px;
+  
 }
 
 .listItem {
@@ -200,10 +201,11 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
   border-radius: 5px;
-  outline: solid 0.1px rgba(0, 0, 0, 0.1);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  outline: solid 2.1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.1);
 }
 
 .list-title {
@@ -232,7 +234,7 @@ export default {
 
 
 ion-card{
-  color:#d2d4db;
-  text-transform: capitalize;
+  color:#474547;
+  text-transform: capitalize; 
 }
 </style>
