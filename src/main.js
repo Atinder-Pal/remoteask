@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import VueClipboards from 'vue-clipboards';
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,8 +34,7 @@ firebase.auth().onAuthStateChanged((user) => {
 const app = createApp(App)
 	.use(IonicVue)
 	.use(store)
-	.use(router)
-	.use(VueClipboards);
+	.use(router);
 
 router.isReady().then(() => {
 	app.mount('#app');
