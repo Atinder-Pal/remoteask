@@ -20,7 +20,7 @@
           </ion-col>
             <ion-col>
             <router-link to="/askquestion">
-              <ion-button fill="outline">Ask</ion-button>
+              <ion-button fill="outline">Create</ion-button>
             </router-link>
           </ion-col>
           <ion-col>
