@@ -55,4 +55,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+ion-toolbar{
+  --ion-text-color: #fff;
+}
+</style>

@@ -85,12 +85,13 @@ https://ionicframework.com/docs/theming/advanced */
   /** background colors  **/
   --ion-toolbar-background: #510353;
   --ion-toolbar-background: linear-gradient(90deg, rgba(81,3,83,1) 0%, rgba(33,37,73,1) 100%);
-  --ion-item-background: #212549;
 
-  --ion-card-background: #212549;
+  --ion-item-background: #fff;
 
-  --ion-text-color: #d2d4db;
+   --ion-card-background: #fff;
 
+  --ion-text-color: #514f52;
+  
   --ion-border-color: #d2d4db;
 
   /* --ion-tab-bar-background: #b82c72; */
@@ -98,11 +99,11 @@ https://ionicframework.com/docs/theming/advanced */
 
   --ionicon-stroke-width: 80px;
 
-  /* --ion-background-color: #b79be0; */
+  --ion-background-color: #6a696d;
 }
 
 h1,h2 {
-  color: #d2d4db;
+  color: #514f52;
 }
 
 ion-tab-button {
