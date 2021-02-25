@@ -1,12 +1,12 @@
 <template>
-  <section class="display" v-if="!videosExist">
+  <section class="display" v-if="selectedItem.id">
     <iframe
       v-if="selectedItem.link"
       id="video-frame"
       :src="selectedItem.link"
       frameborder="0"
     ></iframe>
-    <div v-else>
+    <div v-if="!selectedItem.link">
       <h3>This question does not have an answer yet</h3>
     </div>
 
@@ -27,7 +27,12 @@
       <button @click="copyLink">Copy</button>
     </div>
   </section>
-  <div v-else><h3>You have no videos yet</h3></div>
+  <div v-else>
+    <h3>You have no videos yet!</h3>
+    <router-link to="/upload">
+      <button>Create a Video</button>
+    </router-link>
+  </div>
   <hr />
   <ul class="videosList">
     <li
@@ -99,7 +104,7 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
-      this.shareLink = `http://localhost:8100/video/${this.selectedItem.id}`;
+      this.shareLink = `${window.location.protocol}//${window.location.host}/video/${this.selectedItem.id}`;
     },
     copyLink() {
       document.querySelector("#copyContent").select();
@@ -107,6 +112,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log(`${window.location.protocol}//${window.location.host}`);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")
         .where("userId", "==", user.uid)
