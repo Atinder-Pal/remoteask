@@ -15,19 +15,7 @@
         </ion-item>
 
   
-        <!-- <ion-item>
-          <ion-button
-            expand="block"
-            fill="outline"
-            @click="sendOtp()"
-            class="margin-ra"
-          >
-            Resend Verification code
-          </ion-button>
-
-        
-        </ion-item> -->
-
+  
         <ion-item>
           <ion-input
             type="number"
