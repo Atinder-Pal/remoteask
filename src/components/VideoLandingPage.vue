@@ -14,6 +14,7 @@
 
 <script>
 import db from "../db.js";
+import firebase from "firebase";
 import NotFound from "./NotFound";
 
 export default {
@@ -50,6 +51,24 @@ export default {
         if (snapshot.exist) {
           this.validLink = false;
         }
+      });
+
+    firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        // Signed in..
+        console.log("User signed in anonymously");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log(
+          "error while signing in anonymously",
+          errorCode,
+          errorMessage
+        );
       });
   },
 };
