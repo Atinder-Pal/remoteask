@@ -58,14 +58,14 @@ To start with the project:
   ## To Start the project in android studio and run on emulator / android device
     
   
-  **Run the following commands in the terminal
+  **Run the following commands in the terminal**
   
   1. ionic build
   2. ionic cap sync
   3. ionic cap open android
 
 
-  **Step 3 will open up android studio
+  **Step 3 will open up android studio**
   
   1. open avd manager ( tools -> avd manager )
   2. From **Android Virtual Device Manager** launch a virtual device by pressing **green play button** under **actions** ( more details on how to setup if you dont have one https://developer.android.com/studio/run/managing-avds )
