@@ -14,6 +14,7 @@
 
 <script>
 import db from "../db.js";
+import firebase from "firebase";
 import NotFound from "./NotFound";
 
 export default {
@@ -42,15 +43,42 @@ export default {
     },
   },
   beforeMount() {
-    db.collection("videos")
-      .doc(this.videoDocUID)
-      .get()
-      .then((snapshot) => {
-        this.setDisplayVideo(snapshot.data());
-        if (snapshot.exist) {
-          this.validLink = false;
-        }
+    firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        // Signed in..
+        console.log("User signed in anonymously");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log(
+          "error while signing in anonymously",
+          errorCode,
+          errorMessage
+        );
       });
+  },
+  mounted() {
+    console.log("starting video check");
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        db.collection("videos")
+          .doc(this.videoDocUID)
+          .get()
+          .then((snapshot) => {
+            this.setDisplayVideo(snapshot.data());
+            if (snapshot.exist) {
+              this.validLink = false;
+            }
+          });
+      } else {
+        // User is signed out
+        console.log("User is signed out");
+      }
+    });
   },
 };
 </script>
