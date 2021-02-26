@@ -1,10 +1,22 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ 
-https://ionicframework.com/docs/theming/advanced */
+https://ionicframework.com/docs/theming/advanced 
+
+https://fonts.google.com/specimen/Raleway?preview.text_type=custom
+
+https://fonts.google.com/specimen/Roboto?preview.text_type=custom
+
+*/
+
 
 /** Ionic CSS Variables **/
+
+
 :root {
   /** primary **/
+
+  --ion-font-family:  'Roboto';
+  /* --ion-font-family:  'Raleway'; */
 
   --ion-color-primary: #8f5ed9;
   --ion-color-primary: linear-gradient(
@@ -104,7 +116,7 @@ https://ionicframework.com/docs/theming/advanced */
 }
 
 h1,h2 {
-  color: #7f7b81;
+  color: #474547;
 }
 
 ion-tab-button {
@@ -116,6 +128,8 @@ margin-top: 30px;
 margin-bottom: 30px;
  
 box-shadow: 0 10px 20px #777;
+
+border-radius: 5px;
 }
 
 @media (prefers-color-scheme: dark) {

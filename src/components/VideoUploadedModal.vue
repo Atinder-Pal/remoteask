@@ -18,9 +18,9 @@
 
               <div class="modal-footer">
                 <slot name="footer">                  
-                  <button class="modal-default-button" @click="$emit('close')">
+                  <ion-button class="modal-default-button" @click="$emit('close')">
                     OK
-                  </button>
+                  </ion-button>
                 </slot>
               </div>
             </div>
@@ -54,6 +54,7 @@
 
 .modal-container {
   width: 300px;
+  height: 170px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
