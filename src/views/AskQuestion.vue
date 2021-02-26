@@ -9,12 +9,10 @@
         <ion-card-header>
           <h1>Ask a Question</h1>
         </ion-card-header>
+        <ion-button fill="outline" @click.prevent="newQuestion"
+          >New Question</ion-button
+        >
 
-        <span
-          ><ion-button fill="outline" @click.prevent="newQuestion"
-            >New Question</ion-button
-          >
-        </span>
         <ion-card-content>
           <form-for-video-info
             @formSubmitted="shareQuestion"
@@ -24,7 +22,6 @@
           </form-for-video-info>
         </ion-card-content>
 
-
         <link-share-modal
           v-if="modal"
           :link="shareLink"
@@ -32,10 +29,7 @@
           @copyLink="copyLink"
         >
         </link-share-modal>
-
       </ion-card>
-
-     
     </ion-content>
     <TabBar />
   </ion-page>
