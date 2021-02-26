@@ -69,4 +69,8 @@
 		--max-width: 60% !important;
 		--max-height: 50% !important;
 	}
+
+	ion-toolbar{
+		 --ion-text-color: #fff;
+	}
 </style>
