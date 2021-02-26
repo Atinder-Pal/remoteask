@@ -43,16 +43,6 @@ export default {
     },
   },
   beforeMount() {
-    db.collection("videos")
-      .doc(this.videoDocUID)
-      .get()
-      .then((snapshot) => {
-        this.setDisplayVideo(snapshot.data());
-        if (snapshot.exist) {
-          this.validLink = false;
-        }
-      });
-
     firebase
       .auth()
       .signInAnonymously()
@@ -70,6 +60,25 @@ export default {
           errorMessage
         );
       });
+  },
+  mounted() {
+    console.log("starting video check");
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        db.collection("videos")
+          .doc(this.videoDocUID)
+          .get()
+          .then((snapshot) => {
+            this.setDisplayVideo(snapshot.data());
+            if (snapshot.exist) {
+              this.validLink = false;
+            }
+          });
+      } else {
+        // User is signed out
+        console.log("User is signed out");
+      }
+    });
   },
 };
 </script>
