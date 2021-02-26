@@ -1,12 +1,12 @@
 <template>
-  <section v-if="video.link">
+  <ion-card v-if="video.link">
     <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
     <div id="video-info">
       <h3 id="video-title">{{ video.title }}</h3>
       <p id="video-topic">{{ video.topic }}</p>
       <p id="video-timestamp">{{ video.createdAt }}</p>
     </div>
-  </section>
+  </ion-card>
   <div v-if="!validLink">
     <NotFound />
   </div>
