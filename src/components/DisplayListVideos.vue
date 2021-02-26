@@ -201,7 +201,7 @@ export default {
   display: block;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 5px;
   padding: 20px;
   margin-bottom: 30px;
   border-radius: 5px;

@@ -1,10 +1,10 @@
 <template>
   <div>
     <router-link to="/login">
-      <button>Login</button>
+      <ion-button>Login</ion-button>
     </router-link>
     <router-link to="/signup">
-      <button>Register</button>
+      <ion-button>Register</ion-button>
     </router-link>
   </div>
 </template>

@@ -6,8 +6,7 @@
       data-setup='{"fluid": true}'
       playsinline
     ></video>
-    <!-- <ion-card>
-      <ion-card-header> -->
+ 
         <ion-button fill="outline" @click.prevent="startCamera"
           >Start Camera</ion-button
         >
@@ -17,12 +16,12 @@
         <ion-button fill="outline" @click.prevent="stopRecording"
           >Stop Recording</ion-button
         >
-      <!-- </ion-card-header> -->
+   
       <p class="align-center" v-if="!deviceReady">
         Click or Tap on Start Camera Button to enable the camera
       </p>
       <p class="align-center" v-if="deviceReady">Record a video</p>
-    <!-- </ion-card> -->
+   
   </div>
 </template>
 
