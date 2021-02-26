@@ -129,7 +129,7 @@ margin-bottom: 30px;
  
 box-shadow: 0 10px 20px #777;
 
-border-radius: 10px;
+border-radius: 5px;
 }
 
 @media (prefers-color-scheme: dark) {

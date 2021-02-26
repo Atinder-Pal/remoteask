@@ -213,6 +213,7 @@
 	}
 	.progress-bar {
 		margin-top: 2em;
+	
 	}
 	h4 {
 		text-align: center;

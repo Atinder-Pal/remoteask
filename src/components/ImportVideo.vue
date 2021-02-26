@@ -1,22 +1,19 @@
 <template>
-  <!-- <div class="show-border"> -->
-  <ion-card>
-    <ion-card-header>
-      <ion-label class="import-video-label" stacked
-        >Add video from Device</ion-label
-      >
-      <section>
-        <ion-input
-          class="center"
-          type="file"
-          @change="previewVideo"
-          accept="video/*"
-          ref="inputForFile"
-        ></ion-input>
-      </section>
-    </ion-card-header>
-  </ion-card>
-  <!-- </div> -->
+  <div class="show-border">
+    <ion-label class="import-video-label" stacked
+      >Add video from Device</ion-label
+    >
+
+    <section>
+      <ion-input
+        class="center"
+        type="file"
+        @change="previewVideo"
+        accept="video/*"
+        ref="inputForFile"
+      ></ion-input>
+    </section>
+  </div>
   <div v-if="videoData != null">
     <p>Preview Video before uploading:</p>
     <div class="resp-container">
@@ -91,9 +88,11 @@ iframe {
 }
 
 .show-border {
-  border: 1px solid;
+  border: 2px solid #bbb0ba ;
   padding: 10px;
-  box-shadow: 5px 10px #888;
+  margin: 20px;
+  box-shadow: 0px 5px 20px #888;
+  border-radius: 5px;
 }
 section {
   width: 70%;
