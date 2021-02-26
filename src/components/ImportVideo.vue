@@ -88,7 +88,7 @@ iframe {
 }
 
 .show-border {
-  border: 2px solid #bbb0ba ;
+  border: 2px solid #bbb0ba;
   padding: 10px;
   margin: 20px;
   box-shadow: 0px 5px 20px #888;
