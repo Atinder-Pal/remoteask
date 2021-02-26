@@ -1,18 +1,28 @@
 <template>
-    
-    <div class="video-player">
-      <video
-        id="myVideo"
-        class="video-js vjs-default-skin vjs-16-9"
-        data-setup='{"fluid": true}'
-        playsinline
-      ></video>
+  <div class="video-player">
+    <video
+      id="myVideo"
+      class="video-js vjs-default-skin vjs-16-9"
+      data-setup='{"fluid": true}'
+      playsinline
+    ></video>
+ 
+        <ion-button fill="outline" @click.prevent="startCamera"
+          >Start Camera</ion-button
+        >
+        <ion-button fill="outline" @click.prevent="startRecording"
+          >Start Recording</ion-button
+        >
+        <ion-button fill="outline" @click.prevent="stopRecording"
+          >Stop Recording</ion-button
+        >
+   
       <p class="align-center" v-if="!deviceReady">
-        Click or Tap on Camera Icon to enable the camera
+        Click or Tap on Start Camera Button to enable the camera
       </p>
       <p class="align-center" v-if="deviceReady">Record a video</p>
-    </div>
    
+  </div>
 </template>
 
 <script>
@@ -24,52 +34,66 @@ import RecordRTC from "recordrtc";
 //import Record from "videojs-record/dist/videojs.record.js";
 
 export default {
-    data() {
-        return {
-             deviceReady: false,
-             player: "",
-            options: {
-                controls: true,
-                autoplay: false,
-                fluid: false,
-                loop: false,
-                bigPlayButton: true,
-                controlBar: {
-                    volumePanel: true,
-                },
-                plugins: {
-                    // configure videojs-record plugin
-                    record: {
-                        audio: true,
-                        video: {
-                            mandatory: {
-                                // chromeMediaSource: 'screen',
-                                minWidth: 1280,
-                                minHeight: 720,
-                                maxWidth: 1920,
-                                maxHeight: 1080,
-                                minAspectRatio: 1.77
-                            },
-                            optional: []
-                        },
-                        minFrameRate: 30,
-                        maxFramerate:30,                        
-                        debug: true,
-                        maxLength: 600,
-                        videoMimeType: "video/webm;codecs=vp9",
-                    },
-                },
-            }
-        }
+  data() {
+    return {
+      deviceReady: false,
+      player: "",
+      options: {
+        controls: true,
+        autoplay: false,
+        fluid: false,
+        loop: false,
+        bigPlayButton: false,
+        controlBar: {
+          volumePanel: true,
+          deviceButton: false,
+          recordToggle: false,
+          pipTggle: false,
+        },
+        plugins: {
+          // configure videojs-record plugin
+          record: {
+            audio: true,
+            pip: false,
+            video: {
+              mandatory: {
+                // chromeMediaSource: 'screen',
+                minWidth: 1280,
+                minHeight: 720,
+                maxWidth: 1920,
+                maxHeight: 1080,
+                minAspectRatio: 1.77,
+              },
+              optional: [],
+            },
+            minFrameRate: 30,
+            maxFramerate: 30,
+            debug: true,
+            maxLength: 600,
+            videoMimeType: "video/webm;codecs=vp9",
+          },
+        },
+      },
+    };
+  },
+  methods: {
+    resetRecorder() {
+      this.player.record().getDevice();
     },
-   methods: {
-       resetRecorder() {
-           this.player.record().getDevice();
-       }
-   },
-    mounted() {
+    startCamera() {
+      this.player.record().getDevice();
+    },
+    startRecording() {
+      this.player.record().start();
+    },
+    stopRecording() {
+      this.player.record().stop();
+      //this.player.record().stopDevice();
+    },
+  },
+  mounted() {
     /* eslint-disable no-console */
-    
+
     this.player = videojs("#myVideo", this.options, () => {
       // print version information at startup
       var msg =
@@ -84,23 +108,21 @@ export default {
     // device is ready
     this.player.on("deviceReady", () => {
       console.log("device is ready!");
-      this.deviceReady = true;      
+      this.deviceReady = true;
     });
     // user clicked the record button and started recording
     this.player.on("startRecord", () => {
       console.log("started recording!");
-    
     });
     // user completed recording and stream is available
     this.player.on("finishRecord", () => {
-      
       // the blob object contains the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log("finished recording: ", this.player.recordedData);
       //this.recordedBlob = this.player.recordedData;
-      this.$emit('videoRecorded', this.player.recordedData)
+      this.$emit("videoRecorded", this.player.recordedData);
       // ==========================save video on desktop====================================
-       this.player.record().saveAs({'video': 'recording.mp4'});
+      this.player.record().saveAs({ video: "recording.mp4" });
       // ===================================================================================
     });
     // error handling
@@ -116,7 +138,7 @@ export default {
       this.player.dispose();
     }
   },
-}
+};
 </script>
 <style scoped="">
 .resp-container {
