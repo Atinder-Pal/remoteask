@@ -53,3 +53,22 @@ To start with the project:
   `npm run build`
   `firebase deploy`
   This may not work if you do not have the Firebase CLI installed. If not, check step 2 to install the Firebase CLI  
+  
+  
+  ## To Start the project in android studio and run on emulator / android device
+    
+  
+  **Run the following commands in the terminal
+  
+  1. ionic build
+  2. ionic cap sync
+  3. ionic cap open android
+
+
+  **Step 3 will open up android studio
+  
+  1. open avd manager ( tools -> avd manager )
+  2. From **Android Virtual Device Manager** launch a virtual device by pressing **green play button** under **actions** ( more details on how to setup if you dont have one https://developer.android.com/studio/run/managing-avds )
+  3. Run the app in emulator ( Run -> Run 'app' )
+  4. Instructions to run the app on real device from android studio https://developer.android.com/training/basics/firstapp/running-app
+ 
