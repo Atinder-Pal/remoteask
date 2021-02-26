@@ -9,9 +9,6 @@
         <ion-card-header>
           <h1>Ask a Question</h1>
         </ion-card-header>
-        <ion-button fill="outline" @click.prevent="newQuestion"
-          >New Question</ion-button
-        >
 
         <ion-card-content>
           <form-for-video-info
@@ -20,6 +17,10 @@
             ref="form"
           >
           </form-for-video-info>
+
+          <ion-button expand="block" class="button-margin" @click.prevent="newQuestion"
+            >New Question</ion-button
+          >
         </ion-card-content>
 
         <link-share-modal
@@ -169,5 +170,9 @@ export default defineComponent({
   --border-color: red;
   --max-width: 60% !important;
   --max-height: 50% !important;
+}
+
+.button-margin{
+  margin: 20px;
 }
 </style>
