@@ -10,22 +10,23 @@
       <h3>This question does not have an answer yet</h3>
     </div>
 
-    <div id="video-info">
+    <ion-card id="video-info">
       <h3 id="video-title">{{ selectedItem.title }}</h3>
       <p id="video-topic">{{ selectedItem.topic }}</p>
       <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
-    </div>
-    <button @click="openModal">Share</button>
+    
+    <ion-button @click="openModal">Share</ion-button>
     <div v-if="modal" id="modal">
       <textarea
         name="copyContent"
         id="copyContent"
-        cols="30"
-        rows="10"
+        cols="55"
+        rows="4"
         :value="shareLink"
       ></textarea>
-      <button @click="copyLink">Copy</button>
+      <ion-button @click="copyLink">Copy</ion-button>
     </div>
+    </ion-card>
   </section>
   <div v-else>
     <h3>You have no videos yet!</h3>
@@ -34,7 +35,7 @@
     </router-link>
   </div>
   <hr />
-  <ul class="videosList">
+  <!-- <ul class="videosList">
     <li
       v-for="item in itemsArray"
       :key="item"
@@ -61,7 +62,39 @@
         >{{ item.createdAt.toDate().toDateString() }}</span
       >
     </li>
-  </ul>
+  </ul> -->
+
+
+    <div class="videosList">
+    <ion-card
+      v-for="item in itemsArray"
+      :key="item"
+      :data-item="JSON.stringify(item)"
+      class="listItem"
+      @click.capture="selectVideo"
+    >
+      <span
+        class="list-title"
+        :data-item="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.title }}</span
+      >
+      <span
+        class="list-topic"
+        :data-item="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.topic }}</span
+      >
+      <span
+        class="list-timestamp"
+        :data-item="JSON.stringify(item)"
+        @click.capture="selectVideo"
+        >{{ item.createdAt.toDate().toDateString() }}</span
+      >
+    </ion-card>
+  </div>
+
+  
 </template>
 
 <script>
@@ -104,7 +137,7 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
-      this.shareLink = `http://localhost:8100/video/${this.selectedItem.id}`;
+      this.shareLink = `${window.location.protocol}//${window.location.host}/video/${this.selectedItem.id}`;
     },
     copyLink() {
       document.querySelector("#copyContent").select();
@@ -112,6 +145,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log(`${window.location.protocol}//${window.location.host}`);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")
         .where("userId", "==", user.uid)
@@ -159,18 +193,20 @@ export default {
 }
 
 .videosList {
-  padding: 0px;
+  padding: 10px;
+  
 }
 
 .listItem {
   display: block;
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  padding: 10px;
+  margin: 5px;
+  padding: 20px;
+  margin-bottom: 30px;
   border-radius: 5px;
-  outline: solid 0.1px rgba(0, 0, 0, 0.1);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  outline: solid 2.1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.1);
 }
 
 .list-title {
@@ -195,5 +231,11 @@ export default {
   #video-frame {
     height: 300px;
   }
+}
+
+
+ion-card{
+  color:#474547;
+  text-transform: capitalize; 
 }
 </style>

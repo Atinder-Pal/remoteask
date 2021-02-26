@@ -6,21 +6,25 @@
 
               <div class="modal-header">
                 <slot name="header">
-                  Video uploaded successfully
+                  Here is the link
                 </slot>
               </div>
 
-              <div class="modal-body">
-                <slot name="body">
-                  Cick OK to add more videos
+              <div class="modal-body" id="link-to-copy">
+                <slot name="body" >
+                  {{link}}
                 </slot>
+                <ion-button class="modal-default-button" @click="$emit('close')">
+                    X
+                  </ion-button>
+                  <ion-button class="modal-default-button" @click="$emit('copyLink')">
+                    Copy
+                  </ion-button>
               </div>
 
               <div class="modal-footer">
                 <slot name="footer">                  
-                  <ion-button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </ion-button>
+                  
                 </slot>
               </div>
             </div>
@@ -28,23 +32,30 @@
         </div>
       </transition>
  </template>
- <script>
- export default {
-     
- }
+ <script>   
+   import { IonButton } from '@ionic/vue';
+   export default {
+    name: 'LinkShareModal',
+    props: {
+      link: { type: String, default: 'Link' },
+    },     
+    components: {
+			IonButton			
+		}, 
+  }
  </script>
 
 <style scoped>
-    .modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
+  .modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -54,7 +65,6 @@
 
 .modal-container {
   width: 300px;
-  height: 170px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;

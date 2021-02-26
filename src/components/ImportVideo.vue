@@ -1,59 +1,59 @@
 <template>
-    <div class="show-border">
-      <ion-label class="import-video-label" stacked
-        >Add video from Device</ion-label
-      >
-      <section>
-        <input
-          class="center"
-          type="file"
-          @change="previewVideo"
-          accept="video/*"
-          ref="inputForFile"
-        />
-      </section>
+  <div class="show-border">
+    <ion-label class="import-video-label" stacked
+      >Add video from Device</ion-label
+    >
+
+    <section>
+      <ion-input
+        class="center"
+        type="file"
+        @change="previewVideo"
+        accept="video/*"
+        ref="inputForFile"
+      ></ion-input>
+    </section>
+  </div>
+  <div v-if="videoData != null">
+    <p>Preview Video before uploading:</p>
+    <div class="resp-container">
+      <iframe
+        class="preview resp-iframe"
+        :src="blobURL"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
     </div>
-     <div v-if="videoData != null">
-      <p>Preview Video before uploading:</p>
-      <div class="resp-container">
-        <iframe
-          class="preview resp-iframe"
-          :src="blobURL"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
+  </div>
 </template>
 <script>
-import { 
-  IonLabel,
-} from "@ionic/vue";
+import { IonLabel, IonInput } from "@ionic/vue";
 export default {
-    data() {
-        return {
-            videoData: null,
-            blobURL: null
-        }
+  data() {
+    return {
+      videoData: null,
+      blobURL: null,
+    };
+  },
+  components: {
+    IonLabel,
+    IonInput,
+  },
+  methods: {
+    previewVideo() {
+      // this.uploadValue = 0;
+      //this.videoData = this.$refs.inputForFile.files[0];
+      this.videoData = event.target.files[0];
+      // this.recordedBlob = this.videoData;
+      this.blobURL = URL.createObjectURL(this.videoData);
+      this.$emit("videoImported", this.videoData);
     },
-    components:{
-        IonLabel
+    resetInput() {
+      this.$refs.inputForFile.value = null;
+      this.videoData = null;
     },
-    methods: {
-        previewVideo() {
-            // this.uploadValue = 0;
-            this.videoData = this.$refs.inputForFile.files[0];
-            // this.videoData = event.target.files[0];
-            // this.recordedBlob = this.videoData;
-            this.blobURL = URL.createObjectURL(this.videoData);
-            this.$emit('videoImported', this.videoData)
-        },
-        resetInput() {
-            this.$refs.inputForFile.value = null;
-            this.videoData = null;
-        }
-    }
-}
+  },
+};
 </script>
 
 <style scoped="">
@@ -88,9 +88,11 @@ iframe {
 }
 
 .show-border {
-  border: 1px solid;
+  border: 2px solid #bbb0ba ;
   padding: 10px;
-  box-shadow: 5px 10px #888;
+  margin: 20px;
+  box-shadow: 0px 5px 20px #888;
+  border-radius: 5px;
 }
 section {
   width: 70%;
