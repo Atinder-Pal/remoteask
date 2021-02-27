@@ -71,6 +71,7 @@
 
 <script>
 import db from "../db.js";
+import configData from "../config.json";
 import firebase from "firebase";
 
 export default {
@@ -117,7 +118,7 @@ export default {
     },
   },
   beforeMount() {
-    console.log(`${window.location.protocol}//${window.location.host}`);
+    console.log(configData.SERVER_URL);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")
         .where("userId", "==", user.uid)
