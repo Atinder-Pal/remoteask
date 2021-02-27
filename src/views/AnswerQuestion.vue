@@ -5,11 +5,14 @@
 		</ion-header>
 
 		<ion-content :fullscreen="true">
-			<div id="container">
-				<h1>Answer a Question</h1>
-				<p>Question: {{ video.title }}</p>
-				<p>Topic: {{ video.topic }}</p>
-				<div class="align-center container">
+			<ion-card class="center-ra">
+				<login-prompt />
+				<ion-card-header>
+					<h1>Answer a Question</h1>
+					<p>Question: {{ video.title }}</p>
+					<p>Topic: {{ video.topic }}</p>
+				</ion-card-header>
+				<ion-card-content>
 					<video-record
 						@videoRecorded="videoRecorded"
 						ref="videoRecordComponent"
@@ -21,7 +24,7 @@
 						ref="videoImportComponent"
 					>
 					</import-video>
-					<div v-if="showProgress" class="progress-bar">
+					<div v-if="showProgress">
 						Progress: {{ uploadValue.toFixed() + '%' + ' ' }}
 						<progress
 							id="progress"
@@ -41,11 +44,10 @@
 							Upload
 						</ion-button>
 					</div>
-				</div>
-
-				<video-uploaded-modal v-if="uploaded" @close="newVideo">
-				</video-uploaded-modal>
-			</div>
+				</ion-card-content>
+			</ion-card>
+			<video-uploaded-modal v-if="uploaded" @close="newVideo">
+			</video-uploaded-modal>
 		</ion-content>
 	</ion-page>
 </template>
@@ -58,13 +60,11 @@
 	import NavBar from '../components/NavBar';
 	import 'video.js/dist/video-js.css';
 	import 'videojs-record/dist/css/videojs.record.css';
-	//import videojs from "video.js";
 	import 'webrtc-adapter';
-	//import RecordRTC from "recordrtc";
-	//import Record from "videojs-record/dist/videojs.record.js";
 	import VideoUploadedModal from '../components/VideoUploadedModal.vue';
 	import VideoRecord from '../components/VideoRecord.vue';
 	import ImportVideo from '../components/ImportVideo.vue';
+	import LoginPrompt from '../components/LoginPrompt.vue';
 
 	export default defineComponent({
 		name: 'AskQuestion',
@@ -76,6 +76,7 @@
 			VideoUploadedModal,
 			VideoRecord,
 			ImportVideo,
+			LoginPrompt,
 		},
 		data() {
 			return {
@@ -255,91 +256,11 @@
 		},
 	});
 </script>
-
-<style scoped="">
-	.resp-container {
-		position: relative;
-		overflow: hidden;
-		padding-top: 56.25%;
-	}
-	.resp-iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}
-
-	#myVideo {
+<style scoped>
+	.center-ra {
+		max-width: 600px;
 		margin-right: auto;
-		margin-bottom: 1.5em;
-	}
-	.video-player {
-		width: 100%;
 		margin-left: auto;
-		margin-right: auto;
-	}
-	iframe {
-		object-fit: fill;
-	}
-	.align-center {
 		text-align: center;
-	}
-
-	.show-border {
-		border: 1px solid;
-		padding: 10px;
-		box-shadow: 5px 10px #888;
-	}
-	section {
-		width: 70%;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.label-class {
-		font-size: small;
-	}
-	.progress-bar {
-		margin-top: 2em;
-	}
-	h4 {
-		text-align: center;
-		color: green;
-	}
-	@media only screen and (min-width: 760px) {
-		.container {
-			width: 80%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.progress-bar {
-			font-size: 1.3em;
-		}
-		p {
-			font-size: 1.3em;
-		}
-		.import-video-label {
-			font-size: 1.3em;
-		}
-		.center {
-			font-size: 1.3em;
-			margin-left: auto;
-			margin-right: auto;
-			width: 60%;
-		}
-		.label-class {
-			font-size: large;
-		}
-	}
-	@media screen and (min-width: 1024px) {
-		.container {
-			width: 50%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.center {
-			width: 45%;
-		}
 	}
 </style>
