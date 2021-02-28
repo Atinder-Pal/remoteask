@@ -52,8 +52,8 @@ To start with the project:
 
 7. Run the following commands to deploy app to firebase hosting
   
-  1. `npm run build`
-  2. `firebase deploy`
+  * `npm run build`
+  * `firebase deploy`
   
   This may not work if you do not have the Firebase CLI installed. If not, check step 2 to install the Firebase CLI  
   
