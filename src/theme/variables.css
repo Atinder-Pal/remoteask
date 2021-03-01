@@ -143,12 +143,17 @@ ion-card {
    */
 
   body {
-    --ion-color-primary: #428cff;
-    --ion-color-primary-rgb: 66, 140, 255;
+    --ion-color-primary: #8f5ed9;
+    --ion-color-primary: linear-gradient(
+      90deg,
+      rgba(121, 12, 158, 1) 0%,
+      rgba(116, 62, 197, 1) 100%
+    );
+    --ion-color-primary-rgb: 143, 94, 217;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #3a7be0;
-    --ion-color-primary-tint: #5598ff;
+    --ion-color-primary-shade: #7e53bf;
+    --ion-color-primary-tint: #9a6edd;
 
     --ion-color-secondary: #50c8ff;
     --ion-color-secondary-rgb: 80, 200, 255;
