@@ -1,27 +1,29 @@
 <template>
-	<div class="align-center container">
-		<video-record @videoRecorded="videoRecorded" ref="videoRecordComponent">
-		</video-record>
-		<p>or</p>
-		<import-video @videoImported="previewVideo" ref="videoImportComponent">
-		</import-video>
+	<ion-card class="center-ra">
+		<ion-card-content>
+			<video-record @videoRecorded="videoRecorded" ref="videoRecordComponent">
+			</video-record>
+			<p>or</p>
 
-		<div v-if="showProgress" class="progress-bar">
-			Progress: {{ uploadValue.toFixed() + '%' + ' ' }}
-			<progress
-				id="progress"
-				:value="uploadValue"
-				max="100"
-				color="primary"
-			></progress>
-		</div>
+			<import-video @videoImported="previewVideo" ref="videoImportComponent">
+			</import-video>
 
-		<div v-if="recordedBlob != null">
-			<form-for-video-info @formSubmitted="onUpload" submitButton="Upload">
-			</form-for-video-info>
-		</div>
-	</div>
+			<div v-if="showProgress" class="progress-bar">
+				Progress: {{ uploadValue.toFixed() + '%' + ' ' }}
+				<progress
+					id="progress"
+					:value="uploadValue"
+					max="100"
+					color="primary"
+				></progress>
+			</div>
 
+			<div v-if="recordedBlob != null">
+				<form-for-video-info @formSubmitted="onUpload" submitButton="Upload">
+				</form-for-video-info>
+			</div>
+		</ion-card-content>
+	</ion-card>
 	<video-uploaded-modal v-if="uploaded" @close="newVideo">
 	</video-uploaded-modal>
 </template>
@@ -41,6 +43,7 @@
 	import VideoUploadedModal from './VideoUploadedModal.vue';
 	import VideoRecord from './VideoRecord.vue';
 	import ImportVideo from './ImportVideo.vue';
+	import { IonCard } from '@ionic/vue';
 
 	export default {
 		data() {
@@ -68,6 +71,7 @@
 			VideoUploadedModal,
 			VideoRecord,
 			ImportVideo,
+			IonCard,
 		},
 		methods: {
 			videoRecorded(value) {
@@ -167,91 +171,11 @@
 		},
 	};
 </script>
-<style scoped="">
-	.resp-container {
-		position: relative;
-		overflow: hidden;
-		padding-top: 56.25%;
-	}
-	.resp-iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}
-
-	#myVideo {
+<style scoped>
+	.center-ra {
+		max-width: 600px;
 		margin-right: auto;
-		margin-bottom: 1.5em;
-	}
-	.video-player {
-		width: 100%;
 		margin-left: auto;
-		margin-right: auto;
-	}
-	iframe {
-		object-fit: fill;
-	}
-	.align-center {
 		text-align: center;
-	}
-
-	.show-border {
-		border: 1px solid;
-		padding: 10px;
-		box-shadow: 5px 10px #888;
-	}
-	section {
-		width: 70%;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.label-class {
-		font-size: small;
-	}
-	.progress-bar {
-		margin-top: 2em;
-	
-	}
-	h4 {
-		text-align: center;
-		color: green;
-	}
-	@media only screen and (min-width: 760px) {
-		.container {
-			width: 80%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.progress-bar {
-			font-size: 1.3em;
-		}
-		p {
-			font-size: 1.3em;
-		}
-		.import-video-label {
-			font-size: 1.3em;
-		}
-		.center {
-			font-size: 1.3em;
-			margin-left: auto;
-			margin-right: auto;
-			width: 60%;
-		}
-		.label-class {
-			font-size: large;
-		}
-	}
-	@media screen and (min-width: 1024px) {
-		.container {
-			width: 50%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.center {
-			width: 45%;
-		}
 	}
 </style>

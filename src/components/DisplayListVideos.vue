@@ -1,104 +1,77 @@
 <template>
-  <section class="display" v-if="selectedItem.id">
-    <iframe
-      v-if="selectedItem.link"
-      id="video-frame"
-      :src="selectedItem.link"
-      frameborder="0"
-    ></iframe>
-    <div v-if="!selectedItem.link">
-      <h3>This question does not have an answer yet</h3>
+  <ion-card>
+    <div class="display" v-if="selectedItem.id">
+      <iframe
+        v-if="selectedItem.link"
+        id="video-frame"
+        :src="selectedItem.link"
+        frameborder="0"
+      ></iframe>
+      <div v-if="!selectedItem.link">
+        <h3>This question does not have an answer yet</h3>
+      </div>
+
+      <div id="video-info">
+        <h3 id="video-title">{{ selectedItem.title }}</h3>
+        <p id="video-topic">{{ selectedItem.topic }}</p>
+        <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
+
+        <ion-button @click="openModal">Share</ion-button>
+        <div v-if="modal" id="modal">
+          <textarea
+            name="copyContent"
+            id="copyContent"
+            cols="55"
+            rows="4"
+            :value="shareLink"
+          ></textarea>
+          <ion-button @click="copyLink">Copy</ion-button>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <h3>You have no videos yet!</h3>
+      <router-link to="/upload">
+        <button>Create a Video</button>
+      </router-link>
     </div>
 
-    <ion-card id="video-info">
-      <h3 id="video-title">{{ selectedItem.title }}</h3>
-      <p id="video-topic">{{ selectedItem.topic }}</p>
-      <p id="video-timestamp">{{ selectedItem.createdAt }}</p>
-    
-    <ion-button @click="openModal">Share</ion-button>
-    <div v-if="modal" id="modal">
-      <textarea
-        name="copyContent"
-        id="copyContent"
-        cols="55"
-        rows="4"
-        :value="shareLink"
-      ></textarea>
-      <ion-button @click="copyLink">Copy</ion-button>
-    </div>
-    </ion-card>
-  </section>
-  <div v-else>
-    <h3>You have no videos yet!</h3>
-    <router-link to="/upload">
-      <button>Create a Video</button>
-    </router-link>
-  </div>
-  <hr />
-  <!-- <ul class="videosList">
-    <li
-      v-for="item in itemsArray"
-      :key="item"
-      :data-item="JSON.stringify(item)"
-      class="listItem"
-      @click.capture="selectVideo"
-    >
-      <span
-        class="list-title"
-        :data-item="JSON.stringify(item)"
-        @click.capture="selectVideo"
-        >{{ item.title }}</span
-      >
-      <span
-        class="list-topic"
-        :data-item="JSON.stringify(item)"
-        @click.capture="selectVideo"
-        >{{ item.topic }}</span
-      >
-      <span
-        class="list-timestamp"
-        :data-item="JSON.stringify(item)"
-        @click.capture="selectVideo"
-        >{{ item.createdAt.toDate().toDateString() }}</span
-      >
-    </li>
-  </ul> -->
-
+    <ion-item-divider></ion-item-divider>
 
     <div class="videosList">
-    <ion-card
-      v-for="item in itemsArray"
-      :key="item"
-      :data-item="JSON.stringify(item)"
-      class="listItem"
-      @click.capture="selectVideo"
-    >
-      <span
-        class="list-title"
+      <ion-card
+        v-for="item in itemsArray"
+        :key="item"
         :data-item="JSON.stringify(item)"
+        class="listItem"
         @click.capture="selectVideo"
-        >{{ item.title }}</span
       >
-      <span
-        class="list-topic"
-        :data-item="JSON.stringify(item)"
-        @click.capture="selectVideo"
-        >{{ item.topic }}</span
-      >
-      <span
-        class="list-timestamp"
-        :data-item="JSON.stringify(item)"
-        @click.capture="selectVideo"
-        >{{ item.createdAt.toDate().toDateString() }}</span
-      >
-    </ion-card>
-  </div>
-
-  
+        <span
+          class="list-title"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.title }}</span
+        >
+        <span
+          class="list-topic"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.topic }}</span
+        >
+        <span
+          class="list-timestamp"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.createdAt.toDate().toDateString() }}</span
+        >
+      </ion-card>
+    </div>
+  </ion-card>
 </template>
 
 <script>
 import db from "../db.js";
+import configData from "../config.json";
 import firebase from "firebase";
 
 export default {
@@ -145,7 +118,10 @@ export default {
     },
   },
   beforeMount() {
-    console.log(`${window.location.protocol}//${window.location.host}`);
+    const user = firebase.auth().currentUser;
+    console.log(user);
+
+    console.log(configData.SERVER_URL);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")
         .where("userId", "==", user.uid)
@@ -194,19 +170,17 @@ export default {
 
 .videosList {
   padding: 10px;
-  
 }
 
 .listItem {
   display: block;
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  margin: 2px;
+  margin-bottom: 10px;
   padding: 20px;
-  margin-bottom: 30px;
   border-radius: 5px;
-  outline: solid 2.1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px rgba(44, 44, 44, 0.096);
 }
 
 .list-title {
@@ -233,9 +207,12 @@ export default {
   }
 }
 
+ion-card {
+  color: #474547;
+  text-transform: capitalize;
+}
 
-ion-card{
-  color:#474547;
-  text-transform: capitalize; 
+ion-item-divider {
+  background: rgba(255, 255, 255, 0);
 }
 </style>
