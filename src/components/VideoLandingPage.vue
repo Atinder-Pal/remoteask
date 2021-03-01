@@ -1,12 +1,12 @@
 <template>
-  <section v-if="video.link">
+  <ion-card v-if="video.link">
     <iframe id="video-frame" :src="video.link" frameborder="0"></iframe>
     <div id="video-info">
       <h3 id="video-title">{{ video.title }}</h3>
       <p id="video-topic">{{ video.topic }}</p>
       <p id="video-timestamp">{{ video.createdAt }}</p>
     </div>
-  </section>
+  </ion-card>
   <div v-if="!validLink">
     <NotFound />
   </div>
@@ -43,23 +43,30 @@ export default {
     },
   },
   beforeMount() {
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(() => {
-        // Signed in..
-        console.log("User signed in anonymously");
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-        console.log(
-          "error while signing in anonymously",
-          errorCode,
-          errorMessage
-        );
-      });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        firebase
+          .auth()
+          .signInAnonymously()
+          .then(() => {
+            // Signed in..
+            console.log("User signed in anonymously");
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            console.log(
+              "error while signing in anonymously",
+              errorCode,
+              errorMessage
+            );
+          });
+      } else {
+        // User is signed out
+        console.log("User is signed out");
+      }
+    });
   },
   mounted() {
     console.log("starting video check");

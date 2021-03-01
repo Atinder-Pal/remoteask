@@ -1,10 +1,8 @@
 <template>
-
-
 	<form @submit.prevent="formSubmitted">
 		<ion-list>
 			<ion-item>
-				<ion-label class="label-class" stacked>Video Title</ion-label>
+				<ion-label stacked>Video Title</ion-label>
 				<ion-input
 					type="text"
 					id="title"
@@ -16,7 +14,7 @@
 			</ion-item>
 
 			<ion-item>
-				<ion-label class="label-class" stacked>Video Topic</ion-label>
+				<ion-label stacked>Video Topic</ion-label>
 				<ion-input
 					type="text"
 					id="topic"
@@ -58,10 +56,10 @@
 				this.$emit('formSubmitted', this.video);
 			},
 			clearInputFields() {
-				this.video.title = null
-				this.video.topic = null
-				console.log("clearInputFields was called")
-			}
+				this.video.title = null;
+				this.video.topic = null;
+				console.log('clearInputFields was called');
+			},
 		},
 	};
 </script>
