@@ -118,6 +118,9 @@ export default {
     },
   },
   beforeMount() {
+    const user = firebase.auth().currentUser;
+    console.log(user);
+
     console.log(configData.SERVER_URL);
     firebase.auth().onAuthStateChanged((user) => {
       db.collection("videos")

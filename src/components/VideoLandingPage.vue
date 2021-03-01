@@ -43,23 +43,30 @@ export default {
     },
   },
   beforeMount() {
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(() => {
-        // Signed in..
-        console.log("User signed in anonymously");
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-        console.log(
-          "error while signing in anonymously",
-          errorCode,
-          errorMessage
-        );
-      });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        firebase
+          .auth()
+          .signInAnonymously()
+          .then(() => {
+            // Signed in..
+            console.log("User signed in anonymously");
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            console.log(
+              "error while signing in anonymously",
+              errorCode,
+              errorMessage
+            );
+          });
+      } else {
+        // User is signed out
+        console.log("User is signed out");
+      }
+    });
   },
   mounted() {
     console.log("starting video check");
