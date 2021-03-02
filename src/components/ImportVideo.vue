@@ -7,6 +7,7 @@
 				@change="previewVideo"
 				accept="video/*"
 				ref="inputForFile"
+				id="input-for-file"
 			></ion-input>
 		</ion-card-content>
 	</ion-card>
@@ -42,8 +43,9 @@
 				this.$emit('videoImported', this.videoData);
 			},
 			resetInput() {
-				this.$refs.inputForFile.value = null;
+				//this.$refs['inputForFile'].value = '';
 				this.videoData = null;
+				document.querySelector('#input-for-file').value = null;
 			},
 		},
 	};
