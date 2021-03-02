@@ -6,7 +6,6 @@
 
 		<ion-content :fullscreen="true">
 			<ion-card class="center-ra">
-				<login-prompt />
 				<ion-card-header>
 					<h1>Answer a Question</h1>
 					<p>Question: {{ video.title }}</p>
@@ -52,9 +51,11 @@
 					</div>
 				</ion-card-content>
 			</ion-card>
+			<login-prompt />
 			<video-uploaded-modal v-if="uploaded" @close="newVideo">
 			</video-uploaded-modal>
 		</ion-content>
+		<TabBar />
 	</ion-page>
 </template>
 
@@ -71,6 +72,7 @@
 	import VideoRecord from '../components/VideoRecord.vue';
 	import ImportVideo from '../components/ImportVideo.vue';
 	import LoginPrompt from '../components/LoginPrompt.vue';
+	import TabBar from '../components/TabBar';
 
 	export default defineComponent({
 		name: 'AskQuestion',
@@ -80,6 +82,7 @@
 			IonHeader,
 			IonPage,
 			NavBar,
+			TabBar,
 			VideoUploadedModal,
 			VideoRecord,
 			ImportVideo,
@@ -144,8 +147,8 @@
 				this.showProgress = false;
 				this.$refs.videoImportComponent.resetInput();
 
-				this.video.title = null;
-				this.video.topic = null;
+				// this.video.title = null;
+				// this.video.topic = null;
 				this.video.url = null;
 
 				this.errorOnUploading = {
