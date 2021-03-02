@@ -1,6 +1,6 @@
 <template>
 	<ion-label stacked>Add video from Device</ion-label>
-	<ion-card>
+	<ion-card class="card">
 		<ion-card-content class="input-for-file">
 			<ion-input
 				type="file"
@@ -60,5 +60,10 @@
 		margin-left: auto;
 		margin-right: auto;
 		width: 50%;
+	}
+
+	.card {
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px rgba(44, 44, 44, 0.096);
 	}
 </style>
