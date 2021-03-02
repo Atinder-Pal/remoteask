@@ -1,13 +1,15 @@
 <template>
 	<ion-label stacked>Add video from Device</ion-label>
-
-	<ion-input
-		type="file"
-		@change="previewVideo"
-		accept="video/*"
-		ref="inputForFile"
-	></ion-input>
-
+	<ion-card>
+		<ion-card-content class="input-for-file">
+			<ion-input
+				type="file"
+				@change="previewVideo"
+				accept="video/*"
+				ref="inputForFile"
+			></ion-input>
+		</ion-card-content>
+	</ion-card>
 	<div v-if="videoData != null">
 		<p>Preview Video before uploading:</p>
 		<div>
@@ -50,5 +52,11 @@
 	#video-frame {
 		width: 100%;
 		height: 300px;
+	}
+
+	.input-for-file {
+		margin-left: auto;
+		margin-right: auto;
+		width: 50%;
 	}
 </style>
