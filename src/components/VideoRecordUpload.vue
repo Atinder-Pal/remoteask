@@ -49,7 +49,7 @@
 	import VideoUploadedModal from './VideoUploadedModal.vue';
 	import VideoRecord from './VideoRecord.vue';
 	import ImportVideo from './ImportVideo.vue';
-	import { IonCard,IonProgressBar } from '@ionic/vue';
+	import { IonCard, IonProgressBar } from '@ionic/vue';
 
 	export default {
 		data() {
@@ -78,7 +78,7 @@
 			VideoRecord,
 			ImportVideo,
 			IonCard,
-			IonProgressBar
+			IonProgressBar,
 		},
 		methods: {
 			videoRecorded(value) {
