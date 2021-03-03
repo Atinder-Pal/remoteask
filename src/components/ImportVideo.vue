@@ -1,5 +1,5 @@
 <template>
-	<ion-label stacked>Add video from Device</ion-label>
+	<ion-label stacked>Import video from Device</ion-label>
 	<ion-card class="card">
 		<ion-card-content class="input-for-file">
 			<ion-input
