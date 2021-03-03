@@ -8,13 +8,22 @@
 		></video>
 
 		<ion-item>
-			<ion-button fill="outline" @click.prevent="startCamera"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="startCamera"
 				>Start Camera</ion-button
 			>
-			<ion-button fill="outline" @click.prevent="startRecording"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="startRecording"
 				>Start Recording</ion-button
 			>
-			<ion-button fill="outline" @click.prevent="stopRecording"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="stopRecording"
 				>Stop Recording</ion-button
 			>
 		</ion-item>
@@ -141,7 +150,19 @@
 	};
 </script>
 <style scoped>
-	#myVideo {
+	/* #myVideo {
 		background-color: rgb(68, 15, 105);
+	} */
+
+	.video-control-buttons {
+		padding: 0;
+		font-size: 12px;
+		font-weight: 400;
+
+		@media only screen and (min-width: 768px) {
+			padding: 4px;
+			font-size: large;
+			font-weight: 500;
+		}
 	}
 </style>
