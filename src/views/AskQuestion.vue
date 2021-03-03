@@ -99,9 +99,23 @@
 						this.openModal();
 					}
 				} else {
-					//this.modal = true;
-					//console.log("modal: "+ this.modal)
-					this.openModal();
+					if (navigator.share) {
+						navigator
+							.share({
+								title: 'WebShare API Demo',
+								url: this.shareLink,
+							})
+							.then(() => {
+								console.log('Thanks for sharing!');
+							})
+							.catch(console.error);
+					} else {
+						// fallback
+						console.log('WEB share API not supported!');
+						//this.modal = true;
+						//console.log("modal: "+ this.modal)
+						this.openModal();
+					}
 				}
 			},
 			// copyLink() {
@@ -170,9 +184,8 @@
 <style scoped>
 	.my-custom-class {
 		--backdrop-opacity: 0.8 !important;
-		--border-color: red;
-		--max-width: 60% !important;
-		--max-height: 50% !important;
+		--max-width: 400px !important;
+		--max-height: 100px !important;
 	}
 
 	.button-margin {

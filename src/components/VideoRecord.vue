@@ -78,7 +78,7 @@
 		},
 		methods: {
 			resetRecorder() {
-				this.player.record().getDevice();
+				this.player.record().reset();
 			},
 			startCamera() {
 				this.player.record().getDevice();
@@ -140,3 +140,8 @@
 		},
 	};
 </script>
+<style scoped>
+	#myVideo {
+		background-color: rgb(68, 15, 105);
+	}
+</style>

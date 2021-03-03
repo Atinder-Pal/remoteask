@@ -10,12 +10,18 @@
 
 			<div v-if="showProgress" class="progress-bar">
 				Progress: {{ uploadValue.toFixed() + '%' + ' ' }}
-				<progress
+				<ion-progress-bar
+					id="progress"
+					color="primary"
+					:value="uploadValue"
+					max="100"
+				></ion-progress-bar>
+				<!-- <progress
 					id="progress"
 					:value="uploadValue"
 					max="100"
 					color="primary"
-				></progress>
+				></progress> -->
 			</div>
 
 			<div v-if="recordedBlob != null">
@@ -43,7 +49,7 @@
 	import VideoUploadedModal from './VideoUploadedModal.vue';
 	import VideoRecord from './VideoRecord.vue';
 	import ImportVideo from './ImportVideo.vue';
-	import { IonCard } from '@ionic/vue';
+	import { IonCard, IonProgressBar } from '@ionic/vue';
 
 	export default {
 		data() {
@@ -72,6 +78,7 @@
 			VideoRecord,
 			ImportVideo,
 			IonCard,
+			IonProgressBar,
 		},
 		methods: {
 			videoRecorded(value) {
