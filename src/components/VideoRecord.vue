@@ -156,12 +156,14 @@
 
 	.video-control-buttons {
 		padding: 0;
-		font-size: 12px;
+		font-size: 9px;
 		font-weight: 400;
+	}
 
-		@media only screen and (min-width: 768px) {
-			padding: 4px;
-			font-size: large;
+	@media only screen and (min-width: 768px) {
+		.video-control-buttons button {
+			padding: 5px;
+			font-size: 14px;
 			font-weight: 500;
 		}
 	}
