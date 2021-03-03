@@ -99,9 +99,23 @@
 						this.openModal();
 					}
 				} else {
-					//this.modal = true;
-					//console.log("modal: "+ this.modal)
-					this.openModal();
+					if (navigator.share) {
+						navigator
+							.share({
+								title: 'WebShare API Demo',
+								url: this.shareLink,
+							})
+							.then(() => {
+								console.log('Thanks for sharing!');
+							})
+							.catch(console.error);
+					} else {
+						// fallback
+						console.log('WEB share API not supported!');
+						//this.modal = true;
+						//console.log("modal: "+ this.modal)
+						this.openModal();
+					}
 				}
 			},
 			// copyLink() {
