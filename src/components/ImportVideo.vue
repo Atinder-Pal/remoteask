@@ -53,7 +53,13 @@
 <style scoped>
 	#video-frame {
 		width: 100%;
-		height: 300px;
+		height: 200px;
+	}
+
+	@media screen and (min-width: 500px) {
+		#video-frame {
+			height: 300px;
+		}
 	}
 
 	.input-for-file {
