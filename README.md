@@ -42,19 +42,23 @@ To start with the project:
                 };
                 ```
   
-
 5. Run the following command to install all dependencies in terminal <br />
   `npm install`
   
 6. To run the project, run the following command in terminal <br />
   `ionic serve`
 
+## Publishing main branch to Firebase Hosting
+
 7. Run the following commands to deploy app to firebase hosting
-  `npm run build`
-  `firebase deploy`
+  
+  * `npm run build`
+  * `firebase deploy`
+  
   This may not work if you do not have the Firebase CLI installed. If not, check step 2 to install the Firebase CLI  
   
-  
+
+# ANDROID BUILD INSTRUCTIONS
   ## To Start the project in android studio and run on emulator / android device
     
   
