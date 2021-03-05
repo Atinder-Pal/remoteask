@@ -108,8 +108,8 @@ https://fonts.google.com/specimen/Roboto?preview.text_type=custom
 
   --ion-border-color: #9a9ca3;
 
-  --ion-tab-bar-background: #b82c72;
-  --ion-tab-bar-background: #510353;
+  /* --ion-tab-bar-background: #b82c72; */
+  /* --ion-tab-bar-background: #510353; */
 
   --ionicon-stroke-width: 80px;
 
@@ -123,7 +123,7 @@ h2 {
 }
 
 ion-tab-button {
-  --color: #d2d4db;
+  --color: #510353;
 }
 
 ion-card {
@@ -253,7 +253,7 @@ ion-card {
       rgb(85, 49, 88) 100%
     );
 
-    --ion-tab-bar-background: #510353;
+    /* --ion-tab-bar-background: #510353; */
 
     --ion-card-background: #fff;
   }
@@ -301,7 +301,7 @@ ion-card {
       rgb(85, 49, 88) 100%
     );
 
-    --ion-tab-bar-background: #510353;
+    /* --ion-tab-bar-background: #510353; */
 
     --ion-card-background: #fff;
   }
