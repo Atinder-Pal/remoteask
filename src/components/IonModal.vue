@@ -65,12 +65,11 @@
 <style scoped>
 	.my-custom-class {
 		--backdrop-opacity: 0.8 !important;
-		--border-color: red;
-		--max-width: 60% !important;
-		--max-height: 50% !important;
+		--max-width: 400px !important;
+		--max-height: 100px !important;
 	}
 
-	ion-toolbar{
-		 --ion-text-color: #fff;
+	ion-toolbar {
+		--ion-text-color: #fff;
 	}
 </style>

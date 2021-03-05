@@ -8,13 +8,22 @@
 		></video>
 
 		<ion-item>
-			<ion-button fill="outline" @click.prevent="startCamera"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="startCamera"
 				>Start Camera</ion-button
 			>
-			<ion-button fill="outline" @click.prevent="startRecording"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="startRecording"
 				>Start Recording</ion-button
 			>
-			<ion-button fill="outline" @click.prevent="stopRecording"
+			<ion-button
+				class="video-control-buttons"
+				fill="outline"
+				@click.prevent="stopRecording"
 				>Stop Recording</ion-button
 			>
 		</ion-item>
@@ -78,7 +87,7 @@
 		},
 		methods: {
 			resetRecorder() {
-				this.player.record().getDevice();
+				this.player.record().reset();
 			},
 			startCamera() {
 				this.player.record().getDevice();
@@ -140,3 +149,22 @@
 		},
 	};
 </script>
+<style scoped>
+	/* #myVideo {
+		background-color: rgb(68, 15, 105);
+	} */
+
+	.video-control-buttons {
+		padding: 0;
+		font-size: 9px;
+		font-weight: 400;
+	}
+
+	@media only screen and (min-width: 768px) {
+		.video-control-buttons button {
+			padding: 5px;
+			font-size: 14px;
+			font-weight: 500;
+		}
+	}
+</style>

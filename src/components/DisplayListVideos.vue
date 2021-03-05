@@ -110,7 +110,7 @@ export default {
     },
     openModal() {
       this.modal = !this.modal;
-      this.shareLink = `${window.location.protocol}//${window.location.host}/video/${this.selectedItem.id}`;
+      this.shareLink = `${configData.SERVER_URL}//${window.location.host}/video/${this.selectedItem.id}`;
     },
     copyLink() {
       document.querySelector("#copyContent").select();
