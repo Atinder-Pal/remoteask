@@ -146,7 +146,7 @@ export default defineComponent({
           console.log(`This is document id: ${docRef.id}`);
           console.log(this.docId);
           //Citation- Borrowed code for getting dynamic link from Birm
-          this.shareLink = `${window.location.protocol}//${window.location.host}/answerquestion/${this.docId}`;
+          this.shareLink = `${configData.SERVER_URL}//${window.location.host}/answerquestion/${this.docId}`;
         })
         .catch((error) => {
           console.log(error);
