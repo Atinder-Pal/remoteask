@@ -9,7 +9,7 @@
       </div>
     </ion-content>
 
-      <TabBar />
+    <TabBar id="tabbar" />
   </ion-page>
 </template>
 
@@ -39,8 +39,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
 #container {
   max-width: 600px;
   margin: auto;
+  height: 86vh;
+  overflow: scroll;
+  margin-bottom: 0px;
 }
 </style>
