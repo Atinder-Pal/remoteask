@@ -5,22 +5,22 @@
       <ion-tab-button>
         <router-link to="/upload">
           <ion-icon :icon="add" size="large"></ion-icon>
+          UPLOAD
         </router-link>
-        UPLOAD
       </ion-tab-button>
 
       <ion-tab-button>
         <router-link to="/askquestion">
           <ion-icon :icon="chatbubble" size="large"></ion-icon>
+          ASK
         </router-link>
-        ASK
       </ion-tab-button>
 
       <ion-tab-button>
         <router-link to="/listVideos">
           <ion-icon :icon="list" size="large"></ion-icon>
+          MY VIDEOS
         </router-link>
-        MY VIDEOS
       </ion-tab-button>
 
       <ion-tab-button @click="logOut()">
@@ -66,4 +66,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  display: block;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+</style>
