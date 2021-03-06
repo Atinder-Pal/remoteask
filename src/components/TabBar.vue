@@ -1,36 +1,34 @@
 <template>
- 
-    <ion-tabs>
-      <!-- Tab bar -->
-      <ion-tab-bar>
-        <ion-tab-button>
-          <router-link to="/upload">
-            <ion-icon :icon="add" size="large"></ion-icon>
-          </router-link>
-          UPLOAD
-        </ion-tab-button>
+  <ion-tabs>
+    <!-- Tab bar -->
+    <ion-tab-bar>
+      <ion-tab-button>
+        <router-link to="/upload">
+          <ion-icon :icon="add" size="large"></ion-icon>
+        </router-link>
+        UPLOAD
+      </ion-tab-button>
 
-        <ion-tab-button>
-          <router-link to="/askquestion">
-            <ion-icon :icon="chatbubble" size="large"></ion-icon>
-          </router-link>
-          ASK
-        </ion-tab-button>
+      <ion-tab-button>
+        <router-link to="/askquestion">
+          <ion-icon :icon="chatbubble" size="large"></ion-icon>
+        </router-link>
+        ASK
+      </ion-tab-button>
 
-        <ion-tab-button>
-          <router-link to="/listVideos">
-            <ion-icon :icon="list" size="large"></ion-icon>
-          </router-link>
-          MY VIDEOS
-        </ion-tab-button>
+      <ion-tab-button>
+        <router-link to="/listVideos">
+          <ion-icon :icon="list" size="large"></ion-icon>
+        </router-link>
+        MY VIDEOS
+      </ion-tab-button>
 
-        <ion-tab-button @click="logOut()">
-          <ion-icon :icon="exit" size="large"></ion-icon>
-          LOG OUT
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-
+      <ion-tab-button @click="logOut()">
+        <ion-icon :icon="exit" size="large"></ion-icon>
+        LOG OUT
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </template>
 
 <script>

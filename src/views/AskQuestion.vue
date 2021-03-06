@@ -1,5 +1,5 @@
 <template>
-  <ion-page>
+  <ion-page id="question-page">
     <ion-header :translucent="true">
       <NavBar v-bind:upload="upload" />
     </ion-header>
@@ -35,7 +35,9 @@
         </link-share-modal>
       </ion-card>
     </ion-content>
-    <TabBar />
+    <footer>
+      <TabBar />
+    </footer>
   </ion-page>
 </template>
 
@@ -197,5 +199,14 @@ export default defineComponent({
   max-width: 600px;
   margin-right: auto;
   margin-left: auto;
+}
+
+#question-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#question-page > * {
+  overflow: scroll;
 }
 </style>
