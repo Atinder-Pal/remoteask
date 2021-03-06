@@ -145,8 +145,8 @@
 						this.docId = docRef.id;
 						console.log(`This is document id: ${docRef.id}`);
 						console.log(this.docId);
-						//Citation- Borrowed code for getting dynamic link from Birm
-						this.shareLink = `${configData.SERVER_URL}//${window.location.host}/answerquestion/${this.docId}`;
+
+						this.shareLink = `${configData.SERVER_URL}/answerquestion/${this.docId}`;
 					})
 					.catch((error) => {
 						console.log(error);
