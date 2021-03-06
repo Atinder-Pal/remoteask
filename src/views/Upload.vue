@@ -1,5 +1,5 @@
 <template>
-  <ion-page>
+  <ion-page id="upload-page">
     <ion-header :translucent="true">
       <NavBar v-bind:upload="upload" />
     </ion-header>
@@ -9,12 +9,13 @@
         <!-- <router-link to="/home">
         <ion-button>HOME</ion-button>
         </router-link> -->
-        
+
         <VideoRecordUpload />
       </div>
-        
     </ion-content>
-  <TabBar />
+    <footer>
+      <TabBar />
+    </footer>
   </ion-page>
 </template>
 
@@ -44,4 +45,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+#upload-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#upload-page > * {
+  overflow: scroll;
+}
+</style>

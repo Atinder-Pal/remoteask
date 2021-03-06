@@ -32,7 +32,7 @@
     <div v-else>
       <h3>You have no videos yet!</h3>
       <router-link to="/upload">
-        <button>Create a Video</button>
+        <ion-button>Create a Video</ion-button>
       </router-link>
     </div>
 
