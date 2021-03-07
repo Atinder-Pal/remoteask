@@ -13,14 +13,19 @@
 						<slot name="body">
 							Click OK to add more videos
 						</slot>
-					</div>
-
-					<div class="modal-footer">
 						<slot name="footer">
 							<ion-button class="modal-default-button" @click="$emit('close')">
 								OK
 							</ion-button>
 						</slot>
+					</div>
+
+					<div class="modal-footer">
+						<!-- <slot name="footer">
+							<ion-button class="modal-default-button" @click="$emit('close')">
+								OK
+							</ion-button>
+						</slot> -->
 					</div>
 				</div>
 			</div>
