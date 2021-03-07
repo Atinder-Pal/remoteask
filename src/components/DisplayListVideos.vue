@@ -26,47 +26,47 @@
             :value="shareLink"
           ></textarea>
           <ion-button @click="copyLink">Copy</ion-button>
-        </div> -->
-			</div>
-		</div>
-		<div v-else>
-			<h3>You have no videos yet!</h3>
-			<router-link to="/upload">
-				<button>Create a Video</button>
-			</router-link>
-		</div>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <h3>You have no videos yet!</h3>
+      <router-link to="/upload">
+        <ion-button>Create a Video</ion-button>
+      </router-link>
+    </div>
 
-		<ion-item-divider></ion-item-divider>
+    <ion-item-divider></ion-item-divider>
 
-		<div class="videosList">
-			<ion-card
-				v-for="item in itemsArray"
-				:key="item"
-				:data-item="JSON.stringify(item)"
-				class="listItem"
-				@click.capture="selectVideo"
-			>
-				<span
-					class="list-title"
-					:data-item="JSON.stringify(item)"
-					@click.capture="selectVideo"
-					>{{ item.title }}</span
-				>
-				<span
-					class="list-topic"
-					:data-item="JSON.stringify(item)"
-					@click.capture="selectVideo"
-					>{{ item.topic }}</span
-				>
-				<span
-					class="list-timestamp"
-					:data-item="JSON.stringify(item)"
-					@click.capture="selectVideo"
-					>{{ item.createdAt.toDate().toDateString() }}</span
-				>
-			</ion-card>
-		</div>
-	</ion-card>
+    <div class="videosList">
+      <ion-card
+        v-for="item in itemsArray"
+        :key="item"
+        :data-item="JSON.stringify(item)"
+        class="listItem"
+        @click.capture="selectVideo"
+      >
+        <span
+          class="list-title"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.title }}</span
+        >
+        <span
+          class="list-topic"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.topic }}</span
+        >
+        <span
+          class="list-timestamp"
+          :data-item="JSON.stringify(item)"
+          @click.capture="selectVideo"
+          >{{ item.createdAt.toDate().toDateString() }}</span
+        >
+      </ion-card>
+    </div>
+  </ion-card>
 </template>
 
 <script>
