@@ -131,7 +131,7 @@
 				//this.recordedBlob = this.player.recordedData;
 				this.$emit('videoRecorded', this.player.recordedData);
 				// ==========================save video on desktop====================================
-				this.player.record().saveAs({ video: 'recording.mp4' });
+				//this.player.record().saveAs({ video: 'recording.mp4' });
 				// ===================================================================================
 			});
 			// error handling
