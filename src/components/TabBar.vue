@@ -72,5 +72,6 @@ a {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
+  width: 100%;
 }
 </style>
