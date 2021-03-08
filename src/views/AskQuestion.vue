@@ -1,8 +1,8 @@
 <template>
-	<ion-page>
-		<ion-header :translucent="true">
-			<NavBar v-bind:upload="upload" />
-		</ion-header>
+  <ion-page id="question-page">
+    <ion-header :translucent="true">
+      <NavBar v-bind:upload="upload" />
+    </ion-header>
 
 		<ion-content :fullscreen="true">
 			<ion-card class="center-ra">
@@ -32,11 +32,13 @@
           @close="modal = false"
           @copyLink="copyLink"
         >
-        </link-share-modal> -->
-			</ion-card>
-		</ion-content>
-		<TabBar />
-	</ion-page>
+        </link-share-modal>
+      </ion-card>
+    </ion-content>
+    <footer>
+      <TabBar />
+    </footer>
+  </ion-page>
 </template>
 
 <script>
@@ -194,9 +196,18 @@
 		margin: 20px;
 	}
 
-	.center-ra {
-		max-width: 600px;
-		margin-right: auto;
-		margin-left: auto;
-	}
+.center-ra {
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#question-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#question-page > * {
+  overflow: scroll;
+}
 </style>

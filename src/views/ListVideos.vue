@@ -1,15 +1,16 @@
 <template>
-  <ion-page>
+  <ion-page id="full-page">
     <ion-header :translucent="true">
-      <NavBar v-bind:upload="upload" />
+      <NavBar v-bind:upload="upload" id="navbar" />
     </ion-header>
     <ion-content :fullscreen="true">
       <div id="container">
         <DisplayListVideos />
       </div>
     </ion-content>
-
-      <TabBar />
+    <footer>
+      <TabBar id="tabbar" />
+    </footer>
   </ion-page>
 </template>
 
@@ -39,8 +40,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+#full-page {
+  display: flex;
+  flex-direction: column;
+}
+
 #container {
   max-width: 600px;
   margin: auto;
+  overflow: scroll;
+  margin-bottom: 0px;
+}
+
+#full-page > * {
+  overflow: scroll;
 }
 </style>

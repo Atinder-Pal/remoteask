@@ -2,18 +2,14 @@
   <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-col>
+        <ion-col id="logo-col">
           <ion-title
-            ><router-link to="/upload">RemoteAsk</router-link>
-            <!-- <p>{{ user ? user.email : null }}</p> -->
- 
+            ><router-link to="/upload"
+              ><div id="logo">remote<span>ask</span></div></router-link
+            >
           </ion-title>
         </ion-col>
 
-        <ion-col v-if="user.loggedIn">
-   Welcome <strong> {{ user.data.email }} </strong>
-        </ion-col>
- 
         <ion-col v-if="signup == true">
           <router-link to="/login">
             <ion-button fill="outline">Sign In</ion-button>
@@ -28,8 +24,6 @@
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-
- 
 </template>
 
 <script>
@@ -51,13 +45,31 @@ export default defineComponent({
       user: "user",
     }),
   },
-
 });
 </script>
 
 <style scoped>
-
-ion-toolbar{
+ion-toolbar {
   --ion-text-color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+#logo-col {
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  padding: 0.5%;
+  text-transform: uppercase;
+  text-decoration: none;
+  width: max-content;
+}
+
+#logo > span {
+  color: #fca739;
 }
 </style>
