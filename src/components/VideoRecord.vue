@@ -50,13 +50,13 @@
 				options: {
 					controls: true,
 					autoplay: false,
-					fluid: false,
+					fluid: true,
 					loop: false,
 					bigPlayButton: false,
 					controlBar: {
 						volumePanel: true,
 						deviceButton: false,
-						recordToggle: false,
+						recordToggle: true,
 						pipTggle: false,
 					},
 					plugins: {
